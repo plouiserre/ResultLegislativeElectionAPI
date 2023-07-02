@@ -1,9 +1,9 @@
 from fastapi import FastAPI
-from .routeurs import candidates
+from .adapters import candidatesAPI
 
 app = FastAPI()
 
-app.include_router(candidates.router)
+app.include_router(candidatesAPI.router)
 
 @app.get("/")
 def Index():
