@@ -18,3 +18,9 @@ class AssertTest:
         self.unit_test.assertEqual(candidate_check[12], candidate_dto.vote_second_round)
         self.unit_test.assertEqual(candidate_check[13], candidate_dto.rate_vote_registered_second_round)
         self.unit_test.assertEqual(candidate_check[14], candidate_dto.rate_vote_expressed_second_round)
+        
+        
+    def assert_party_dto(self, party_check, party_dto) : 
+        self.unit_test.assertEqual(party_check[0], party_dto.id)
+        self.unit_test.assertEqual(party_check[1], party_dto.name)
+        self.unit_test.assertEqual(party_check[2], party_dto.short_name)

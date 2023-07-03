@@ -1,7 +1,7 @@
 import datetime
 import unittest
 
-from app.factory.factorycandidate import FactoryCandidate
+from app.domain.factory.factorycandidate import FactoryCandidate
 from tests.assert_test import AssertTest
 
 class FactoryCandidateTest(unittest.TestCase) :
