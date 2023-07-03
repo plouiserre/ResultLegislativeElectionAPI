@@ -1,11 +1,15 @@
 from fastapi import APIRouter, Depends, HTTPException
 from app.domain.candidatebusiness import CandidateBusiness
+from app.ports.in_memory_candidate_repository import InMemoryCandidateRepository
+from app.ports.in_memory_party_repository import InMemoryPartyRepository
 
 
 router = APIRouter()
 
 def init_candidate_business() : 
-    candidate_business = CandidateBusiness()
+    candidate_repo = InMemoryCandidateRepository()
+    party_repo = InMemoryPartyRepository()
+    candidate_business = CandidateBusiness(candidate_repo, party_repo)
     return candidate_business
 
 
