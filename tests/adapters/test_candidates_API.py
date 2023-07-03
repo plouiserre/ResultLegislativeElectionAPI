@@ -38,7 +38,7 @@ class CandidatesAPITest(unittest.TestCase) :
         response = self.client.get("/candidates")
         
         self.assertEqual(200, response.status_code)
-        self.assertEqual(response.json(), [{"LastName" : "Cazenave", "FirstName" : "Thomas", "Sexe" : "M"}, {"LastName" : "TRASTOUR-ISNART", "FirstName" : "Laurence", "Sexe" : "F"}])  
+        self.assertEqual([{"LastName" : "Cazenave", "FirstName" : "Thomas", "Sexe" : "M"}, {"LastName" : "TRASTOUR-ISNART", "FirstName" : "Laurence", "Sexe" : "F"}], response.json())  
     
       
     def test_get_candidates_status_500_when_errors(self) : 
@@ -46,4 +46,4 @@ class CandidatesAPITest(unittest.TestCase) :
         response = self.client.get("/candidates")
         
         self.assertEqual(500, response.status_code)
-        self.assertEqual(response.json(), {'detail': 'Treatment failed'})
+        self.assertEqual({'detail': 'Treatment failed'}, response.json())
