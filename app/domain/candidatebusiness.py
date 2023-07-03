@@ -2,7 +2,7 @@
 
 import datetime
 
-from app.factory.factorycandidate import FactoryCandidate
+from app.domain.factory.factorycandidate import FactoryCandidate
 from app.domain.DTO.partyDTO import PartyDTO
 
 class CandidateBusiness() : 

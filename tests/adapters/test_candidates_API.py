@@ -46,4 +46,4 @@ class CandidatesAPITest(unittest.TestCase) :
         response = self.client.get("/candidates")
         
         self.assertEqual(500, response.status_code)
-       #self.assertEqual(response.json(), [{"LastName" : "Cazenave", "FirstName" : "Thomas", "Sexe" : "M"}, {"LastName" : "TRASTOUR-ISNART", "FirstName" : "Laurence", "Sexe" : "F"}])
+        self.assertEqual(response.json(), {'detail': 'Treatment failed'})
