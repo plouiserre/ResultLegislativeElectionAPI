@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
-from app.domain.candidatebusiness import CandidateBusiness
+from app.domain.candidate_business import CandidateBusiness
 from app.ports.in_memory_candidate_repository import InMemoryCandidateRepository
 from app.ports.in_memory_party_repository import InMemoryPartyRepository
 
