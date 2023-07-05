@@ -1,9 +1,10 @@
 import unittest
 from unittest.mock import Mock
 
-from fastapi.testclient import TestClient
 from app.main import app
 from app.adapters.candidatesAPI import init_candidate_business
+from fastapi.testclient import TestClient
+
 
 def override_candidate_business() :
     json = [{"LastName" : "Cazenave", "FirstName" : "Thomas", "Sexe" : "M"}, {"LastName" : "TRASTOUR-ISNART", "FirstName" : "Laurence", "Sexe" : "F"}]
@@ -14,7 +15,7 @@ def override_candidate_business() :
    
 def override_candidate_business_exception() :
     mock = Mock()
-    mock.get_candidates.side_effect =Exception("Boom!")
+    mock.get_candidates.side_effect = Exception("Boom!")
     mock.get_candidates.return_value = ""
     return mock    
      
