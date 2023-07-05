@@ -1,7 +1,7 @@
 import datetime
 import unittest
 
-from app.domain.candidatebusiness import CandidateBusiness
+from app.domain.candidate_business import CandidateBusiness
 from app.domain.factory.factorycandidate import FactoryCandidate
 from app.domain.factory.factoryparty import FactoryParty
 from app.ports.in_memory_candidate_repository import InMemoryCandidateRepository

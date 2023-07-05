@@ -24,3 +24,12 @@ class AssertTest:
         self.unit_test.assertEqual(party_check[0], party_dto.id)
         self.unit_test.assertEqual(party_check[1], party_dto.name)
         self.unit_test.assertEqual(party_check[2], party_dto.short_name)
+        
+    
+    def assert_deputy_dto(self, deputy_check, deputy_dto) :
+        self.unit_test.assertEqual(deputy_check[0], deputy_dto.id)
+        self.unit_test.assertEqual(deputy_check[1], deputy_dto.last_name)
+        self.unit_test.assertEqual(deputy_check[2], deputy_dto.first_name)
+        self.unit_test.assertEqual(deputy_check[3], deputy_dto.sexe)
+        self.unit_test.assertTrue(deputy_check[4] == deputy_dto.birthdate)
+        self.unit_test.assertTrue(deputy_check[5] == deputy_dto.is_sorting)

@@ -1,9 +1,3 @@
-
-
-import datetime
-
-from app.domain.DTO.partyDTO import PartyDTO
-
 class CandidateBusiness() : 
     def __init__(self, CandidateRepository, PartyRepository) -> None:
         self.candidate_repo = CandidateRepository
@@ -24,4 +18,3 @@ class CandidateBusiness() :
                 else : 
                     continue
         return candidates
-        

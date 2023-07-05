@@ -1,9 +1,10 @@
 import unittest
 from unittest.mock import Mock
 
-from fastapi.testclient import TestClient
 from app.main import app
 from app.adapters.candidatesAPI import init_candidate_business
+from fastapi.testclient import TestClient
+
 
 def override_candidate_business() :
     json = [{"LastName" : "Cazenave", "FirstName" : "Thomas", "Sexe" : "M"}, {"LastName" : "TRASTOUR-ISNART", "FirstName" : "Laurence", "Sexe" : "F"}]
@@ -14,7 +15,7 @@ def override_candidate_business() :
    
 def override_candidate_business_exception() :
     mock = Mock()
-    mock.get_candidates.side_effect =Exception("Boom!")
+    mock.get_candidates.side_effect = Exception("Boom!")
     mock.get_candidates.return_value = ""
     return mock    
      
@@ -38,7 +39,7 @@ class CandidatesAPITest(unittest.TestCase) :
         response = self.client.get("/candidates")
         
         self.assertEqual(200, response.status_code)
-        self.assertEqual(response.json(), [{"LastName" : "Cazenave", "FirstName" : "Thomas", "Sexe" : "M"}, {"LastName" : "TRASTOUR-ISNART", "FirstName" : "Laurence", "Sexe" : "F"}])  
+        self.assertEqual([{"LastName" : "Cazenave", "FirstName" : "Thomas", "Sexe" : "M"}, {"LastName" : "TRASTOUR-ISNART", "FirstName" : "Laurence", "Sexe" : "F"}], response.json())  
     
       
     def test_get_candidates_status_500_when_errors(self) : 
@@ -46,4 +47,4 @@ class CandidatesAPITest(unittest.TestCase) :
         response = self.client.get("/candidates")
         
         self.assertEqual(500, response.status_code)
-        self.assertEqual(response.json(), {'detail': 'Treatment failed'})
+        self.assertEqual({'detail': 'Treatment failed'}, response.json())
