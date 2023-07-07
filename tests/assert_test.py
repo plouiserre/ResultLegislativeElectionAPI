@@ -33,3 +33,23 @@ class AssertTest:
         self.unit_test.assertEqual(deputy_check[3], deputy_dto.sexe)
         self.unit_test.assertTrue(deputy_check[4] == deputy_dto.birthdate)
         self.unit_test.assertTrue(deputy_check[5] == deputy_dto.is_sorting)
+        
+        
+    def assert_result_dto(self, result_check, result_dto) :
+        self.unit_test.assertEqual(result_check[0], result_dto.id)
+        self.unit_test.assertEqual(result_check[1], result_dto.state_compute)
+        self.unit_test.assertEqual(result_check[2], result_dto.round_number)
+        self.unit_test.assertEqual(result_check[3], result_dto.registered)
+        self.unit_test.assertEqual(result_check[4], result_dto.abstaining)
+        self.unit_test.assertEqual(result_check[5], result_dto.rate_abstaining)
+        self.unit_test.assertEqual(result_check[6], result_dto.voting)
+        self.unit_test.assertEqual(result_check[7], result_dto.rate_voting)
+        self.unit_test.assertEqual(result_check[8], result_dto.blank_balot)
+        self.unit_test.assertEqual(result_check[9], result_dto.rate_blank_registered)
+        self.unit_test.assertEqual(result_check[10], result_dto.rate_blank_voting)
+        self.unit_test.assertEqual(result_check[11], result_dto.null_ballot)
+        self.unit_test.assertEqual(result_check[12], result_dto.rate_null_registered)
+        self.unit_test.assertEqual(result_check[13], result_dto.rate_null_voting)
+        self.unit_test.assertEqual(result_check[14], result_dto.expressed)
+        self.unit_test.assertEqual(result_check[15], result_dto.rate_express_registered)
+        self.unit_test.assertEqual(result_check[16], result_dto.rate_express_voting)

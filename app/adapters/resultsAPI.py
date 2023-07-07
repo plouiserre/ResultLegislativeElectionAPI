@@ -1,10 +1,16 @@
-from fastapi import FastAPI, APIRouter
+from app.domain.result_business import ResultBusiness
+from fastapi import HTTPException, APIRouter, Depends
 
 router = APIRouter()
 
+def init_result_business() :
+    result_business = ResultBusiness()
+    return result_business
+
 @router.get("/results/", tags= ["results"])
-async def get_results():
-    result_first = {"state_compute" : "Completed", "round_number" : 1, "registered" : 8765, "abstaining":65, "rate_abstaining":8.6}
-    result_second = {"state_compute" : "Completed", "round_number" : 2, "registered" : 666, "abstaining":25, "rate_abstaining":12.6}
-    results = [result_first, result_second]
-    return results
+async def get_results(result_business = Depends(init_result_business)):
+    try :
+        results = result_business.get_results()
+        return results
+    except :
+        raise HTTPException(status_code = 500, detail= "Treatment failed")
