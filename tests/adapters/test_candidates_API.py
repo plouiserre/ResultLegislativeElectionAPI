@@ -23,7 +23,6 @@ def override_candidate_business_exception() :
 class CandidatesAPITest(unittest.TestCase) : 
     def __init__(self, methodName: str = "runTest") -> None:
         super().__init__(methodName)
-        self.app = app
         self.client = TestClient(app)
         
     
