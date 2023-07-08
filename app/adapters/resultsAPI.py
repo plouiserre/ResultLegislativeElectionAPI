@@ -1,10 +1,12 @@
 from app.domain.result_business import ResultBusiness
+from app.ports.in_memory_result_repository import InMemoryResultRepository
 from fastapi import HTTPException, APIRouter, Depends
 
 router = APIRouter()
 
 def init_result_business() :
-    result_business = ResultBusiness()
+    repo = InMemoryResultRepository()
+    result_business = ResultBusiness(repo)
     return result_business
 
 @router.get("/results/", tags= ["results"])
