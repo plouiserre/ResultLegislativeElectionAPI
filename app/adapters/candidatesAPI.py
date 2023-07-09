@@ -13,9 +13,9 @@ def init_candidate_business() :
 
 
 @router.get("/candidates/", tags=["candidates"])
-async def get_candidates(candidate_business = Depends(init_candidate_business)):
+async def get_candidates(first_name : str ="", last_name: str = "", candidate_business = Depends(init_candidate_business)):
     try :
-        candidates_result = candidate_business.get_candidates()
+        candidates_result = candidate_business.get_candidates(first_name, last_name)
         return candidates_result
     except : 
         raise HTTPException(status_code = 500, detail= "Treatment failed")
