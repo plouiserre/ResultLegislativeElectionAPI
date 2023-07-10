@@ -83,3 +83,37 @@ class CandidateBusinessTest(unittest.TestCase) :
         first_candidate = candidates[0]
         candidate_check =[2, "RAVACLEY", "Stéphane", "M", datetime.datetime(1970,6,6), 3, "Nouvelle union populaire écologique et sociale", "Artisan", False, 13112, 16.56, 32.51, 17594, 22.22, 47.75]
         self.assert_test.assert_candidate_dto(candidate_check, first_candidate)
+        
+        
+    @patch.object(InMemoryCandidateRepository, "get_candidates")
+    @patch.object(InMemoryPartyRepository, "get_parties")
+    def test_get_specific_candidate_managing_caps(self, mock_party_repository, mock_candidate_repository) : 
+        mock_party_repository.get_parties.return_value = self.__get_parties() 
+        mock_candidate_repository.get_candidates.return_value = self.__get_candidates()
+        
+        business = CandidateBusiness(mock_candidate_repository, mock_party_repository)
+        
+        candidates = business.get_candidates("stéphane", "ravacley")
+        
+        self.assertEqual(1, len(candidates))
+        
+        first_candidate = candidates[0]
+        candidate_check =[2, "RAVACLEY", "Stéphane", "M", datetime.datetime(1970,6,6), 3, "Nouvelle union populaire écologique et sociale", "Artisan", False, 13112, 16.56, 32.51, 17594, 22.22, 47.75]
+        self.assert_test.assert_candidate_dto(candidate_check, first_candidate)
+        
+        
+    @patch.object(InMemoryCandidateRepository, "get_candidates")
+    @patch.object(InMemoryPartyRepository, "get_parties")
+    def test_get_specific_candidate_managing_accent(self, mock_party_repository, mock_candidate_repository) : 
+        mock_party_repository.get_parties.return_value = self.__get_parties() 
+        mock_candidate_repository.get_candidates.return_value = self.__get_candidates()
+        
+        business = CandidateBusiness(mock_candidate_repository, mock_party_repository)
+        
+        candidates = business.get_candidates("Stephane", "RAVACLEY")
+        
+        self.assertEqual(1, len(candidates))
+        
+        first_candidate = candidates[0]
+        candidate_check =[2, "RAVACLEY", "Stéphane", "M", datetime.datetime(1970,6,6), 3, "Nouvelle union populaire écologique et sociale", "Artisan", False, 13112, 16.56, 32.51, 17594, 22.22, 47.75]
+        self.assert_test.assert_candidate_dto(candidate_check, first_candidate)
