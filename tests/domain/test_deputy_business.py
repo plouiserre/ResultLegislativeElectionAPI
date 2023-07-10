@@ -29,7 +29,7 @@ class DeputyBusinessTest(unittest.TestCase):
         mock_deputy_repository.get_deputies.return_value = self.__get_deputies()
         dep = DeputyBusiness(mock_deputy_repository)
         
-        deputies = dep.get_deputies()
+        deputies = dep.get_deputies("", "")
         
         self.assertEqual(4, len(deputies))
          
@@ -48,3 +48,45 @@ class DeputyBusinessTest(unittest.TestCase):
         fourth_deputy = deputies[3]
         deputy_check = [4, "LEROUX", "Sylvain", "M",  datetime.datetime(1978,6,25), False]
         self.assert_test.assert_deputy_dto(deputy_check, fourth_deputy)
+        
+        
+    @patch.object(InMemoryDeputyRepository, 'get_deputies')
+    def test_get_specific_deputies(self, mock_deputy_repository):
+        mock_deputy_repository.get_deputies.return_value = self.__get_deputies()
+        dep = DeputyBusiness(mock_deputy_repository)
+        
+        deputies = dep.get_deputies("Anne-Cécile", "BENOIT-GOLA")
+        
+        self.assertEqual(1, len(deputies))
+         
+        first_deputy = deputies[0]
+        deputy_check = [3, "BENOIT-GOLA", "Anne-Cécile", "F",  datetime.datetime(1973,7,24), False]
+        self.assert_test.assert_deputy_dto(deputy_check, first_deputy)
+        
+        
+    @patch.object(InMemoryDeputyRepository, 'get_deputies')
+    def test_get_specific_deputies_managing_caps(self, mock_deputy_repository):
+        mock_deputy_repository.get_deputies.return_value = self.__get_deputies()
+        dep = DeputyBusiness(mock_deputy_repository)
+        
+        deputies = dep.get_deputies("anne-cécile", "benoit-gola")
+        
+        self.assertEqual(1, len(deputies))
+         
+        first_deputy = deputies[0]
+        deputy_check = [3, "BENOIT-GOLA", "Anne-Cécile", "F",  datetime.datetime(1973,7,24), False]
+        self.assert_test.assert_deputy_dto(deputy_check, first_deputy)
+        
+        
+    @patch.object(InMemoryDeputyRepository, 'get_deputies')
+    def test_get_specific_deputies_managing_accent(self, mock_deputy_repository):
+        mock_deputy_repository.get_deputies.return_value = self.__get_deputies()
+        dep = DeputyBusiness(mock_deputy_repository)
+        
+        deputies = dep.get_deputies("Anne-Cecile", "BENOIT-GOLA")
+        
+        self.assertEqual(1, len(deputies))
+         
+        first_deputy = deputies[0]
+        deputy_check = [3, "BENOIT-GOLA", "Anne-Cécile", "F",  datetime.datetime(1973,7,24), False]
+        self.assert_test.assert_deputy_dto(deputy_check, first_deputy)

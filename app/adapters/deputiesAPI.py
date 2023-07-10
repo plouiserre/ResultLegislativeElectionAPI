@@ -11,9 +11,9 @@ def init_deputy_business() :
 
 
 @router.get("/deputies/", tags=["deputies"])
-async def get_deputies(deputy_business = Depends(init_deputy_business)) : 
+async def get_deputies(first_name : str ="", last_name : str = "", deputy_business = Depends(init_deputy_business)) : 
     try :
-        deputies_result = deputy_business.get_deputies()
+        deputies_result = deputy_business.get_deputies(first_name, last_name)
         return deputies_result
     except :
         raise HTTPException(status_code = 500, detail= "Treatment failed")

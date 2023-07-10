@@ -15,8 +15,8 @@ Feature to developped :
 3. Create in routers deputies.py with a method to get all the deputies DONE
 4. Create in routers results.py with a method to get all the results DONE
 5. Add three new method
-- Find candidates from his last name and first name
-- Find deputies from last name and first name and from his candidate
+- Find candidates from his last name and first name DONE
+- Find deputies from last name and first name and from his candidate DOING
 - Find candidate's results 
 6. Create a method in candidates.py to retrieve all candidates from a specific party.
 7. Create a method in candidates.py to retrieve all candidates from a specific district.

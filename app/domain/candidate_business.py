@@ -1,4 +1,4 @@
-import unicodedata
+from app.utils.helper import getLabelFormatted
 
 class CandidateBusiness() : 
     def __init__(self, CandidateRepository, PartyRepository) -> None:
@@ -29,10 +29,10 @@ class CandidateBusiness() :
                 
                 
     def __search_candidates_from_first_name_last_name(self, candidate, parties):
-        first_name_lower_no_accent = self.__get_label_formatted(self.first_name)
-        first_name_candidate_lower_no_accent = self.__get_label_formatted(candidate.first_name)
-        last_name_lower_no_accent = self.__get_label_formatted(self.last_name)
-        last_name_candidate_lower_no_accent = self.__get_label_formatted(candidate.last_name)
+        first_name_lower_no_accent = getLabelFormatted(self.first_name)
+        first_name_candidate_lower_no_accent = getLabelFormatted(candidate.first_name)
+        last_name_lower_no_accent = getLabelFormatted(self.last_name)
+        last_name_candidate_lower_no_accent = getLabelFormatted(candidate.last_name)
         if first_name_lower_no_accent == first_name_candidate_lower_no_accent and last_name_lower_no_accent == last_name_candidate_lower_no_accent : 
                 self.__set_party_name_for_candidate(candidate, parties)
                 self.candidates_specific.append(candidate)
@@ -45,12 +45,4 @@ class CandidateBusiness() :
                     break
                 else : 
                     continue
-                                                
-                                                
-    def __get_label_formatted(self, label): 
-        label_lower = label.lower()
-        label_lower_no_accent = unicodedata.normalize('NFD', label_lower)\
-                                                .encode('ascii', 'ignore')\
-                                                .decode("utf-8")
-        return label_lower_no_accent
         
