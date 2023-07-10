@@ -68,12 +68,13 @@ class CandidateBusinessTest(unittest.TestCase) :
         self.assert_test.assert_candidate_dto(candidate_check, fourth_candidate)
         
         
-    #TODO reprendre ce TU quand j'aurai pluggé la partie InMemory
+    @patch.object(InMemoryCandidateRepository, "get_candidates")
     @patch.object(InMemoryPartyRepository, "get_parties")
-    def test_get_specific_candidate(self, mock_party_repository) : 
-        mock_party_repository.get_parties.return_value = self.__get_parties()
+    def test_get_specific_candidate(self, mock_party_repository, mock_candidate_repository) : 
+        mock_party_repository.get_parties.return_value = self.__get_parties() 
+        mock_candidate_repository.get_candidates.return_value = self.__get_candidates()
         
-        business = CandidateBusiness(None, mock_party_repository)
+        business = CandidateBusiness(mock_candidate_repository, mock_party_repository)
         
         candidates = business.get_candidates("Stéphane", "RAVACLEY")
         
