@@ -1,4 +1,4 @@
-from app.domain.result_business import ResultBusiness
+from app.domain.business.result_business import ResultBusiness
 from app.ports.in_memory_result_repository import InMemoryResultRepository
 from fastapi import HTTPException, APIRouter, Depends
 

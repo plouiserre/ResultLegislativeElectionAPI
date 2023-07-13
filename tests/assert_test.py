@@ -32,7 +32,8 @@ class AssertTest:
         self.unit_test.assertEqual(deputy_check[2], deputy_dto.first_name)
         self.unit_test.assertEqual(deputy_check[3], deputy_dto.sexe)
         self.unit_test.assertTrue(deputy_check[4] == deputy_dto.birthdate)
-        self.unit_test.assertTrue(deputy_check[5] == deputy_dto.is_sorting)
+        self.unit_test.assertEqual(deputy_check[5], deputy_dto.candidate_id)
+        self.unit_test.assertTrue(deputy_check[6] == deputy_dto.is_sorting)
         
         
     def assert_result_dto(self, result_check, result_dto) :

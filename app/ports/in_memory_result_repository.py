@@ -1,6 +1,6 @@
 from app.domain.DTO.resultDTO import ResultDTO
 from app.domain.factory.factoryresult import FactoryResult
-from app.domain.result_repository import ResultRepository
+from app.domain.repository.result_repository import ResultRepository
 from typing import List
 
 class InMemoryResultRepository(ResultRepository) :
