@@ -4,8 +4,8 @@ import unittest
 from app.domain.business.deputy_business import DeputyBusiness
 from app.domain.factory.factorycandidate import FactoryCandidate
 from app.domain.factory.factorydeputy import FactoryDeputy
-from app.ports.in_memory_candidate_repository import InMemoryCandidateRepository
-from app.ports.in_memory_deputy_repository import InMemoryDeputyRepository
+from app.ports.InMemory.in_memory_candidate_repository import InMemoryCandidateRepository
+from app.ports.InMemory.in_memory_deputy_repository import InMemoryDeputyRepository
 from tests.assert_test import AssertTest
 from unittest.mock import patch
 

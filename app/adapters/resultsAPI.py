@@ -1,5 +1,5 @@
 from app.domain.business.result_business import ResultBusiness
-from app.ports.in_memory_result_repository import InMemoryResultRepository
+from app.ports.InMemory.in_memory_result_repository import InMemoryResultRepository
 from fastapi import HTTPException, APIRouter, Depends
 
 router = APIRouter()

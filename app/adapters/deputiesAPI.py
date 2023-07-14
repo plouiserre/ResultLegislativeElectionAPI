@@ -1,7 +1,7 @@
 from app.domain.business.deputy_business import DeputyBusiness
 from fastapi import APIRouter, Depends, HTTPException, status
-from app.ports.in_memory_candidate_repository import InMemoryCandidateRepository
-from app.ports.in_memory_deputy_repository import InMemoryDeputyRepository
+from app.ports.InMemory.in_memory_candidate_repository import InMemoryCandidateRepository
+from app.ports.InMemory.in_memory_deputy_repository import InMemoryDeputyRepository
 
 router = APIRouter()
 

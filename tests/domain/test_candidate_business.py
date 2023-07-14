@@ -4,8 +4,8 @@ import unittest
 from app.domain.business.candidate_business import CandidateBusiness
 from app.domain.factory.factorycandidate import FactoryCandidate
 from app.domain.factory.factoryparty import FactoryParty
-from app.ports.in_memory_candidate_repository import InMemoryCandidateRepository
-from app.ports.in_memory_party_repository import InMemoryPartyRepository
+from app.ports.InMemory.in_memory_candidate_repository import InMemoryCandidateRepository
+from app.ports.InMemory.in_memory_party_repository import InMemoryPartyRepository
 from unittest.mock import patch
 from tests.assert_test import AssertTest
 
