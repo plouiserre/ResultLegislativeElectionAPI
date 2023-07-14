@@ -7,4 +7,5 @@ class DeputyDTO:
         self.last_name = ''
         self.first_name = ''
         self.birthdate = datetime.date
+        self.candidate_id = 0
         self.is_sorting = False

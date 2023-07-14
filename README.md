@@ -14,16 +14,18 @@ Feature to developped :
 2. New method in candidates.py to get all the candidates from the database DONE
 3. Create in routers deputies.py with a method to get all the deputies DONE
 4. Create in routers results.py with a method to get all the results DONE
-5. Find candidates from his last name and first name
-6. Find deputies from last name and first name and from his candidate
-7. Find candidate's results 
-8. Create a method in candidates.py to retrieve all candidates from a specific party.
-9. Create a method in candidates.py to retrieve all candidates from a specific district.
-10. Create a method in candidates.py to retrieve all candidates from a specific department.
-11. Create a method to find all 10 candidates with the hightest result in second round.
-12. Create a method to find for each party all 10 candidates with the hightest result in second round.
-13. Create a method to find for each party all 10 departments with the hightest result.
-14. Create a method to find the top 10 jobs of the new congressmans.
-15. Create a method to return the average age of the new congressmans and for each party.
-16. Create a method to return in the good order the list of the party order by the score of the election. 
-17. Create a method to return with parties have the most fight
+5. Add three new methods
+- Find candidates from his last name and first name DONE
+- Find deputies from last name and first name and from his candidate DONE
+6. Connect this API with the database and mysqlrepository
+7. In Candidates py, add this three methods :
+- Retrieve all candidates from a specific party.
+- Retrieve all candidates from a specific district.
+- Retrieve all candidates from a specific department.
+8. Create a method to find all 10 candidates with the hightest result in second round.
+9. Create a method to find for each party all 10 candidates with the hightest result in second round.
+10. Create a method to find for each party all 10 departments with the hightest result.
+11. Create a method to find the top 10 jobs of the new congressmans.
+12. Create a method to return the average age of the new congressmans and for each party.
+13. Create a method to return in the good order the list of the party order by the score of the election. 
+14. Create a method to return with parties have the most fight

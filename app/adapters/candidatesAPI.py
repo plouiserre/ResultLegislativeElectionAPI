@@ -1,4 +1,4 @@
-from app.domain.candidate_business import CandidateBusiness
+from app.domain.business.candidate_business import CandidateBusiness
 from app.ports.in_memory_candidate_repository import InMemoryCandidateRepository
 from app.ports.in_memory_party_repository import InMemoryPartyRepository
 from fastapi import APIRouter, Depends, HTTPException
@@ -13,9 +13,9 @@ def init_candidate_business() :
 
 
 @router.get("/candidates/", tags=["candidates"])
-async def get_candidates(candidate_business = Depends(init_candidate_business)):
+async def get_candidates(first_name : str ="", last_name: str = "", candidate_business = Depends(init_candidate_business)):
     try :
-        candidates_result = candidate_business.get_candidates()
+        candidates_result = candidate_business.get_candidates(first_name, last_name)
         return candidates_result
     except : 
         raise HTTPException(status_code = 500, detail= "Treatment failed")

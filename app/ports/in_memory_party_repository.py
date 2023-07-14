@@ -1,5 +1,5 @@
 from app.domain.DTO.partyDTO import PartyDTO
-from app.domain.party_repository import PartyRepository
+from app.domain.repository.party_repository import PartyRepository
 from app.domain.factory.factoryparty import FactoryParty
 from typing import List
 
