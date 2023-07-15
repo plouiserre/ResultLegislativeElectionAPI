@@ -32,11 +32,10 @@ class DeputyBusiness :
                     self.deputies.append(deputy)
                     
     
-    #TODO after improve this method
     def get_deputy_from_candidate_identity(self, candidate_first_name, candidate_last_name):
         deputy_result = DeputyDTO()
-        candidates = self.candidate_business.get_candidates("", "")
-        candidate_id = self.candidate_business.get_candidate_id(candidates, candidate_first_name, candidate_last_name)  
+        candidates = self.candidate_business.get_candidates(candidate_first_name, candidate_last_name)
+        candidate_id = candidates[0].id
         deputies = self.deputy_repo.get_deputies()
         for deputy in deputies:
             if deputy.candidate_id == candidate_id :

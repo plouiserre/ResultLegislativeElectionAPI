@@ -117,30 +117,3 @@ class CandidateBusinessTest(unittest.TestCase) :
         first_candidate = candidates[0]
         candidate_check =[2, "RAVACLEY", "Stéphane", "M", datetime.datetime(1970,6,6), 3, "Nouvelle union populaire écologique et sociale", "Artisan", False, 13112, 16.56, 32.51, 17594, 22.22, 47.75]
         self.assert_test.assert_candidate_dto(candidate_check, first_candidate)
-        
-        
-    def test_get_candidate_id_from_last_name_first_name(self) :
-        candidates = self.__get_candidates()
-        business = CandidateBusiness(None, None)
-        
-        candidate_id = business.get_candidate_id(candidates, "Stéphane", "RAVACLEY")
-        
-        self.assertEqual(2, candidate_id)
-        
-        
-    def test_get_candidate_id_from_last_name_first_name_managing_caps(self) :
-        candidates = self.__get_candidates()
-        business = CandidateBusiness(None, None)
-        
-        candidate_id = business.get_candidate_id(candidates, "Stéphane", "ravacley")
-        
-        self.assertEqual(2, candidate_id)
-        
-        
-    def test_get_candidate_id_from_last_name_first_name_managing_accents(self) :
-        candidates = self.__get_candidates()
-        business = CandidateBusiness(None, None)
-        
-        candidate_id = business.get_candidate_id(candidates, "Stephane", "RAVACLEY")
-        
-        self.assertEqual(2, candidate_id)
