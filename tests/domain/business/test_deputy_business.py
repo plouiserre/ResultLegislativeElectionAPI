@@ -1,10 +1,10 @@
 import datetime
 import unittest
 
+from app.domain.business.candidate_business import CandidateBusiness
 from app.domain.business.deputy_business import DeputyBusiness
 from app.domain.factory.factorycandidate import FactoryCandidate
 from app.domain.factory.factorydeputy import FactoryDeputy
-from app.ports.InMemory.in_memory_candidate_repository import InMemoryCandidateRepository
 from app.ports.InMemory.in_memory_deputy_repository import InMemoryDeputyRepository
 from tests.assert_test import AssertTest
 from unittest.mock import patch
@@ -105,12 +105,16 @@ class DeputyBusinessTest(unittest.TestCase):
         self.assert_test.assert_deputy_dto(deputy_check, first_deputy)
         
         
-    @patch.object(InMemoryCandidateRepository, "get_candidates")
+    def __get_candidate_id(self, id_to_return) :
+        return id_to_return
+        
+    @patch.object(CandidateBusiness, "get_candidates")
     @patch.object(InMemoryDeputyRepository, 'get_deputies')
-    def test_get_deputy_from_candidate_thomassin(self, mock_deputy_repository, mock_candidate_repository):
+    def test_get_deputy_from_candidate_thomassin(self, mock_deputy_repository, mock_candidate_business):
         mock_deputy_repository.get_deputies.return_value = self.__get_deputies()
-        mock_candidate_repository.get_candidates.return_value = self.__get_candidates()
-        dep = DeputyBusiness(mock_deputy_repository, mock_candidate_repository)
+        mock_candidate_business.get_candidates.return_value = self.__get_candidates()
+        mock_candidate_business.get_candidate_id.return_value =  self.__get_candidate_id(24)
+        dep = DeputyBusiness(mock_deputy_repository, mock_candidate_business)
         
         deputy = dep.get_deputy_from_candidate_identity("Geoffrey", "THOMASSIN")
         
@@ -119,12 +123,13 @@ class DeputyBusinessTest(unittest.TestCase):
         
         
         
-    @patch.object(InMemoryCandidateRepository, "get_candidates")
+    @patch.object(CandidateBusiness, "get_candidates")
     @patch.object(InMemoryDeputyRepository, 'get_deputies')
-    def test_get_deputy_from_candidate_benoit_gola(self, mock_deputy_repository, mock_candidate_repository):
+    def test_get_deputy_from_candidate_benoit_gola(self, mock_deputy_repository, mock_candidate_business):
         mock_deputy_repository.get_deputies.return_value = self.__get_deputies()
-        mock_candidate_repository.get_candidates.return_value = self.__get_candidates()
-        dep = DeputyBusiness(mock_deputy_repository, mock_candidate_repository)
+        mock_candidate_business.get_candidates.return_value = self.__get_candidates()
+        mock_candidate_business.get_candidate_id.return_value =  self.__get_candidate_id(132)
+        dep = DeputyBusiness(mock_deputy_repository, mock_candidate_business)
         
         deputy = dep.get_deputy_from_candidate_identity("Eric", "ALAUZET")
         
@@ -132,12 +137,13 @@ class DeputyBusinessTest(unittest.TestCase):
         self.assert_test.assert_deputy_dto(deputy_check, deputy)
         
         
-    @patch.object(InMemoryCandidateRepository, "get_candidates")
+    @patch.object(CandidateBusiness, "get_candidates")
     @patch.object(InMemoryDeputyRepository, 'get_deputies')
-    def test_get_deputy_from_candidate_benoit_gola_managing_caps(self, mock_deputy_repository, mock_candidate_repository):
+    def test_get_deputy_from_candidate_benoit_gola_managing_caps(self, mock_deputy_repository, mock_candidate_business):
         mock_deputy_repository.get_deputies.return_value = self.__get_deputies()
-        mock_candidate_repository.get_candidates.return_value = self.__get_candidates()
-        dep = DeputyBusiness(mock_deputy_repository, mock_candidate_repository)
+        mock_candidate_business.get_candidates.return_value = self.__get_candidates()
+        mock_candidate_business.get_candidate_id.return_value =  self.__get_candidate_id(132)
+        dep = DeputyBusiness(mock_deputy_repository, mock_candidate_business)
         
         deputy = dep.get_deputy_from_candidate_identity("eric", "ALAUZET")
         
@@ -145,12 +151,13 @@ class DeputyBusinessTest(unittest.TestCase):
         self.assert_test.assert_deputy_dto(deputy_check, deputy)
         
         
-    @patch.object(InMemoryCandidateRepository, "get_candidates")
+    @patch.object(CandidateBusiness, "get_candidates")
     @patch.object(InMemoryDeputyRepository, 'get_deputies')
-    def test_get_deputy_from_candidate_jp_drugregne_managing_accent(self, mock_deputy_repository, mock_candidate_repository):
+    def test_get_deputy_from_candidate_jp_drugregne_managing_accent(self, mock_deputy_repository, mock_candidate_business):
         mock_deputy_repository.get_deputies.return_value = self.__get_deputies()
-        mock_candidate_repository.get_candidates.return_value = self.__get_candidates()
-        dep = DeputyBusiness(mock_deputy_repository, mock_candidate_repository)
+        mock_candidate_business.get_candidates.return_value = self.__get_candidates()
+        mock_candidate_business.get_candidate_id.return_value =  self.__get_candidate_id(2)
+        dep = DeputyBusiness(mock_deputy_repository, mock_candidate_business)
         
         deputy = dep.get_deputy_from_candidate_identity("Stephane", "RAVACLEY")
         
@@ -158,12 +165,12 @@ class DeputyBusinessTest(unittest.TestCase):
         self.assert_test.assert_deputy_dto(deputy_check, deputy)
         
         
-    @patch.object(InMemoryCandidateRepository, "get_candidates")
+    @patch.object(CandidateBusiness, "get_candidates")
     @patch.object(InMemoryDeputyRepository, 'get_deputies')
-    def test_get_deputy_from_candidate_unknown(self, mock_deputy_repository, mock_candidate_repository):
+    def test_get_deputy_from_candidate_unknown(self, mock_deputy_repository, mock_candidate_business):
         mock_deputy_repository.get_deputies.return_value = self.__get_deputies()
-        mock_candidate_repository.get_candidates.return_value = self.__get_candidates()
-        dep = DeputyBusiness(mock_deputy_repository, mock_candidate_repository)
+        mock_candidate_business.get_candidates.return_value = self.__get_candidates()
+        dep = DeputyBusiness(mock_deputy_repository, mock_candidate_business)
         
         deputy = dep.get_deputy_from_candidate_identity("John", "DOE")
         

@@ -1,11 +1,10 @@
-from app.domain.business.candidate_business import CandidateBusiness
 from app.domain.DTO.deputyDTO import DeputyDTO
 from app.utils.helper import getLabelFormatted
 
 class DeputyBusiness : 
-    def __init__(self, DeputyRepository, CandidateRepository) -> None:
+    def __init__(self, DeputyRepository, CandidateBusiness) -> None:
         self.deputy_repo = DeputyRepository
-        self.candidate_repo = CandidateRepository
+        self.candidate_business = CandidateBusiness
         self.deputies = []
         self.first_name = ""
         self.last_name = ""
@@ -32,12 +31,12 @@ class DeputyBusiness :
         if first_name_deputy_lower == first_name_lower and last_name_deputy_lower == last_name_lower :
                     self.deputies.append(deputy)
                     
-              
+    
+    #TODO after improve this method
     def get_deputy_from_candidate_identity(self, candidate_first_name, candidate_last_name):
         deputy_result = DeputyDTO()
-        candidate_business = CandidateBusiness(None, None)
-        candidates = self.candidate_repo.get_candidates()
-        candidate_id = candidate_business.get_candidate_id(candidates, candidate_first_name, candidate_last_name)  
+        candidates = self.candidate_business.get_candidates("", "")
+        candidate_id = self.candidate_business.get_candidate_id(candidates, candidate_first_name, candidate_last_name)  
         deputies = self.deputy_repo.get_deputies()
         for deputy in deputies:
             if deputy.candidate_id == candidate_id :
