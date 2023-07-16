@@ -1,5 +1,4 @@
 from app.domain.business.candidate_business import CandidateBusiness
-from app.ports.InMemory.in_memory_candidate_repository import InMemoryCandidateRepository
 from app.ports.MySql.my_sql_candidate_repository import MySqlCandidateRepository
 from app.ports.MySql.my_sql_party_repository import MySqlPartyRepository
 from fastapi import APIRouter, Depends, HTTPException
