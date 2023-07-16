@@ -17,7 +17,7 @@ Feature to developped :
 5. Add three new methods
 - Find candidates from his last name and first name DONE
 - Find deputies from last name and first name and from his candidate DONE
-6. Connect this API with the database and mysqlrepository
+6. Connect this API with the database and mysqlrepository DONE
 7. Create a cache to load data only one time
 8. In Candidates py, add this three methods :
 - Retrieve all candidates from a specific party.
