@@ -2,7 +2,7 @@ import unittest
 
 from app.domain.factory.factoryresult import FactoryResult
 from app.domain.business.result_business import ResultBusiness
-from ports.test_in_memory_result_repository import InMemoryResultRepository
+from ports.InMemory.test_in_memory_result_repository import InMemoryResultRepository
 from tests.assert_test import AssertTest
 from unittest.mock import patch
 

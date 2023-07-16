@@ -22,3 +22,25 @@ class FactoryCandidate :
         candidate.rate_vote_registered_second_round = rate_vote_registered_second_round
         candidate.rate_vote_expressed_second_round = rate_vote_expressed_second_round
         return candidate
+    
+    
+    def construct_candidate_from_bdd(self, candidate_data_from_bdd) : 
+        candidate = CandidateDTO()
+        candidate.id = candidate_data_from_bdd[0]
+        candidate.last_name = candidate_data_from_bdd[1]
+        candidate.first_name = candidate_data_from_bdd[2]
+        candidate.sexe = candidate_data_from_bdd[3]
+        candidate.birthdate = candidate_data_from_bdd[4]
+        candidate.party_id = candidate_data_from_bdd[5]
+        candidate.job = candidate_data_from_bdd[6]
+        if candidate_data_from_bdd[7] == 0 : 
+            candidate.is_sorting = False
+        else : 
+            candidate.is_sorting = True
+        candidate.vote_first_round = candidate_data_from_bdd[8]
+        candidate.rate_vote_registered_first_round = candidate_data_from_bdd[9]
+        candidate.rate_vote_expressed_first_round = candidate_data_from_bdd[10]
+        candidate.vote_second_round = candidate_data_from_bdd[11]
+        candidate.rate_vote_registered_second_round = candidate_data_from_bdd[12]
+        candidate.rate_vote_expressed_second_round = candidate_data_from_bdd[13]
+        return candidate

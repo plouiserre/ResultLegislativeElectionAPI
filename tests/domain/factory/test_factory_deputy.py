@@ -17,3 +17,13 @@ class FactoryDeputyTest(unittest.TestCase) :
         
         deputy_check = [66, "DUFREGNE", "Jean-Paul", "M",  datetime.datetime(1958, 3, 28), 2, True]
         self.assert_test.assert_deputy_dto(deputy_check, deputy)
+        
+        
+    def test_contruct_deputy_from_bdd(self) : 
+        factory = FactoryDeputy()
+        
+        deputy_data = [578, 'Douard', 'Dominique', 'F', datetime.datetime(1953, 2, 6), 0, 6291]
+        deputy = factory.construct_deputy_from_bdd(deputy_data)
+        
+        deputy_check = [578, 'Douard', 'Dominique', 'F', datetime.datetime(1953, 2, 6), 6291, False]
+        self.assert_test.assert_deputy_dto(deputy_check, deputy)

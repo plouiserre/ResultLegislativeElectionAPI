@@ -1,6 +1,6 @@
 import unittest
 
-from app.ports.in_memory_party_repository import InMemoryPartyRepository
+from app.ports.InMemory.in_memory_party_repository import InMemoryPartyRepository
 from tests.assert_test import AssertTest
 
 class InMemoryPartyRepositoryTest(unittest.TestCase) : 
