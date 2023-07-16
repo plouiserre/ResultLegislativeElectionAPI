@@ -1,6 +1,7 @@
 from app.domain.business.candidate_business import CandidateBusiness
 from app.domain.business.deputy_business import DeputyBusiness
 from fastapi import APIRouter, Depends, HTTPException, status
+from app.ports.MySql.cache import Cache
 from app.ports.MySql.my_sql_candidate_repository import MySqlCandidateRepository
 from app.ports.MySql.my_sql_deputy_repository import MySqlDeputyRepository
 from app.ports.MySql.my_sql_party_repository import MySqlPartyRepository
@@ -8,9 +9,10 @@ from app.ports.MySql.my_sql_party_repository import MySqlPartyRepository
 router = APIRouter()
 
 def init_deputy_business() :
-    candidate_repo = MySqlCandidateRepository()
-    deputy_repo = MySqlDeputyRepository()
-    party_repo = MySqlPartyRepository()
+    cache = Cache()
+    candidate_repo = MySqlCandidateRepository(cache)
+    deputy_repo = MySqlDeputyRepository(cache)
+    party_repo = MySqlPartyRepository(cache)
     candidate_business = CandidateBusiness(candidate_repo, party_repo)
     deputy_business = DeputyBusiness(deputy_repo, candidate_business)
     return deputy_business
