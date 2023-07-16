@@ -18,7 +18,7 @@ Feature to developped :
 - Find candidates from his last name and first name DONE
 - Find deputies from last name and first name and from his candidate DONE
 6. Connect this API with the database and mysqlrepository DONE
-7. Create a cache to load data only one time
+7. Create a cache to load data only one time DONE
 8. In Candidates py, add this three methods :
 - Retrieve all candidates from a specific party.
 - Retrieve all candidates from a specific district.

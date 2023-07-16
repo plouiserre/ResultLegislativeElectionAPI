@@ -1,4 +1,5 @@
 from app.domain.business.candidate_business import CandidateBusiness
+from app.ports.MySql.cache import Cache
 from app.ports.MySql.my_sql_candidate_repository import MySqlCandidateRepository
 from app.ports.MySql.my_sql_party_repository import MySqlPartyRepository
 from fastapi import APIRouter, Depends, HTTPException
@@ -6,8 +7,9 @@ from fastapi import APIRouter, Depends, HTTPException
 router = APIRouter()
 
 def init_candidate_business() : 
-    candidate_repo = MySqlCandidateRepository()
-    party_repo = MySqlPartyRepository()
+    cache = Cache()
+    candidate_repo = MySqlCandidateRepository(cache)
+    party_repo = MySqlPartyRepository(cache)
     candidate_business = CandidateBusiness(candidate_repo, party_repo)
     return candidate_business
 
