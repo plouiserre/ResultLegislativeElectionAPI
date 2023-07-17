@@ -27,7 +27,6 @@ class PartyBusinessTest(unittest.TestCase) :
         mock_party_repository.get_parties.return_value = self.__get_parties()
         
         business = PartyBusiness(mock_party_repository)
-        
         parties = business.get_parties()
         
         self.assertEqual(4, len(parties))
@@ -43,4 +42,15 @@ class PartyBusinessTest(unittest.TestCase) :
         
         party_check = [9, "Divers", "DIV"]
         self.assert_test.assert_party_dto(party_check, parties[3])
+        
+        
+    @patch.object(InMemoryPartyRepository, "get_parties")
+    def test_get_parties_by_short_name(self, mock_party_repository) : 
+        mock_party_repository.get_parties.return_value = self.__get_parties()
+        
+        business = PartyBusiness(mock_party_repository)
+        party = business.get_party_by_short_name("ENS")
+        
+        party_check = [7, "Ensemble ! (Majorité présidentielle)", "ENS"]
+        self.assert_test.assert_party_dto(party_check, party)
         

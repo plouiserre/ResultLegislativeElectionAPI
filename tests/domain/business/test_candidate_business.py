@@ -127,7 +127,8 @@ class CandidateBusinessTest(unittest.TestCase) :
     @patch.object(InMemoryCandidateRepository, "get_candidates")
     @patch.object(PartyBusiness, "get_parties")
     def test_get_candidates_from_specific_party(self, mock_party_business, mock_candidate_repository) :
-        mock_party_business.get_parties.return_value = self.__get_parties()
+        factory = FactoryParty()
+        mock_party_business.get_party_by_short_name.return_value = factory.construct_party(3, "Nouvelle union populaire écologique et sociale", "NUP")
         mock_candidate_repository.get_candidates.return_value = self.__get_candidates()
         
         business = CandidateBusiness(mock_candidate_repository, mock_party_business)
