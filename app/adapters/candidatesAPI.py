@@ -21,3 +21,12 @@ async def get_candidates(first_name : str ="", last_name: str = "", candidate_bu
         return candidates_result
     except : 
         raise HTTPException(status_code = 500, detail= "Treatment failed")
+    
+    
+@router.get("/candidates/parties/", tags=["candidates"])
+async def get_candidates_by_party(party : str = "", candidate_business = Depends(init_candidate_business)) :
+    try :
+        candidates_result = candidate_business.get_candidates_by_party(party)
+        return candidates_result
+    except :
+        raise HTTPException(status_code = 500, detail= "Treatment failed")

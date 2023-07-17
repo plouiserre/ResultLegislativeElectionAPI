@@ -46,3 +46,25 @@ class CandidateBusiness() :
                     break
                 else : 
                     continue
+                        
+    #TODO first party externalize in party_service
+    def get_candidates_by_party(self, party_short_name) :
+        candidates_from_parties = []
+        party_id = 0
+        party_name = ""
+        
+        parties = self.party_repo.get_parties()
+        for party in parties : 
+            if party.short_name == party_short_name : 
+                party_id = party.id
+                party_name = party.name
+                break
+           
+        candidates = self.candidate_repo.get_candidates() 
+            
+        for candidate in candidates : 
+            if candidate.party_id == party_id :
+                candidate.party_name = party_name
+                candidates_from_parties.append(candidate)
+                
+        return candidates_from_parties
