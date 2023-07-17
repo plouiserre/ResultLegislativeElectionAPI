@@ -4,8 +4,8 @@ import unittest
 from app.domain.business.candidate_business import CandidateBusiness
 from app.domain.factory.factorycandidate import FactoryCandidate
 from app.domain.factory.factoryparty import FactoryParty
+from app.domain.business.party_business import PartyBusiness
 from app.ports.InMemory.in_memory_candidate_repository import InMemoryCandidateRepository
-from app.ports.InMemory.in_memory_party_repository import InMemoryPartyRepository
 from unittest.mock import patch
 from tests.assert_test import AssertTest
 
@@ -41,12 +41,12 @@ class CandidateBusinessTest(unittest.TestCase) :
     
     
     @patch.object(InMemoryCandidateRepository, "get_candidates")
-    @patch.object(InMemoryPartyRepository, "get_parties")
-    def test_get_all_candidates(self, mock_candidate_repository, mock_party_repository) : 
+    @patch.object(PartyBusiness, "get_parties")
+    def test_get_all_candidates(self, mock_candidate_repository, mock_party_business) : 
         mock_candidate_repository.get_candidates.return_value = self.__get_candidates()
-        mock_party_repository.get_parties.return_value = self.__get_parties()
+        mock_party_business.get_parties.return_value = self.__get_parties()
         
-        business = CandidateBusiness(mock_candidate_repository, mock_party_repository)
+        business = CandidateBusiness(mock_candidate_repository, mock_party_business)
         
         candidates = business.get_candidates("", "")
         
@@ -74,12 +74,12 @@ class CandidateBusinessTest(unittest.TestCase) :
         
         
     @patch.object(InMemoryCandidateRepository, "get_candidates")
-    @patch.object(InMemoryPartyRepository, "get_parties")
-    def test_get_specific_candidate(self, mock_party_repository, mock_candidate_repository) : 
-        mock_party_repository.get_parties.return_value = self.__get_parties() 
+    @patch.object(PartyBusiness, "get_parties")
+    def test_get_specific_candidate(self, mock_party_business, mock_candidate_repository) : 
+        mock_party_business.get_parties.return_value = self.__get_parties() 
         mock_candidate_repository.get_candidates.return_value = self.__get_candidates()
         
-        business = CandidateBusiness(mock_candidate_repository, mock_party_repository)
+        business = CandidateBusiness(mock_candidate_repository, mock_party_business)
         
         candidates = business.get_candidates("Stéphane", "RAVACLEY")
         
@@ -91,12 +91,12 @@ class CandidateBusinessTest(unittest.TestCase) :
         
         
     @patch.object(InMemoryCandidateRepository, "get_candidates")
-    @patch.object(InMemoryPartyRepository, "get_parties")
-    def test_get_specific_candidate_managing_caps(self, mock_party_repository, mock_candidate_repository) : 
-        mock_party_repository.get_parties.return_value = self.__get_parties() 
+    @patch.object(PartyBusiness, "get_parties")
+    def test_get_specific_candidate_managing_caps(self, mock_party_business, mock_candidate_repository) : 
+        mock_party_business.get_parties.return_value = self.__get_parties() 
         mock_candidate_repository.get_candidates.return_value = self.__get_candidates()
         
-        business = CandidateBusiness(mock_candidate_repository, mock_party_repository)
+        business = CandidateBusiness(mock_candidate_repository, mock_party_business)
         
         candidates = business.get_candidates("stéphane", "ravacley")
         
@@ -108,12 +108,12 @@ class CandidateBusinessTest(unittest.TestCase) :
         
         
     @patch.object(InMemoryCandidateRepository, "get_candidates")
-    @patch.object(InMemoryPartyRepository, "get_parties")
-    def test_get_specific_candidate_managing_accent(self, mock_party_repository, mock_candidate_repository) : 
-        mock_party_repository.get_parties.return_value = self.__get_parties() 
+    @patch.object(PartyBusiness, "get_parties")
+    def test_get_specific_candidate_managing_accent(self, mock_party_business, mock_candidate_repository) : 
+        mock_party_business.get_parties.return_value = self.__get_parties() 
         mock_candidate_repository.get_candidates.return_value = self.__get_candidates()
         
-        business = CandidateBusiness(mock_candidate_repository, mock_party_repository)
+        business = CandidateBusiness(mock_candidate_repository, mock_party_business)
         
         candidates = business.get_candidates("Stephane", "RAVACLEY")
         
@@ -125,12 +125,12 @@ class CandidateBusinessTest(unittest.TestCase) :
         
         
     @patch.object(InMemoryCandidateRepository, "get_candidates")
-    @patch.object(InMemoryPartyRepository, "get_parties")
-    def test_get_candidates_from_specific_party(self, mock_party_repository, mock_candidate_repository) :
-        mock_party_repository.get_parties.return_value = self.__get_parties()
+    @patch.object(PartyBusiness, "get_parties")
+    def test_get_candidates_from_specific_party(self, mock_party_business, mock_candidate_repository) :
+        mock_party_business.get_parties.return_value = self.__get_parties()
         mock_candidate_repository.get_candidates.return_value = self.__get_candidates()
         
-        business = CandidateBusiness(mock_candidate_repository, mock_party_repository)
+        business = CandidateBusiness(mock_candidate_repository, mock_party_business)
         
         candidates = business.get_candidates_by_party("NUP")
         

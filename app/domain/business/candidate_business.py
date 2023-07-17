@@ -1,9 +1,10 @@
 from app.utils.helper import getLabelFormatted
+from app.domain.business.party_business import PartyBusiness
 
 class CandidateBusiness() : 
-    def __init__(self, CandidateRepository, PartyRepository) -> None:
+    def __init__(self, CandidateRepository, PartyBusiness) -> None:
         self.candidate_repo = CandidateRepository
-        self.party_repo = PartyRepository
+        self.party_business = PartyBusiness
         self.first_name = ""
         self.last_name = ""
         self.candidates = []
@@ -15,7 +16,7 @@ class CandidateBusiness() :
         self.last_name = last_name
         self.candidates = self.candidate_repo.get_candidates()
         
-        parties = self.party_repo.get_parties()
+        parties = self.party_business.get_parties()
         
         for candidate in self.candidates : 
             if first_name == "" and last_name == "" :
@@ -53,7 +54,7 @@ class CandidateBusiness() :
         party_id = 0
         party_name = ""
         
-        parties = self.party_repo.get_parties()
+        parties = self.party_business.get_parties()
         for party in parties : 
             if party.short_name == party_short_name : 
                 party_id = party.id
