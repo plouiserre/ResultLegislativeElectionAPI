@@ -19,11 +19,14 @@ class FactoryCandidateTest(unittest.TestCase) :
         self.assert_test.assert_candidate_dto(candidate_check, candidate)
         
         
+    #TODO update later when district Id will be needed
     def test_construct_candidate_from_bdd(self) : 
         factory = FactoryCandidate()
         
         candidate_data = [6291, "GUILLERMAIN", "Vincent", "M", datetime.datetime(1976, 8, 10), 7, "Agriculteur sur petite exploitation", 0, 576, 8071, 9.36, 19.3, 0, 0, 0]
         candidate = factory.construct_candidate_from_bdd(candidate_data)
         
-        candidate_check = [6291, "GUILLERMAIN", "Vincent", "M", datetime.datetime(1976, 8, 10), 7, "", "Agriculteur sur petite exploitation", False, 576, 8071, 9.36, 19.3, 0, 0, 0]
+        #candidate_check with district_id
+        #candidate_check = [6291, "GUILLERMAIN", "Vincent", "M", datetime.datetime(1976, 8, 10), 7, "", "Agriculteur sur petite exploitation", False, 576, 8071, 9.36, 19.3, 0, 0, 0]
+        candidate_check = [6291, "GUILLERMAIN", "Vincent", "M", datetime.datetime(1976, 8, 10), 7, "", "Agriculteur sur petite exploitation", False, 8071, 9.36, 19.3, 0, 0, 0]
         self.assert_test.assert_candidate_dto(candidate_check, candidate)

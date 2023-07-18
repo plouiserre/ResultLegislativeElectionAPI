@@ -37,10 +37,11 @@ class FactoryCandidate :
             candidate.is_sorting = False
         else : 
             candidate.is_sorting = True
-        candidate.vote_first_round = candidate_data_from_bdd[8]
-        candidate.rate_vote_registered_first_round = candidate_data_from_bdd[9]
-        candidate.rate_vote_expressed_first_round = candidate_data_from_bdd[10]
-        candidate.vote_second_round = candidate_data_from_bdd[11]
-        candidate.rate_vote_registered_second_round = candidate_data_from_bdd[12]
-        candidate.rate_vote_expressed_second_round = candidate_data_from_bdd[13]
+        # candidate_data_from_bdd[8] => DISTRICT ID Do later
+        candidate.vote_first_round = candidate_data_from_bdd[9]
+        candidate.rate_vote_registered_first_round = candidate_data_from_bdd[10]
+        candidate.rate_vote_expressed_first_round = candidate_data_from_bdd[11]
+        candidate.vote_second_round = candidate_data_from_bdd[12]
+        candidate.rate_vote_registered_second_round = candidate_data_from_bdd[13]
+        candidate.rate_vote_expressed_second_round = candidate_data_from_bdd[14]
         return candidate
