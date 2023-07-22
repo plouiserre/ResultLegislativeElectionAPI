@@ -5,7 +5,7 @@ from app.main import app
 from app.adapters.deputiesAPI import init_deputy_business
 from fastapi.testclient import TestClient
 
-
+#TODO rework this file
 def override_get_deputies_OK() :
     json = [{"LastName" : "CARPENTIER", "FirstName" : "Julien", "Sexe" : "M"}, {"LastName" : "DUFREGNE", "FirstName" : "Jean-Paul", "Sexe" : "M"}, {"LastName" : "BENOIT-GOLA", "FirstName" : "Anne-Cécile", "Sexe" : "F"}]
     mock = Mock()

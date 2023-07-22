@@ -20,9 +20,9 @@ Feature to developped :
 6. Connect this API with the database and mysqlrepository DONE
 7. Create a cache to load data only one time DONE
 8. In Candidates py, add this three methods :
-- Retrieve all candidates from a specific party.
-- Retrieve all candidates from a specific district.
+- Retrieve all candidates from a specific party. DONE
 - Retrieve all candidates from a specific department.
+- Retrieve all candidates from a specific district.
 9. Create a method to find all 10 candidates with the hightest result in second round.
 10. Create a method to find for each party all 10 candidates with the hightest result in second round.
 11. Create a method to find for each party all 10 departments with the hightest result.
