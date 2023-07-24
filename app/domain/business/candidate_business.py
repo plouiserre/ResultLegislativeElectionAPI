@@ -81,16 +81,21 @@ class CandidateBusiness() :
         
         department = self.department_business.get_department_by_name(department_name)
         
-        districts = self.district_business.get_districts_by_department_id(department.id)
+        if department != None : 
         
-        candidates = self.candidate_repo.get_candidates()
+            districts = self.district_business.get_districts_by_department_id(department.id)
+            
+            candidates = self.candidate_repo.get_candidates()
+            
+            parties = self.party_business.get_parties()
+            
+            for candidate in candidates : 
+                for district in districts :
+                    if candidate.district_id == district.id :
+                        self.__set_party_name_for_candidate(candidate, parties)
+                        candidates_result.append(candidate)
         
-        parties = self.party_business.get_parties()
+            return candidates_result
         
-        for candidate in candidates : 
-            for district in districts :
-                if candidate.district_id == district.id :
-                    self.__set_party_name_for_candidate(candidate, parties)
-                    candidates_result.append(candidate)
-        
-        return candidates_result
+        else :
+            return None

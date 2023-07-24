@@ -225,3 +225,21 @@ class CandidateBusinessTest(unittest.TestCase) :
         fourth_candidate = candidates[3]
         candidate_check =[5, "HERITIER", "Louise", "F", datetime.datetime(1997,2,25), 3, "Nouvelle union populaire écologique et sociale", "Profession de l'information, des arts et des spectacles", False, 66, 89787, 23.2, 12.2, 9872, 21.32, 6.2]
         self.assert_test.assert_candidate_dto(candidate_check, fourth_candidate)
+        
+    
+    #TODO check to simplify to delete mock Party Business
+    @patch.object(InMemoryCandidateRepository, "get_candidates")
+    @patch.object(DepartmentBusiness, "get_department_by_name")
+    @patch.object(DistrictBusiness, "get_districts_by_department_id")
+    @patch.object(PartyBusiness, "get_parties")
+    def test_get_all_candidates_from_unknown_department(self, mock_candidate_repository, mock_department_business, mock_district_business, mock_party_business):
+        mock_candidate_repository.get_candidates.return_value = self.__get_candidates()
+        mock_department_business.get_department_by_name.return_value = None
+        mock_district_business.get_districts_by_department_id.return_value = self.__get_districts()
+        mock_party_business.get_parties.return_value = self.__get_parties()
+        
+        business = CandidateBusiness(mock_candidate_repository, mock_party_business, mock_department_business, mock_district_business)
+        
+        candidates = business.get_candidates_by_departement("azf")
+        
+        self.assertEqual(None, candidates)
