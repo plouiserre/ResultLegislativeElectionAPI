@@ -161,14 +161,8 @@ class CandidateBusinessTest(unittest.TestCase) :
         
         candidates = business.get_candidates_by_district(66)
         
-        #self.assertEqual(3, len(candidates))
         self.assertEqual(2, len(candidates))
 
-        
-        # first_candidate = candidates[0]
-        # candidate_check =[1, "VUITTON", "Brigitte", "F", datetime.datetime(1957,11,29), 1, "Divers extrême gauche", "Professeur, profession scientifique", False, 66, 779, 0.98, 1.93, 0, 0, 0]
-        # self.assert_test.assert_candidate_dto(candidate_check, first_candidate)
-        
         first_candidate = candidates[0]
         candidate_check =[2, "RAVACLEY", "Stéphane", "M", datetime.datetime(1970,6,6), 3, "Nouvelle union populaire écologique et sociale", "Artisan", False, 66, 13112, 16.56, 32.51, 17594, 22.22, 47.75]
         self.assert_test.assert_candidate_dto(candidate_check, first_candidate)
@@ -241,5 +235,40 @@ class CandidateBusinessTest(unittest.TestCase) :
         business = CandidateBusiness(mock_candidate_repository, mock_party_business, mock_department_business, mock_district_business)
         
         candidates = business.get_candidates_by_departement("azf")
+        
+        self.assertEqual(None, candidates)
+        
+        
+    #TODO check to simplify to delete mock Party Business
+    @patch.object(InMemoryCandidateRepository, "get_candidates")
+    @patch.object(PartyBusiness, "get_parties")
+    def test_get_all_candidates_from_district(self, mock_candidate_repository, mock_party_business):
+        mock_candidate_repository.get_candidates.return_value = self.__get_candidates()
+        mock_party_business.get_parties.return_value = self.__get_parties()
+        
+        business = CandidateBusiness(mock_candidate_repository, mock_party_business, None, None)
+        
+        candidates = business.get_candidates_by_district('122')
+        
+        self.assertEqual(2, len(candidates))
+        
+        first_candidate = candidates[0]
+        candidate_check =[3, "THOMASSIN", "Geoffrey", "M", datetime.datetime(1986,10,19), 9, "Divers", "Profession intermédiaire administrative et commerciale des entreprises", False, 122, 216, 0.27, 0.54, 0, 0, 0]
+        self.assert_test.assert_candidate_dto(candidate_check, first_candidate)
+            
+        second_candidate = candidates[1]
+        candidate_check =[4, "ALAUZET", "Eric", "M", datetime.datetime(1958,6,7), 7, "Ensemble ! (Majorité présidentielle)", "Profession libérale", True, 122, 12647, 15.98, 31.36, 19255, 24.32, 52.25]
+        self.assert_test.assert_candidate_dto(candidate_check, second_candidate)
+        
+        
+    @patch.object(InMemoryCandidateRepository, "get_candidates")
+    @patch.object(PartyBusiness, "get_parties")
+    def test_get_all_candidates_from_unknown_district(self, mock_candidate_repository, mock_party_business):
+        mock_candidate_repository.get_candidates.return_value = []
+        mock_party_business.get_parties.return_value = self.__get_parties()
+        
+        business = CandidateBusiness(mock_candidate_repository, mock_party_business, None, None)
+        
+        candidates = business.get_candidates_by_district('122')
         
         self.assertEqual(None, candidates)

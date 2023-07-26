@@ -82,11 +82,8 @@ class CandidateBusiness() :
         department = self.department_business.get_department_by_name(department_name)
         
         if department != None : 
-        
             districts = self.district_business.get_districts_by_department_id(department.id)
-            
             candidates = self.candidate_repo.get_candidates()
-            
             parties = self.party_business.get_parties()
             
             for candidate in candidates : 
@@ -98,4 +95,20 @@ class CandidateBusiness() :
             return candidates_result
         
         else :
+            return None
+        
+        
+    def get_candidates_by_district(self, district_id) : 
+        district_id_needed = int(district_id)
+        candidates_result = []
+        
+        candidates = self.candidate_repo.get_candidates()
+        parties = self.party_business.get_parties()
+        for candidate in candidates : 
+            if candidate.district_id == district_id_needed :
+                self.__set_party_name_for_candidate(candidate, parties)
+                candidates_result.append(candidate)  
+        if len(candidates_result) > 0 :
+            return candidates_result
+        else : 
             return None

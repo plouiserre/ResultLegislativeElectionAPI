@@ -59,3 +59,19 @@ async def get_candidates_by_department(department: str ="", candidate_business =
             status_code = e.status_code
             detail_message = "No result"
         raise HTTPException(status_code = status_code, detail= detail_message)
+    
+    
+@router.get("/candidates/districts/{district_id}")
+async def get_candidates_by_district(district_id , candidate_business = Depends(init_candidate_business)):
+    try :
+        candidates_result = candidate_business.get_candidates_by_district(district_id)
+        if candidates_result == None : 
+            raise HTTPException(status_code= status.HTTP_404_NOT_FOUND, detail = "No result")
+        return candidates_result
+    except Exception as e:
+        status_code = 500
+        detail_message = "Treatment failed"
+        if type(e) == HTTPException :
+            status_code = e.status_code
+            detail_message = "No result"
+        raise HTTPException(status_code = status_code, detail = detail_message)
