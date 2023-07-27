@@ -12,12 +12,13 @@ class AssertTest:
         self.unit_test.assertEqual(candidate_check[6], candidate_dto.party_name)
         self.unit_test.assertEqual(candidate_check[7], candidate_dto.job)
         self.unit_test.assertEqual(candidate_check[8], candidate_dto.is_sorting)
-        self.unit_test.assertEqual(candidate_check[9], candidate_dto.vote_first_round)
-        self.unit_test.assertEqual(candidate_check[10], candidate_dto.rate_vote_registered_first_round)
-        self.unit_test.assertEqual(candidate_check[11], candidate_dto.rate_vote_expressed_first_round)
-        self.unit_test.assertEqual(candidate_check[12], candidate_dto.vote_second_round)
-        self.unit_test.assertEqual(candidate_check[13], candidate_dto.rate_vote_registered_second_round)
-        self.unit_test.assertEqual(candidate_check[14], candidate_dto.rate_vote_expressed_second_round)
+        self.unit_test.assertEqual(candidate_check[9], candidate_dto.district_id)
+        self.unit_test.assertEqual(candidate_check[10], candidate_dto.vote_first_round)
+        self.unit_test.assertEqual(candidate_check[11], candidate_dto.rate_vote_registered_first_round)
+        self.unit_test.assertEqual(candidate_check[12], candidate_dto.rate_vote_expressed_first_round)
+        self.unit_test.assertEqual(candidate_check[13], candidate_dto.vote_second_round)
+        self.unit_test.assertEqual(candidate_check[14], candidate_dto.rate_vote_registered_second_round)
+        self.unit_test.assertEqual(candidate_check[15], candidate_dto.rate_vote_expressed_second_round)
         
         
     def assert_party_dto(self, party_check, party_dto) : 
@@ -54,3 +55,16 @@ class AssertTest:
         self.unit_test.assertEqual(result_check[14], result_dto.expressed)
         self.unit_test.assertEqual(result_check[15], result_dto.rate_express_registered)
         self.unit_test.assertEqual(result_check[16], result_dto.rate_express_voting)
+        
+        
+    def assert_department_dto(self, department_check, department_dto) :
+        self.unit_test.assertEqual(department_check[0], department_dto.id)
+        self.unit_test.assertEqual(department_check[1], department_dto.name)
+        self.unit_test.assertEqual(department_check[2], department_dto.number)
+        
+        
+    def assert_district_dto(self, district_check, district_dto) :
+        self.unit_test.assertEqual(district_check[0], district_dto.id)
+        self.unit_test.assertEqual(district_check[1], district_dto.position)
+        self.unit_test.assertEqual(district_check[2], district_dto.name)
+        self.unit_test.assertEqual(district_check[3], district_dto.department_id)

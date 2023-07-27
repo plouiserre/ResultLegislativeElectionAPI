@@ -1,9 +1,11 @@
 from app.utils.helper import getLabelFormatted
 
 class CandidateBusiness() : 
-    def __init__(self, CandidateRepository, PartyRepository) -> None:
+    def __init__(self, CandidateRepository, PartyBusiness, DepartmentBusiness, DistrictBusiness) -> None:
         self.candidate_repo = CandidateRepository
-        self.party_repo = PartyRepository
+        self.party_business = PartyBusiness
+        self.department_business = DepartmentBusiness
+        self.district_business = DistrictBusiness
         self.first_name = ""
         self.last_name = ""
         self.candidates = []
@@ -15,7 +17,7 @@ class CandidateBusiness() :
         self.last_name = last_name
         self.candidates = self.candidate_repo.get_candidates()
         
-        parties = self.party_repo.get_parties()
+        parties = self.party_business.get_parties()
         
         for candidate in self.candidates : 
             if first_name == "" and last_name == "" :
@@ -46,3 +48,70 @@ class CandidateBusiness() :
                     break
                 else : 
                     continue
+                        
+    
+    def get_candidates_by_party(self, party_short_name) :
+        candidates_from_parties = []
+        
+        party = self.party_business.get_party_by_short_name(party_short_name)
+        
+        if party != None :    
+            candidates = self.candidate_repo.get_candidates() 
+                
+            for candidate in candidates : 
+                if candidate.party_id == party.id :
+                    candidate.party_name = party.name
+                    candidates_from_parties.append(candidate)               
+                    
+            return candidates_from_parties
+        else :
+            return None
+    
+    
+    def get_candidates_by_district(self, district_id) : 
+        candidates_result = []
+        
+        candidates = self.get_candidates("", "")
+        for candidate in candidates : 
+            if candidate.district_id == district_id : 
+                candidates_result.append(candidate)
+                
+        return candidates_result
+    
+    
+    def get_candidates_by_departement(self, department_name) : 
+        candidates_result = []
+        
+        department = self.department_business.get_department_by_name(department_name)
+        
+        if department != None : 
+            districts = self.district_business.get_districts_by_department_id(department.id)
+            candidates = self.candidate_repo.get_candidates()
+            parties = self.party_business.get_parties()
+            
+            for candidate in candidates : 
+                for district in districts :
+                    if candidate.district_id == district.id :
+                        self.__set_party_name_for_candidate(candidate, parties)
+                        candidates_result.append(candidate)
+        
+            return candidates_result
+        
+        else :
+            return None
+        
+        
+    def get_candidates_by_district(self, district_id) : 
+        district_id_needed = int(district_id)
+        candidates_result = []
+        
+        candidates = self.candidate_repo.get_candidates()
+        parties = self.party_business.get_parties()
+        for candidate in candidates : 
+            if candidate.district_id == district_id_needed :
+                self.__set_party_name_for_candidate(candidate, parties)
+                candidates_result.append(candidate)  
+        if len(candidates_result) > 0 :
+            return candidates_result
+        else : 
+            return None

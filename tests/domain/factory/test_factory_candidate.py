@@ -13,9 +13,9 @@ class FactoryCandidateTest(unittest.TestCase) :
     def test_construct_candidate(self) : 
         factory = FactoryCandidate()
         
-        candidate = factory.construct_candidate(1, "VUITTON", "Brigitte", "F", datetime.datetime(1957,11,29), 1, "Professeur, profession scientifique", False, 779, 0.98, 1.93, 0, 0, 0)
+        candidate = factory.construct_candidate(1, "VUITTON", "Brigitte", "F", datetime.datetime(1957,11,29), 1, "Professeur, profession scientifique", False, 66, 779, 0.98, 1.93, 0, 0, 0)
         
-        candidate_check =[1, "VUITTON", "Brigitte", "F", datetime.datetime(1957,11,29), 1, "" , "Professeur, profession scientifique", False, 779, 0.98, 1.93, 0, 0, 0]
+        candidate_check =[1, "VUITTON", "Brigitte", "F", datetime.datetime(1957,11,29), 1, "" , "Professeur, profession scientifique", False, 66, 779, 0.98, 1.93, 0, 0, 0]
         self.assert_test.assert_candidate_dto(candidate_check, candidate)
         
         
