@@ -25,5 +25,5 @@ class FactoryResultTest(unittest.TestCase) :
         result_data = [1150, 1,	"Completed", 86187, 43652, 50.65,	42535, 49.35, 490, 0.57, 1.15, 234,	0.27, 0.55,	41811, 48.51, 98.3,	576]
         result_dto = factory.construct_result_from_bdd(result_data)
         
-        result_check = [1150, "Completed", 1, 86187, 43652, 50.65, 42535, 49.35, 490, 0.57, 1.15, 234, 0.27, 0.55, 41811, 48.51, 98.3]
+        result_check = [1150, "Completed", 1, 86187, 43652, 50.65, 42535, 49.35, 490, 0.57, 1.15, 234, 0.27, 0.55, 41811, 48.51, 98.3, 576]
         self.assert_test.assert_result_dto(result_check, result_dto)

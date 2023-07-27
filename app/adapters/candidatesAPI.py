@@ -7,6 +7,7 @@ from app.ports.MySql.my_sql_candidate_repository import MySqlCandidateRepository
 from app.ports.MySql.my_sql_department_repository import MySqlDepartmentRepository
 from app.ports.MySql.my_sql_district_repository import MySqlDistrictRepository
 from app.ports.MySql.my_sql_party_repository import MySqlPartyRepository
+from app.utils.helper import ManageHttpException
 from fastapi import APIRouter, Depends, HTTPException, status
 
 router = APIRouter()
@@ -24,7 +25,6 @@ def init_candidate_business() :
     return candidate_business
 
 
-#TODO add 404 error in this method
 @router.get("/candidates/", tags=["candidates"])
 async def get_candidates(first_name : str ="", last_name: str = "", candidate_business = Depends(init_candidate_business)):
     try :
@@ -34,17 +34,17 @@ async def get_candidates(first_name : str ="", last_name: str = "", candidate_bu
         raise HTTPException(status_code = 500, detail= "Treatment failed")
     
 
-#TODO add 404 error in this method    
 @router.get("/candidates/parties/", tags=["candidates"])
 async def get_candidates_by_party(party : str = "", candidate_business = Depends(init_candidate_business)) :
     try :
         candidates_result = candidate_business.get_candidates_by_party(party)
+        if candidates_result == None :
+            raise HTTPException (status_code= status.HTTP_404_NOT_FOUND, detail = "No result")
         return candidates_result
-    except :
-        raise HTTPException(status_code = 500, detail= "Treatment failed")
+    except Exception as e:
+        ManageHttpException(e)
     
     
-#TODO factoriser la partie exception
 @router.get("/candidates/departments/", tags=["candidates"])
 async def get_candidates_by_department(department: str ="", candidate_business = Depends(init_candidate_business)):
     try :
@@ -53,12 +53,7 @@ async def get_candidates_by_department(department: str ="", candidate_business =
             raise HTTPException (status_code= status.HTTP_404_NOT_FOUND, detail= "No result")
         return candidates_result
     except Exception as e:
-        status_code = 500
-        detail_message = "Treatment failed"
-        if type(e) == HTTPException :
-            status_code = e.status_code
-            detail_message = "No result"
-        raise HTTPException(status_code = status_code, detail= detail_message)
+        ManageHttpException(e)
     
     
 @router.get("/candidates/districts/{district_id}")
@@ -69,9 +64,4 @@ async def get_candidates_by_district(district_id , candidate_business = Depends(
             raise HTTPException(status_code= status.HTTP_404_NOT_FOUND, detail = "No result")
         return candidates_result
     except Exception as e:
-        status_code = 500
-        detail_message = "Treatment failed"
-        if type(e) == HTTPException :
-            status_code = e.status_code
-            detail_message = "No result"
-        raise HTTPException(status_code = status_code, detail = detail_message)
+        ManageHttpException(e)

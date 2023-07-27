@@ -54,15 +54,18 @@ class CandidateBusiness() :
         candidates_from_parties = []
         
         party = self.party_business.get_party_by_short_name(party_short_name)
-           
-        candidates = self.candidate_repo.get_candidates() 
-            
-        for candidate in candidates : 
-            if candidate.party_id == party.id :
-                candidate.party_name = party.name
-                candidates_from_parties.append(candidate)
+        
+        if party != None :    
+            candidates = self.candidate_repo.get_candidates() 
                 
-        return candidates_from_parties
+            for candidate in candidates : 
+                if candidate.party_id == party.id :
+                    candidate.party_name = party.name
+                    candidates_from_parties.append(candidate)               
+                    
+            return candidates_from_parties
+        else :
+            return None
     
     
     def get_candidates_by_district(self, district_id) : 

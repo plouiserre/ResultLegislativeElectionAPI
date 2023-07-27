@@ -9,11 +9,10 @@ from app.domain.factory.factorydepartment import FactoryDepartment
 from app.domain.factory.factorydistrict import FactoryDistrict
 from app.domain.factory.factoryparty import FactoryParty
 from app.domain.business.party_business import PartyBusiness
-from app.ports.InMemory.in_memory_candidate_repository import InMemoryCandidateRepository
+from app.domain.repository.candidate_repository import CandidateRepository
 from unittest.mock import patch
 from tests.assert_test import AssertTest
 
-#TODO refaire la classe de test en passant par les méthodes abstraites et non les inmemory repo
 class CandidateBusinessTest(unittest.TestCase) :
     
     def __init__(self, methodName: str = "runTest") -> None:
@@ -44,7 +43,7 @@ class CandidateBusinessTest(unittest.TestCase) :
         return parties
     
     
-    @patch.object(InMemoryCandidateRepository, "get_candidates")
+    @patch.object(CandidateRepository, "get_candidates")
     @patch.object(PartyBusiness, "get_parties")
     def test_get_all_candidates(self, mock_candidate_repository, mock_party_business) : 
         mock_candidate_repository.get_candidates.return_value = self.__get_candidates()
@@ -77,7 +76,7 @@ class CandidateBusinessTest(unittest.TestCase) :
         self.assert_test.assert_candidate_dto(candidate_check, fifth_candidate)
         
         
-    @patch.object(InMemoryCandidateRepository, "get_candidates")
+    @patch.object(CandidateRepository, "get_candidates")
     @patch.object(PartyBusiness, "get_parties")
     def test_get_specific_candidate(self, mock_party_business, mock_candidate_repository) : 
         mock_party_business.get_parties.return_value = self.__get_parties() 
@@ -94,7 +93,7 @@ class CandidateBusinessTest(unittest.TestCase) :
         self.assert_test.assert_candidate_dto(candidate_check, first_candidate)
         
         
-    @patch.object(InMemoryCandidateRepository, "get_candidates")
+    @patch.object(CandidateRepository, "get_candidates")
     @patch.object(PartyBusiness, "get_parties")
     def test_get_specific_candidate_managing_caps(self, mock_party_business, mock_candidate_repository) : 
         mock_party_business.get_parties.return_value = self.__get_parties() 
@@ -111,7 +110,7 @@ class CandidateBusinessTest(unittest.TestCase) :
         self.assert_test.assert_candidate_dto(candidate_check, first_candidate)
         
         
-    @patch.object(InMemoryCandidateRepository, "get_candidates")
+    @patch.object(CandidateRepository, "get_candidates")
     @patch.object(PartyBusiness, "get_parties")
     def test_get_specific_candidate_managing_accent(self, mock_party_business, mock_candidate_repository) : 
         mock_party_business.get_parties.return_value = self.__get_parties() 
@@ -128,7 +127,7 @@ class CandidateBusinessTest(unittest.TestCase) :
         self.assert_test.assert_candidate_dto(candidate_check, first_candidate)
         
         
-    @patch.object(InMemoryCandidateRepository, "get_candidates")
+    @patch.object(CandidateRepository, "get_candidates")
     @patch.object(PartyBusiness, "get_parties")
     def test_get_candidates_from_specific_party(self, mock_party_business, mock_candidate_repository) :
         factory = FactoryParty()
@@ -150,8 +149,22 @@ class CandidateBusinessTest(unittest.TestCase) :
         self.assert_test.assert_candidate_dto(candidate_check, second_candidate)
         
         
-    #TODO check to simplify to delete mock Party Business
-    @patch.object(InMemoryCandidateRepository, "get_candidates")
+    @patch.object(CandidateRepository, "get_candidates")
+    @patch.object(PartyBusiness, "get_parties")
+    def test_get_candidates_from_unknown_party(self, mock_party_business, mock_candidate_repository) :
+        factory = FactoryParty()
+        mock_party_business.get_party_by_short_name.return_value = None
+        mock_candidate_repository.get_candidates.return_value = self.__get_candidates()
+        
+        business = CandidateBusiness(mock_candidate_repository, mock_party_business, None, None)
+        
+        candidates = business.get_candidates_by_party("XXX")
+        
+        self.assertEqual(None, candidates)
+        
+        
+    #TODO check if I can simplify with deleting mock Party Business
+    @patch.object(CandidateRepository, "get_candidates")
     @patch.object(PartyBusiness, "get_parties")
     def test_get_all_candidates_by_district_id(self, mock_candidate_repository, mock_party_business) : 
         mock_candidate_repository.get_candidates.return_value = self.__get_candidates()
@@ -187,8 +200,8 @@ class CandidateBusinessTest(unittest.TestCase) :
         return districts
     
     
-    #TODO check to simplify to delete mock Party Business
-    @patch.object(InMemoryCandidateRepository, "get_candidates")
+    #TODO check if I can simplify with deleting mock Party Business
+    @patch.object(CandidateRepository, "get_candidates")
     @patch.object(DepartmentBusiness, "get_department_by_name")
     @patch.object(DistrictBusiness, "get_districts_by_department_id")
     @patch.object(PartyBusiness, "get_parties")
@@ -221,8 +234,8 @@ class CandidateBusinessTest(unittest.TestCase) :
         self.assert_test.assert_candidate_dto(candidate_check, fourth_candidate)
         
     
-    #TODO check to simplify to delete mock Party Business
-    @patch.object(InMemoryCandidateRepository, "get_candidates")
+    #TODO check if I can simplify with deleting mock Party Business
+    @patch.object(CandidateRepository, "get_candidates")
     @patch.object(DepartmentBusiness, "get_department_by_name")
     @patch.object(DistrictBusiness, "get_districts_by_department_id")
     @patch.object(PartyBusiness, "get_parties")
@@ -239,8 +252,8 @@ class CandidateBusinessTest(unittest.TestCase) :
         self.assertEqual(None, candidates)
         
         
-    #TODO check to simplify to delete mock Party Business
-    @patch.object(InMemoryCandidateRepository, "get_candidates")
+    #TODO check if I can simplify with deleting mock Party Business
+    @patch.object(CandidateRepository, "get_candidates")
     @patch.object(PartyBusiness, "get_parties")
     def test_get_all_candidates_from_district(self, mock_candidate_repository, mock_party_business):
         mock_candidate_repository.get_candidates.return_value = self.__get_candidates()
@@ -261,7 +274,7 @@ class CandidateBusinessTest(unittest.TestCase) :
         self.assert_test.assert_candidate_dto(candidate_check, second_candidate)
         
         
-    @patch.object(InMemoryCandidateRepository, "get_candidates")
+    @patch.object(CandidateRepository, "get_candidates")
     @patch.object(PartyBusiness, "get_parties")
     def test_get_all_candidates_from_unknown_district(self, mock_candidate_repository, mock_party_business):
         mock_candidate_repository.get_candidates.return_value = []

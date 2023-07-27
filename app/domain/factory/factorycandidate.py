@@ -2,7 +2,6 @@ from app.domain.DTO.candidateDTO import CandidateDTO
 
 class FactoryCandidate : 
         
-    #TODO after put district name and department name
     def construct_candidate(self, id, last_name, first_name, sexe, birthdate, party_id, job, is_sorting, district_id,
                         vote_first_round, rate_vote_registered_first_round, rate_vote_expressed_first_round, 
                         vote_second_round, rate_vote_registered_second_round, rate_vote_expressed_second_round) : 

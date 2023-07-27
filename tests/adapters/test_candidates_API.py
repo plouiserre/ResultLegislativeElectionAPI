@@ -33,6 +33,7 @@ def override_candidate_no_result():
     mock = Mock()
     mock.get_candidates_by_departement.return_value = None
     mock.get_candidates_by_district.return_value = None
+    mock.get_candidates_by_party.return_value = None
     return mock
 
 
@@ -73,6 +74,14 @@ class CandidatesAPITest(unittest.TestCase) :
         
         self.assertEqual(200, response.status_code)
         self.assertEqual([{"LastName" : "Cazenave", "FirstName" : "Thomas", "Sexe" : "M"}, {"LastName" : "TRASTOUR-ISNART", "FirstName" : "Laurence", "Sexe" : "F"}], response.json())
+        
+        
+    def test_get_candidates_by_party_status_404_when_no_result(self) : 
+        self.overriding_business_dependency("no_result")  
+        response = self.client.get("/candidates/parties/?party=XXX")
+        
+        self.assertEqual(404, response.status_code)
+        self.assertEqual({'detail': 'No result'}, response.json())
         
         
     def test_get_candidates_by_party_status_500_when_errors(self) : 
