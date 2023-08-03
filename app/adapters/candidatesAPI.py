@@ -20,10 +20,9 @@ def init_candidate_business() :
     department_repo = MySqlDepartmentRepository(cache)
     department_business = DepartmentBusiness(department_repo)
     district_repo = MySqlDistrictRepository(cache)
-    district_business = DistrictBusiness(district_repo)
+    district_business = DistrictBusiness(district_repo, department_repo)
     candidate_business = CandidateBusiness(candidate_repo, party_business, department_business, district_business)
     return candidate_business
-
 
 @router.get("/candidates/", tags=["candidates"])
 async def get_candidates(first_name : str ="", last_name: str = "", candidate_business = Depends(init_candidate_business)):
