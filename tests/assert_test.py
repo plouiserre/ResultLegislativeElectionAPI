@@ -55,6 +55,7 @@ class AssertTest:
         self.unit_test.assertEqual(result_check[14], result_dto.expressed)
         self.unit_test.assertEqual(result_check[15], result_dto.rate_express_registered)
         self.unit_test.assertEqual(result_check[16], result_dto.rate_express_voting)
+        self.unit_test.assertEqual(result_check[17], result_dto.district_id)
         
         
     def assert_department_dto(self, department_check, department_dto) :

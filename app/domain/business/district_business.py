@@ -1,7 +1,7 @@
 from app.domain.DTO.departmentDTO import DepartmentDTO
 
 class DistrictBusiness :
-    
+    #TODO replace department_repo by department_business
     def __init__(self, district_repo, department_repo) -> None:
         self.district_repo = district_repo
         self.department_repo = department_repo
@@ -39,3 +39,7 @@ class DistrictBusiness :
             return districts
         else :
             return None
+        
+    #TODO return in a dictionary two list for each round
+    def get_districts_by_voting_rate(self) : 
+        return []

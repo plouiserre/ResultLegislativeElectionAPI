@@ -17,3 +17,4 @@ class ResultDTO:
         self.expressed = 0
         self.rate_express_registered = 0.0
         self.rate_express_voting = 0.0
+        self.district_id = 0

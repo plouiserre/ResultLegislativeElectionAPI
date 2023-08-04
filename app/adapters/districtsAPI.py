@@ -9,6 +9,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 router = APIRouter()
 
 #TODO see how to test that to fail when something is wrong
+#TODO replace department_repo by department_business
 def init_district_business():
     cache = Cache()
     district_repo = MySqlDistrictRepository(cache)

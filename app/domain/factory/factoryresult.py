@@ -3,8 +3,8 @@ from app.domain.DTO.resultDTO import ResultDTO
 class FactoryResult : 
     
     def construct_result(self, id, state_compute, round_number, registered, abstaining, rate_abstaining, voting,
-                      rate_voting, blank_balot, rate_blank_registered, rate_blank_voting, null_ballot,
-                      rate_null_registered, rate_null_voting, expressed, rate_express_registered, rate_express_voting) : 
+                      rate_voting, blank_balot, rate_blank_registered, rate_blank_voting, null_ballot, rate_null_registered,
+                      rate_null_voting, expressed, rate_express_registered, rate_express_voting, district_id) : 
         result = ResultDTO()
         result.id = id
         result.state_compute = state_compute
@@ -23,6 +23,7 @@ class FactoryResult :
         result.expressed = expressed
         result.rate_express_registered = rate_express_registered
         result.rate_express_voting = rate_express_voting
+        result.district_id = district_id
         return result
     
     
@@ -45,4 +46,5 @@ class FactoryResult :
         result.expressed = result_data[14]
         result.rate_express_registered = result_data[15]
         result.rate_express_voting = result_data[16]
+        result.district_id = result_data[17]
         return result

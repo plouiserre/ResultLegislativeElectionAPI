@@ -1,8 +1,10 @@
 import unittest
 
 from app.domain.business.district_business import DistrictBusiness
+from app.domain.business.result_business import ResultBusiness
 from app.domain.factory.factorydepartment import FactoryDepartment
 from app.domain.factory.factorydistrict import FactoryDistrict
+from app.domain.factory.factoryresult import FactoryResult
 from app.domain.repository.department_repository import DepartmentRepository
 from app.domain.repository.district_repository import DistrictRepository
 from tests.assert_test import AssertTest
@@ -99,3 +101,42 @@ class DistrictBusinessTest(unittest.TestCase):
         districts = business.get_districts_by_department_name("XXX")
         
         self.assertEqual(districts, None)
+        
+        
+    # def __get_results_sorted(self) : 
+    #     first_round_results = self.__get_result_from_specific_rounded(1)    
+    #     second_round_results = self.__get_result_from_specific_rounded(2)
+    #     round_results = {}
+    #     round_results["first_round"] = first_round_results
+    #     round_results["second_round"] = second_round_results
+    #     return round_results
+    
+        
+    # def __get_result_from_specific_rounded(self, round_number) :
+    #     factory = FactoryResult()
+    #     first_result = factory.construct_result(1, "Completed", round_number, 876, 5, 0.65, 666, 78.8, 2, 1.2, 0.7, 666, 78.8, 2, 1.2, 0.7, 0.7)
+    #     second_result = factory.construct_result(2, "Completed", round_number, 276, 23, 1.65, 866, 68.8, 3, 5.2, 1.7, 566, 88.8, 3, 5.2, 1.7, 2.7)
+    #     third_result = factory.construct_result(3, "Completed", round_number, 576, 23, 8.65, 566, 15.8, 8, 8.2, 8.7, 605, 68.8, 13, 3.2, 4.7, 5.7)
+    #     fourth_result = factory.construct_result(4, "Completed", round_number, 676, 50, 10.65, 266, 28.8, 5, 23.2, 4.7, 266, 48.8, 8, 4.2, 2.7, 0.9)
+    #     fifth_result = factory.construct_result(5, "Completed", round_number, 876, 5, 0.65, 666, 99.56, 2, 1.2, 0.7, 666, 78.8, 2, 1.2, 0.7, 0.7)
+    #     sixth_result = factory.construct_result(6, "Completed", round_number, 876, 5, 0.65, 666, 65.2, 2, 1.2, 0.7, 666, 78.8, 2, 1.2, 0.7, 0.7)
+    #     seventh_result = factory.construct_result(7, "Completed", round_number, 876, 5, 0.65, 666, 0.45, 2, 1.2, 0.7, 666, 78.8, 2, 1.2, 0.7, 0.7)
+    #     eighth_result = factory.construct_result(8, "Completed", round_number, 876, 5, 0.65, 666, 42.6, 2, 1.2, 0.7, 666, 78.8, 2, 1.2, 0.7, 0.7)
+    #     round_results = [first_result, second_result, third_result, fourth_result, fifth_result, sixth_result, seventh_result, eighth_result]  
+    #     return round_results
+        
+    # @patch.object(DistrictRepository, "get_districts")
+    # @patch.object(ResultBusiness, "get_rounds_participation_sorted")
+    # def test_get_districts_sorted_by_voting_rate(self, mock_district_repo, mock_result_business) : 
+    #     mock_district_repo.get_districts.return_value = self.__get_districts()
+    #     mock_result_business.get_rounds_participation_sorted = self.__get_results_sorted()
+        
+    #     business = DistrictBusiness(mock_district_repo, None, mock_result_business)
+        
+    #     districts_result = business.get_districts_by_voting_rate()
+        
+    #     self.assertEqual(2, districts_result)
+        
+    #     self.assert_test.assert_specific_result(results, "first_round")
+        
+    #     self.assert_test.assert_specific_result(results, "second_round")

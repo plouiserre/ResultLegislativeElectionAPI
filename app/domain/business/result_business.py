@@ -18,18 +18,6 @@ class ResultBusiness() :
         return results_sorted_by_round
     
     
-    # def get_first_round_participation_sorted(self) : 
-    #     results_sorted = self.__process_results_sorted(1)
-        
-    #     return results_sorted
-    
-    
-    # def get_second_round_participation_sorted(self) : 
-    #     results_sorted = self.__process_results_sorted(2)
-        
-    #     return results_sorted
-    
-    
     def __process_results_sorted(self, round_number) :
         all_results = self.result_repository.get_results()
         
