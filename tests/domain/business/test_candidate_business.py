@@ -152,7 +152,6 @@ class CandidateBusinessTest(unittest.TestCase) :
     @patch.object(CandidateRepository, "get_candidates")
     @patch.object(PartyBusiness, "get_parties")
     def test_get_candidates_from_unknown_party(self, mock_party_business, mock_candidate_repository) :
-        factory = FactoryParty()
         mock_party_business.get_party_by_short_name.return_value = None
         mock_candidate_repository.get_candidates.return_value = self.__get_candidates()
         

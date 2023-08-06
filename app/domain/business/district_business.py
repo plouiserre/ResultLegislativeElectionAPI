@@ -2,9 +2,11 @@ from app.domain.DTO.departmentDTO import DepartmentDTO
 
 class DistrictBusiness :
     #TODO replace department_repo by department_business
-    def __init__(self, district_repo, department_repo) -> None:
+    def __init__(self, district_repo, department_repo, result_business) -> None:
         self.district_repo = district_repo
         self.department_repo = department_repo
+        self.result_business = result_business
+        
     
     def get_districts(self) : 
         districts = self.district_repo.get_districts()
@@ -40,6 +42,30 @@ class DistrictBusiness :
         else :
             return None
         
-    #TODO return in a dictionary two list for each round
+        
     def get_districts_by_voting_rate(self) : 
-        return []
+        districts = self.district_repo.get_districts()
+        
+        all_results = self.result_business.get_rounds_participation_sorted()
+        
+        all_first_round_result_sortered = self.__get_districts_sorted_by_result_specific_round(all_results["first_round"], districts)
+        
+        all_second_round_result_sortered = self.__get_districts_sorted_by_result_specific_round(all_results["second_round"], districts)
+        
+        results = {}
+        results["first_round"] = all_first_round_result_sortered
+        results["second_round"] = all_second_round_result_sortered
+        
+        return results
+    
+    
+    def __get_districts_sorted_by_result_specific_round(self, results, districts) : 
+        all_district_sorted = []
+        all_first_round_result_sortered = results
+        for result in all_first_round_result_sortered : 
+            for district in districts : 
+                if result.district_id == district.id : 
+                    all_district_sorted.append(district)
+                else :
+                    continue
+        return all_district_sorted

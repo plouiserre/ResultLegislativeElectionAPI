@@ -32,7 +32,7 @@ async def get_candidates(first_name : str ="", last_name: str = "", candidate_bu
     except : 
         raise HTTPException(status_code = 500, detail= "Treatment failed")
     
-
+#TODO corriger cette méthode pour qu'elle respecte la bonne convention de nommage
 @router.get("/candidates/parties/", tags=["candidates"])
 async def get_candidates_by_party(party : str = "", candidate_business = Depends(init_candidate_business)) :
     try :
@@ -43,7 +43,7 @@ async def get_candidates_by_party(party : str = "", candidate_business = Depends
     except Exception as e:
         ManageHttpException(e)
     
-    
+#TODO corriger cette méthode pour qu'elle respecte la bonne convention de nommage
 @router.get("/candidates/departments/", tags=["candidates"])
 async def get_candidates_by_department(department: str ="", candidate_business = Depends(init_candidate_business)):
     try :
@@ -54,7 +54,7 @@ async def get_candidates_by_department(department: str ="", candidate_business =
     except Exception as e:
         ManageHttpException(e)
     
-    
+#TODO corriger cette méthode pour qu'elle respecte la bonne convention de nommage
 @router.get("/candidates/districts/{district_id}")
 async def get_candidates_by_district(district_id , candidate_business = Depends(init_candidate_business)):
     try :
