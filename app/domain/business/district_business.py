@@ -43,6 +43,7 @@ class DistrictBusiness :
             return None
         
         
+    #TODO méthode à changer ici
     def get_districts_by_voting_rate(self) : 
         districts = self.district_repo.get_districts()
         

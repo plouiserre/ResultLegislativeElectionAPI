@@ -139,6 +139,7 @@ class DistrictBusinessTest(unittest.TestCase):
     
         
     #TODO improve this method
+    #TODO rework this UT with this new code
     @patch.object(DistrictRepository, "get_districts")
     @patch.object(ResultBusiness, "get_rounds_participation_sorted")
     def test_get_districts_sorted_by_voting_rate(self, mock_district_repo, mock_result_business) : 
