@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import Mock
 
 from app.main import app
-from app.adapters.resultsAPI import init_result_business
+from app.adapters.API.resultsAPI import init_result_business
 from fastapi.testclient import TestClient
 
 def render_result_json_mock() :
