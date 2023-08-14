@@ -55,6 +55,7 @@ class AssertTest:
         self.unit_test.assertEqual(result_check[14], result_dto.expressed)
         self.unit_test.assertEqual(result_check[15], result_dto.rate_express_registered)
         self.unit_test.assertEqual(result_check[16], result_dto.rate_express_voting)
+        self.unit_test.assertEqual(result_check[17], result_dto.district_id)
         
         
     def assert_department_dto(self, department_check, department_dto) :
@@ -68,3 +69,9 @@ class AssertTest:
         self.unit_test.assertEqual(district_check[1], district_dto.position)
         self.unit_test.assertEqual(district_check[2], district_dto.name)
         self.unit_test.assertEqual(district_check[3], district_dto.department_id)
+        
+        
+    def assert_district_result_dto(self, district_result_check, district_result_dto) :
+        self.assert_district_dto(district_result_check[0 : 4], district_result_dto)
+        self.unit_test.assertEqual(district_result_check[4], district_result_dto.rate_voting)
+        self.unit_test.assertEqual(district_result_check[5], district_result_dto.department_name)

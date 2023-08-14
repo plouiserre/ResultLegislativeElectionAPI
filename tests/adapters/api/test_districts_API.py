@@ -2,13 +2,14 @@ import unittest
 from unittest.mock import Mock
 
 from app.main import app
-from app.adapters.districtsAPI import init_district_business
+from app.adapters.API.districtsAPI import init_district_business
 from fastapi.testclient import TestClient
 
 def override_district_business() :
     json = [{"Name" : "1 ère circonscription", "Id" : 1}, {"Name" : "2 ème circonscription", "Id" : 1}]
     mock = Mock()
     mock.get_districts_by_department_name.return_value = json
+    mock.get_districts_by_voting_rate.return_value = json
     return mock
 
 
@@ -16,6 +17,8 @@ def override_district_business_exception() :
     mock = Mock()    
     mock.get_districts_by_department_name.side_effect = Exception("Boom!")
     mock.get_districts_by_department_name.return_value = ""
+    mock.get_districts_by_voting_rate.side_effect = Exception("Boom!")
+    mock.get_districts_by_voting_rate.return_value = ""
     return mock
 
 
@@ -62,3 +65,20 @@ class DistrictsTest(unittest.TestCase) :
 
         self.assertEqual(404, response.status_code)
         self.assertEqual({'detail': 'No result'}, response.json())
+        
+        
+    def test_get_districts_by_voting_rate_status_OK_when_no_error(self) : 
+        self.overriding_business_dependency("success")
+        response = self.client.get("districts/results/")
+        
+        self.assertEqual(200, response.status_code)
+        self.assertEqual([{"Name" : "1 ère circonscription", "Id" : 1}, {"Name" : "2 ème circonscription", "Id" : 1}], response.json())  
+        
+        
+    def test_get_districts_by_voting_status_500_when_errors(self) : 
+        self.overriding_business_dependency("error")
+        response = self.client.get("districts/results/")
+        
+        self.assertEqual(500, response.status_code)
+        self.assertEqual({'detail': 'Treatment failed'}, response.json())
+        

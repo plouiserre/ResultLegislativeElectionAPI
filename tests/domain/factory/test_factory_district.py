@@ -8,6 +8,14 @@ class FactoryDistrictTest(unittest.TestCase) :
         super().__init__(methodName)
         self.assert_test = AssertTest(self)
         
+    def test_construct_district(self) : 
+        factory = FactoryDistrict()
+        
+        district = factory.construct_district(29, 29, "29ème circonscription", 2)
+        
+        district_data = [29, 29, "29ème circonscription", 2]
+        self.assert_test.assert_district_dto(district_data, district)
+        
     
     def test_construct_district_from_bdd(self):
         factory = FactoryDistrict()
