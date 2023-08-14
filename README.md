@@ -33,3 +33,6 @@ Feature to developped :
 16. Create a method to return the average age of the new congressmans and for each party.
 17. Create a method to return in the good order the list of the party order by the score of the election. 
 18. Create a method to return with parties have the most fight
+
+## HELP
+- https://blog.octo.com/architecture-hexagonale-trois-principes-et-un-exemple-dimplementation/

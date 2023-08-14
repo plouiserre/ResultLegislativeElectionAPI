@@ -8,7 +8,7 @@ from unittest.mock import patch
 
 ##TODO simply data replacing by XXX useless value
 ##TODO rename to simplify method test
-
+#TODO mutualize the mock method
 class ResultBusinessTest(unittest.TestCase) :
     def __init__(self, methodName: str = "runTest") -> None:
         super().__init__(methodName)
@@ -201,40 +201,3 @@ class ResultBusinessTest(unittest.TestCase) :
         eighth_result = second_round_result[7]
         eighth_result_check =  [5, "Completed", round_number, 876, 5, 0.65, 666, 99.56, 2, 1.2, 0.7, 666, 78.8, 2, 1.2, 0.7, 0.7, 23]
         self.assert_test.assert_result_dto(eighth_result_check, eighth_result) 
-        
-        
-    
-        
-    ##TODO for the moment this UT is useless. If it stay it delete it  
-    # @patch.object(ResultRepository, 'get_results')
-    # def test_get_fifth_results_sorted_participation_first_round_with_equality_from_first_rounds(self, mock_result_repository) : 
-    #     factory = FactoryResult()
-    #     fifth_results_mocked = factory.construct_result(5, "Completed", 1, 276, 23, 1.65, 866, 68.8, 3, 5.2, 1.7, 566, 88.8, 3, 5.2, 1.7, 2.7)
-    #     results_mocked = self.__get_results_first_rounds()
-    #     results_mocked.append(fifth_results_mocked)
-    #     mock_result_repository.get_results.return_value = results_mocked
-    #     business = ResultBusiness(mock_result_repository)
-        
-    #     results = business.get_first_round_participation_sorted()
-        
-    #     self.assertEqual(5, len(results)) 
-        
-    #     first_result = results[0]
-    #     first_result_check = [3, "Completed", 1, 576, 23, 8.65, 566, 15.8, 8, 8.2, 8.7, 605, 68.8, 13, 3.2, 4.7, 5.7]
-    #     self.assert_test.assert_result_dto(first_result_check, first_result)
-        
-    #     second_result = results[1]
-    #     second_result_check = [4, "Completed", 1, 676, 50, 10.65, 266, 28.8, 5, 23.2, 4.7, 266, 48.8, 8, 4.2, 2.7, 0.9]
-    #     self.assert_test.assert_result_dto(second_result_check, second_result)
-        
-    #     third_result = results[2]
-    #     third_result_check = [2, "Completed", 1, 276, 23, 1.65, 866, 68.8, 3, 5.2, 1.7, 566, 88.8, 3, 5.2, 1.7, 2.7]
-    #     self.assert_test.assert_result_dto(third_result_check, third_result)
-       
-    #     fourth_result = results[3]
-    #     fourth_result_check =  [5, "Completed", 1, 276, 23, 1.65, 866, 68.8, 3, 5.2, 1.7, 566, 88.8, 3, 5.2, 1.7, 2.7]
-    #     self.assert_test.assert_result_dto(fourth_result_check, fourth_result)
-        
-    #     fifth_result = results[4]
-    #     fifth_result_check =  [1, "Completed", 1, 876, 5, 0.65, 666, 78.8, 2, 1.2, 0.7, 666, 78.8, 2, 1.2, 0.7, 0.7]
-    #     self.assert_test.assert_result_dto(fifth_result_check, fifth_result)

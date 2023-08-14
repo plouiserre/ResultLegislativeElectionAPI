@@ -2,7 +2,7 @@ import unittest
 
 from app.domain.business.department_business import DepartmentBusiness
 from app.domain.factory.factorydepartment import FactoryDepartment
-from app.ports.MySql.my_sql_department_repository import MySqlDepartmentRepository
+from app.domain.repository.department_repository import DepartmentRepository
 from tests.assert_test import AssertTest
 from unittest.mock import patch
 
@@ -23,7 +23,7 @@ class DepartmentBusinessTest(unittest.TestCase):
         return departments
     
     
-    @patch.object(MySqlDepartmentRepository, "get_departments")
+    @patch.object(DepartmentRepository, "get_departments")
     def test_get_departments(self, mock_repo):
         mock_repo.get_departments.return_value = self.__get_departments()
         
@@ -46,7 +46,7 @@ class DepartmentBusinessTest(unittest.TestCase):
         self.assert_test.assert_department_dto(department_check, departments[3])
         
         
-    @patch.object(MySqlDepartmentRepository, "get_departments")
+    @patch.object(DepartmentRepository, "get_departments")
     def test_get_departments_by_name(self, mock_repo):
         mock_repo.get_departments.return_value = self.__get_departments()
         
@@ -56,3 +56,14 @@ class DepartmentBusinessTest(unittest.TestCase):
         
         department_check = [33, "Gironde", 33]
         self.assert_test.assert_department_dto(department_check, department)
+
+
+    @patch.object(DepartmentRepository, "get_departments")
+    def test_get_department_name_from_department_id(self, mock_dep_repo): 
+        mock_dep_repo.get_departments.return_value = self.__get_departments()
+        
+        business = DepartmentBusiness(mock_dep_repo)
+        
+        result = business.get_department_name_from_department_id(33)
+        
+        self.assertEqual("Gironde", result)
