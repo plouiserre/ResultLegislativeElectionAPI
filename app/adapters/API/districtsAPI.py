@@ -11,8 +11,6 @@ from fastapi import APIRouter, Depends, HTTPException, status
 
 router = APIRouter()
 
-#TODO see how to test that to fail when something is wrong
-#TODO replace department_repo by department_business
 def init_district_business():
     cache = Cache()
     district_repo = MySqlDistrictRepository(cache)
@@ -25,23 +23,14 @@ def init_district_business():
 
 
 @router.get("/districts/", tags=["districts"])
-async def get_districts_from_department(department: str = "", district_business = Depends(init_district_business)) : 
+async def get_districts_from_department(department: str = "", sort : str = "", district_business = Depends(init_district_business)) : 
     try : 
-        districts_result = district_business.get_districts_by_department_name(department)
-        if districts_result == None : 
-            raise HTTPException (status_code= status.HTTP_404_NOT_FOUND, detail = "No result")            
+        if sort == "result" : 
+            districts_result = district_business.get_districts_by_voting_rate()
+        else :
+            districts_result = district_business.get_districts_by_department_name(department)
+            if districts_result == None : 
+                raise HTTPException (status_code= status.HTTP_404_NOT_FOUND, detail = "No result")            
         return districts_result
     except Exception as e :
         ManageHttpException(e)
-        
-        
-#TODO rework this method after to respect REST rules for uri
-#TODO rework exception to print e everywhere
-@router.get("/districts/results/", tags=["districts"])
-async def get_districts_by_result(district_business = Depends(init_district_business)):
-    try :
-        districts_result = district_business.get_districts_by_voting_rate()
-        return districts_result
-    except Exception as e :
-        print (e) 
-        raise HTTPException(status_code = 500, detail= "Treatment failed")

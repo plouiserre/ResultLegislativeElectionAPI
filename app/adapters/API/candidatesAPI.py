@@ -29,42 +29,18 @@ def init_candidate_business() :
     return candidate_business
 
 @router.get("/candidates/", tags=["candidates"])
-async def get_candidates(first_name : str ="", last_name: str = "", candidate_business = Depends(init_candidate_business)):
+async def get_candidates(first_name : str ="", last_name: str = "", party : str = "", department: str ="", district : int = 0, candidate_business = Depends(init_candidate_business)):
     try :
-        candidates_result = candidate_business.get_candidates(first_name, last_name)
-        return candidates_result
-    except : 
-        raise HTTPException(status_code = 500, detail= "Treatment failed")
-    
-#TODO corriger cette méthode pour qu'elle respecte la bonne convention de nommage
-@router.get("/candidates/parties/", tags=["candidates"])
-async def get_candidates_by_party(party : str = "", candidate_business = Depends(init_candidate_business)) :
-    try :
-        candidates_result = candidate_business.get_candidates_by_party(party)
-        if candidates_result == None :
-            raise HTTPException (status_code= status.HTTP_404_NOT_FOUND, detail = "No result")
-        return candidates_result
-    except Exception as e:
-        ManageHttpException(e)
-    
-#TODO corriger cette méthode pour qu'elle respecte la bonne convention de nommage
-@router.get("/candidates/departments/", tags=["candidates"])
-async def get_candidates_by_department(department: str ="", candidate_business = Depends(init_candidate_business)):
-    try :
-        candidates_result = candidate_business.get_candidates_by_departement(department)
+        if party != "" : 
+            candidates_result = candidate_business.get_candidates_by_party(party)
+        elif department != "" : 
+            candidates_result = candidate_business.get_candidates_by_departement(department)
+        elif district != 0 :
+            candidates_result = candidate_business.get_candidates_by_district(district)
+        else :
+            candidates_result = candidate_business.get_candidates(first_name, last_name)
         if candidates_result == None : 
             raise HTTPException (status_code= status.HTTP_404_NOT_FOUND, detail= "No result")
         return candidates_result
-    except Exception as e:
-        ManageHttpException(e)
-    
-#TODO corriger cette méthode pour qu'elle respecte la bonne convention de nommage
-@router.get("/candidates/districts/{district_id}")
-async def get_candidates_by_district(district_id , candidate_business = Depends(init_candidate_business)):
-    try :
-        candidates_result = candidate_business.get_candidates_by_district(district_id)
-        if candidates_result == None : 
-            raise HTTPException(status_code= status.HTTP_404_NOT_FOUND, detail = "No result")
-        return candidates_result
-    except Exception as e:
-        ManageHttpException(e)
+    except Exception as e: 
+        ManageHttpException(e)  
