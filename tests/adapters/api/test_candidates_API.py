@@ -3,6 +3,7 @@ from unittest.mock import Mock
 
 from app.main import app
 from app.adapters.API.candidatesAPI import init_candidate_business
+from app.adapters.dependency.dependency_business import DependencyBusiness
 from fastapi.testclient import TestClient
 
 
