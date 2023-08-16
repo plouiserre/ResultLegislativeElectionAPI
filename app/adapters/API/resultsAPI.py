@@ -1,6 +1,7 @@
 from app.domain.business.result_business import ResultBusiness
 from app.ports.MySql.cache import Cache
 from app.ports.MySql.my_sql_result_repository import MySqlResultRepository
+from app.utils.helper import ManageHttpException
 from fastapi import HTTPException, APIRouter, Depends
 
 router = APIRouter()
@@ -16,5 +17,5 @@ async def get_results(result_business = Depends(init_result_business)):
     try :
         results = result_business.get_results()
         return results
-    except :
-        raise HTTPException(status_code = 500, detail= "Treatment failed")
+    except Exception as e :
+        ManageHttpException(e)
