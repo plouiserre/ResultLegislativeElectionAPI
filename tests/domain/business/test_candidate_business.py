@@ -162,7 +162,6 @@ class CandidateBusinessTest(unittest.TestCase) :
         self.assertEqual(None, candidates)
         
         
-    #TODO check if I can simplify with deleting mock Party Business
     @patch.object(CandidateRepository, "get_candidates")
     @patch.object(PartyBusiness, "get_parties")
     def test_get_all_candidates_by_district_id(self, mock_candidate_repository, mock_party_business) : 
@@ -199,7 +198,6 @@ class CandidateBusinessTest(unittest.TestCase) :
         return districts
     
     
-    #TODO check if I can simplify with deleting mock Party Business
     @patch.object(CandidateRepository, "get_candidates")
     @patch.object(DepartmentBusiness, "get_department_by_name")
     @patch.object(DistrictBusiness, "get_districts_by_department_id")
@@ -233,7 +231,6 @@ class CandidateBusinessTest(unittest.TestCase) :
         self.assert_test.assert_candidate_dto(candidate_check, fourth_candidate)
         
     
-    #TODO check if I can simplify with deleting mock Party Business
     @patch.object(CandidateRepository, "get_candidates")
     @patch.object(DepartmentBusiness, "get_department_by_name")
     @patch.object(DistrictBusiness, "get_districts_by_department_id")
@@ -251,7 +248,6 @@ class CandidateBusinessTest(unittest.TestCase) :
         self.assertEqual(None, candidates)
         
         
-    #TODO check if I can simplify with deleting mock Party Business
     @patch.object(CandidateRepository, "get_candidates")
     @patch.object(PartyBusiness, "get_parties")
     def test_get_all_candidates_from_district(self, mock_candidate_repository, mock_party_business):

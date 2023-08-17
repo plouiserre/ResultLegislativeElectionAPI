@@ -10,9 +10,11 @@ def getLabelFormatted(label):
 
 
 def ManageHttpException(exception):
-    status_code = 500
-    detail_message = "Treatment failed"
+    print(exception)
     if type(exception) == HTTPException :
         status_code = exception.status_code
         detail_message = "No result"
+    else : 
+        status_code = 500
+        detail_message = "Treatment failed"      
     raise HTTPException(status_code = status_code, detail= detail_message)

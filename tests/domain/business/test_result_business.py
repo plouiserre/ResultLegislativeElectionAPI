@@ -6,9 +6,6 @@ from app.domain.repository.result_repository import ResultRepository
 from tests.assert_test import AssertTest
 from unittest.mock import patch
 
-##TODO simply data replacing by XXX useless value
-##TODO rename to simplify method test
-#TODO mutualize the mock method
 class ResultBusinessTest(unittest.TestCase) :
     def __init__(self, methodName: str = "runTest") -> None:
         super().__init__(methodName)
@@ -108,7 +105,7 @@ class ResultBusinessTest(unittest.TestCase) :
         
         results_all_rounds = business.get_rounds_participation_sorted()
         
-        self.__assert_results(results_all_rounds, "first_round")
+        self.__assert_results_sorted(results_all_rounds, "first_round")
         
     
     def __get_eight_results_second_rounds(self): 
@@ -132,7 +129,7 @@ class ResultBusinessTest(unittest.TestCase) :
         
         results_all_rounds = business.get_rounds_participation_sorted()
         
-        self.__assert_results(results_all_rounds, "second_round")
+        self.__assert_results_sorted(results_all_rounds, "second_round")
         
         
     def __get_sixteenth_results_all_rounds(self) : 
@@ -155,12 +152,12 @@ class ResultBusinessTest(unittest.TestCase) :
         
         self.assertEqual(2, len(results)) 
         
-        self.__assert_results(results, "first_round")
+        self.__assert_results_sorted(results, "first_round")
+
+        self.__assert_results_sorted(results, "second_round")
         
-        self.__assert_results(results, "second_round")
         
-        
-    def __assert_results(self, results, key_round) :
+    def __assert_results_sorted(self, results, key_round) :
         round_number = 0
         if key_round == "first_round" :
             round_number = 1

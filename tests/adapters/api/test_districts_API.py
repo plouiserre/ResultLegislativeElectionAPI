@@ -6,10 +6,9 @@ from app.adapters.API.districtsAPI import init_district_business
 from fastapi.testclient import TestClient
 
 def override_district_business() :
-    json = [{"Name" : "1 ère circonscription", "Id" : 1}, {"Name" : "2 ème circonscription", "Id" : 1}]
     mock = Mock()
-    mock.get_districts_by_department_name.return_value = json
-    mock.get_districts_by_voting_rate.return_value = json
+    mock.get_districts_by_department_name.return_value = [{"Name" : "1 ère circonscription", "Id" : 1}, {"Name" : "2 ème circonscription", "Id" : 2}]
+    mock.get_districts_by_voting_rate.return_value = [{"Name" : "2 ème circonscription", "Id" : 2}, {"Name" : "1 ère circonscription", "Id" : 1}]
     return mock
 
 
@@ -48,7 +47,7 @@ class DistrictsTest(unittest.TestCase) :
         response = self.client.get("districts/?department=toto")
         
         self.assertEqual(200, response.status_code)
-        self.assertEqual([{"Name" : "1 ère circonscription", "Id" : 1}, {"Name" : "2 ème circonscription", "Id" : 1}], response.json())
+        self.assertEqual([{"Name" : "1 ère circonscription", "Id" : 1}, {"Name" : "2 ème circonscription", "Id" : 2}], response.json())
         
         
     def test_get_districts_by_departments_status_500_when_errors(self) : 
@@ -69,15 +68,15 @@ class DistrictsTest(unittest.TestCase) :
         
     def test_get_districts_by_voting_rate_status_OK_when_no_error(self) : 
         self.overriding_business_dependency("success")
-        response = self.client.get("districts/results/")
+        response = self.client.get("districts/?sort=result")
         
         self.assertEqual(200, response.status_code)
-        self.assertEqual([{"Name" : "1 ère circonscription", "Id" : 1}, {"Name" : "2 ème circonscription", "Id" : 1}], response.json())  
+        self.assertEqual([{"Name" : "2 ème circonscription", "Id" : 2}, {"Name" : "1 ère circonscription", "Id" : 1}], response.json())  
         
         
     def test_get_districts_by_voting_status_500_when_errors(self) : 
         self.overriding_business_dependency("error")
-        response = self.client.get("districts/results/")
+        response = self.client.get("districts/?sort=result")
         
         self.assertEqual(500, response.status_code)
         self.assertEqual({'detail': 'Treatment failed'}, response.json())
