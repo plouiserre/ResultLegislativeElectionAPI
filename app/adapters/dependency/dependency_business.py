@@ -23,7 +23,7 @@ class DependencyBusiness :
         district_repo = MySqlDistrictRepository(cache)
         self.party_business = PartyBusiness(party_repo)
         self.result_business = ResultBusiness(result_repo)
-        self.district_business = DistrictBusiness(district_repo, department_repo, self.result_business)
         self.department_business = DepartmentBusiness(department_repo)
+        self.district_business = DistrictBusiness(district_repo, self.department_business, self.result_business)
         self.candidate_business = CandidateBusiness(candidate_repo, self.party_business, self.department_business, self.district_business)
         self.deputy_business = DeputyBusiness(deputy_repo, self.candidate_business)
