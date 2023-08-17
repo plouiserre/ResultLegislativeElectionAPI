@@ -24,7 +24,7 @@ Feature to developped :
 - Retrieve all candidates from a specific department. DONE
 - Retrieve all candidates from a specific district. DONE
 9. Create a method to find all districts of a department DONE
-10. Create a method to class all districts by participation in first round and second round DOING
+10. Create a method to class all districts by participation in first round and second round DONE
 11. Create a method to class all departments by participation in first round and second round
 12. Create a method to find all 10 candidates with the hightest result in second round.
 13. Create a method to find for each party all 10 candidates with the hightest result in second round.
