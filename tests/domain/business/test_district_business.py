@@ -146,67 +146,45 @@ class DistrictBusinessTest(unittest.TestCase):
     @patch.object(DepartmentBusiness, "get_department_name_from_department_id")
     def test_get_districts_sorted_by_voting_rate(self, mock_district_repo, mock_result_business, mock_department_business) : 
         mock_district_repo.get_districts.return_value = self.__get_eight_districts_to_sorted()
-        #TODO try to add return_value and () in the name of the method
-        mock_result_business.get_rounds_participation_sorted = self.__get_results_sorted
+        mock_result_business.get_rounds_participation_sorted.return_value = self.__get_results_sorted()
         mock_department_business.get_department_name_from_department_id.return_value = "Aisne"
          
         business = DistrictBusiness(mock_district_repo, mock_department_business, mock_result_business)
         
-        #TODO rename this variable
-        districts_result = business.get_districts_by_voting_rate()        
-        first_list_districts_result = districts_result["first_round"]     
-        second_list_districts_result = districts_result["second_round"]        
+        districts_sorted = business.get_districts_by_voting_rate()        
+        first_list_districts_result = districts_sorted["first_round"]     
+        second_list_districts_result = districts_sorted["second_round"]        
         
-        self.assertEqual(2, len(districts_result))
+        self.assertEqual(2, len(districts_sorted))
         
-        self.assertEqual(8, len(first_list_districts_result))
+        self.__assert_districts_sorted(first_list_districts_result)
         
-        district_check = [23, 23, "23ème circonscription", 2, 78.8, "Aisne"]
-        self.assert_test.assert_district_result_dto(district_check, first_list_districts_result[0])
+        self.__assert_districts_sorted(second_list_districts_result)
         
-        district_check = [24, 24, "24ème circonscription", 2, 68.8, "Aisne"]
-        self.assert_test.assert_district_result_dto(district_check, first_list_districts_result[1])
         
-        district_check = [25, 25, "25ème circonscription", 2, 15.8, "Aisne"]
-        self.assert_test.assert_district_result_dto(district_check, first_list_districts_result[2])
-        
-        district_check = [26, 26, "29ème circonscription", 2, 28.8, "Aisne"]
-        self.assert_test.assert_district_result_dto(district_check, first_list_districts_result[3])
-        
-        district_check = [27, 27, "27ème circonscription", 2, 99.56, "Aisne"]
-        self.assert_test.assert_district_result_dto(district_check, first_list_districts_result[4])
-        
-        district_check = [28, 28, "28ème circonscription", 2, 65.2, "Aisne"]
-        self.assert_test.assert_district_result_dto(district_check, first_list_districts_result[5])
-        
-        district_check = [29, 29, "29ème circonscription", 2, 0.45, "Aisne"]
-        self.assert_test.assert_district_result_dto(district_check, first_list_districts_result[6])
-        
-        district_check = [30, 30, "30ème circonscription", 2, 42.6, "Aisne"]
-        self.assert_test.assert_district_result_dto(district_check, first_list_districts_result[7])
-        
-        self.assertEqual(8, len(second_list_districts_result))
+    def __assert_districts_sorted(self, districts) : 
+        self.assertEqual(8, len(districts))
         
         district_check = [23, 23, "23ème circonscription", 2, 78.8, "Aisne"]
-        self.assert_test.assert_district_result_dto(district_check, second_list_districts_result[0])
+        self.assert_test.assert_district_result_dto(district_check, districts[0])
         
         district_check = [24, 24, "24ème circonscription", 2, 68.8, "Aisne"]
-        self.assert_test.assert_district_result_dto(district_check, second_list_districts_result[1])
+        self.assert_test.assert_district_result_dto(district_check, districts[1])
         
         district_check = [25, 25, "25ème circonscription", 2, 15.8, "Aisne"]
-        self.assert_test.assert_district_result_dto(district_check, second_list_districts_result[2])
+        self.assert_test.assert_district_result_dto(district_check, districts[2])
         
         district_check = [26, 26, "29ème circonscription", 2, 28.8, "Aisne"]
-        self.assert_test.assert_district_result_dto(district_check, second_list_districts_result[3])
+        self.assert_test.assert_district_result_dto(district_check, districts[3])
         
         district_check = [27, 27, "27ème circonscription", 2, 99.56, "Aisne"]
-        self.assert_test.assert_district_result_dto(district_check, second_list_districts_result[4])
+        self.assert_test.assert_district_result_dto(district_check, districts[4])
         
         district_check = [28, 28, "28ème circonscription", 2, 65.2, "Aisne"]
-        self.assert_test.assert_district_result_dto(district_check, second_list_districts_result[5])
+        self.assert_test.assert_district_result_dto(district_check, districts[5])
         
         district_check = [29, 29, "29ème circonscription", 2, 0.45, "Aisne"]
-        self.assert_test.assert_district_result_dto(district_check, second_list_districts_result[6])
+        self.assert_test.assert_district_result_dto(district_check, districts[6])
         
         district_check = [30, 30, "30ème circonscription", 2, 42.6, "Aisne"]
-        self.assert_test.assert_district_result_dto(district_check, second_list_districts_result[7])
+        self.assert_test.assert_district_result_dto(district_check, districts[7])
