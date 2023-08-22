@@ -6,6 +6,7 @@ from app.domain.repository.result_repository import ResultRepository
 from tests.assert_test import AssertTest
 from unittest.mock import patch
 
+#TODO improve and clean mock result because it is difficult to understand and maintain
 class ResultBusinessTest(unittest.TestCase) :
     def __init__(self, methodName: str = "runTest") -> None:
         super().__init__(methodName)

@@ -63,6 +63,10 @@ class AssertTest:
         self.unit_test.assertEqual(department_check[1], department_dto.name)
         self.unit_test.assertEqual(department_check[2], department_dto.number)
         
+    def assert_department_result_dto(self, department_check, department_result_dto) : 
+        self.assert_department_dto(department_check[0 : 3], department_result_dto)
+        self.unit_test.assertEqual(department_check[3], department_result_dto.rate_voting)
+        
         
     def assert_district_dto(self, district_check, district_dto) :
         self.unit_test.assertEqual(district_check[0], district_dto.id)

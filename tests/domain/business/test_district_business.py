@@ -135,12 +135,9 @@ class DistrictBusinessTest(unittest.TestCase):
         seventh_district= factory.construct_district(23, 23, "23ème circonscription", 2)
         eighth_district= factory.construct_district(27, 27, "27ème circonscription", 2)
         districts = [first_district, second_district, third_district, fourth_district, fifth_district, sixth_district, seventh_district, eighth_district]
-        return districts
-    
+        return districts  
     
         
-    #TODO improve this method
-    #TODO rework this UT with this new code
     @patch.object(DistrictRepository, "get_districts")
     @patch.object(ResultBusiness, "get_rounds_participation_sorted")
     @patch.object(DepartmentBusiness, "get_department_name_from_department_id")
