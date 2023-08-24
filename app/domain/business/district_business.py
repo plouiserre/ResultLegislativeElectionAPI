@@ -47,8 +47,7 @@ class DistrictBusiness :
     def get_districts_by_voting_rate(self) : 
         districts = self.district_repo.get_districts()
         
-        all_results = self.result_business.get_rounds_participation_sorted()        
-                    
+        all_results = self.result_business.get_rounds_participation_sorted()                    
         
         all_first_round_districts_results_sortered = self.__get_districts_results_by_round(all_results["first_round"], districts)
         

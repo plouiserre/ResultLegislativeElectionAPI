@@ -56,7 +56,6 @@ class DepartmentBusiness :
         
         return departments_results_sorted 
     
-    #TODO improve code method
     def __get_avg_rate_voting_from_districts_in_specific_department(self, deparment_id) : 
         avg_rate_voting = {}
         districts = self.district_repo.get_districts()
