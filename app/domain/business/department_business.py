@@ -46,15 +46,20 @@ class DepartmentBusiness :
                 
         for department in departments : 
             avg_rate_voting = self.__get_avg_rate_voting_from_districts_in_specific_department(department.id)
-            department_result_first_round = factory.construct_department_result_from_department(department, avg_rate_voting["first_round"])
-            department_result_second_round = factory.construct_department_result_from_department(department, avg_rate_voting["second_round"])
-            departments_results["first_round"].append(department_result_first_round)
-            departments_results["second_round"].append(department_result_second_round)
+            
+            if "first_round" in avg_rate_voting :
+                department_result_first_round = factory.construct_department_result_from_department(department, avg_rate_voting["first_round"])
+                departments_results["first_round"].append(department_result_first_round)
+            
+            if "second_round" in avg_rate_voting : 
+                department_result_second_round = factory.construct_department_result_from_department(department, avg_rate_voting["second_round"])
+                departments_results["second_round"].append(department_result_second_round)
             
         departments_results_sorted["first_round"] = self.__get_departments_results_sorted(departments_results["first_round"])
         departments_results_sorted["second_round"] = self.__get_departments_results_sorted(departments_results["second_round"])
         
         return departments_results_sorted 
+    
     
     def __get_avg_rate_voting_from_districts_in_specific_department(self, deparment_id) : 
         avg_rate_voting = {}
@@ -70,10 +75,13 @@ class DepartmentBusiness :
                         if result.round_number == 1 :
                             first_round_results_belongs_dept.append(result)
                         else : 
-                            second_round_results_belongs_dept.append(result)
-        
-        avg_rate_voting["first_round"] = self.__calculate_avg_rate_voting_specific_round(first_round_results_belongs_dept)
-        avg_rate_voting["second_round"] = self.__calculate_avg_rate_voting_specific_round(second_round_results_belongs_dept)
+                            second_round_results_belongs_dept.append(result)        
+            
+        if len(first_round_results_belongs_dept) > 0 : 
+            avg_rate_voting["first_round"] = self.__calculate_avg_rate_voting_specific_round(first_round_results_belongs_dept)
+            
+        if len(second_round_results_belongs_dept) > 0 : 
+            avg_rate_voting["second_round"] = self.__calculate_avg_rate_voting_specific_round(second_round_results_belongs_dept)
         
         return avg_rate_voting
     
