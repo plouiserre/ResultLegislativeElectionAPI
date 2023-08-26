@@ -13,7 +13,7 @@ def ManageHttpException(exception):
     print(exception)
     if type(exception) == HTTPException :
         status_code = exception.status_code
-        detail_message = "No result"
+        detail_message = exception.detail
     else : 
         status_code = 500
         detail_message = "Treatment failed"      

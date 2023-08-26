@@ -6,6 +6,7 @@ class DepartmentBusiness :
         self.department_repo = department_repo
         self.district_repo = district_repo
         self.result_repo = result_repo
+        self.sorting_type = ""
         
     
     def get_departments(self) : 
@@ -36,7 +37,8 @@ class DepartmentBusiness :
         return department_name
     
     
-    def get_departments_by_voting_rate(self) :
+    def get_departments_by_voting_rate(self, sorting_type) :
+        self.sorting_type = sorting_type
         departments_results = {}
         departments_results["first_round"] = []
         departments_results["second_round"] = []
@@ -115,7 +117,9 @@ class DepartmentBusiness :
                 continue
             elif department_result_compared in department_results_sorted : 
                 continue
-            elif department_result_examined.rate_voting > department_result_compared.rate_voting :
+            elif department_result_examined.rate_voting > department_result_compared.rate_voting and self.sorting_type == "ascending" :
+                break
+            elif department_result_examined.rate_voting < department_result_compared.rate_voting and self.sorting_type == "descending" :
                 break
             elif is_end_loop :
                 department_results_sorted.append(department_result_examined)
