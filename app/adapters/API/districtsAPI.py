@@ -12,7 +12,7 @@ def init_district_business():
 
 
 @router.get("/districts/", tags=["districts"])
-async def get_districts_from_department(department: str = "", sort : str = "", district_business = Depends(init_district_business)) : 
+async def get_districts(department: str = "", sort : str = "", district_business = Depends(init_district_business)) : 
     try : 
         if sort == "result" : 
             districts_result = district_business.get_districts_by_voting_rate()

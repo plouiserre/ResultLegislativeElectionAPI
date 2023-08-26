@@ -53,10 +53,7 @@ class ResultBusiness() :
         for i in range(len(results_to_sort)) :
             is_end_loop = i + 1 == len(results_to_sort)
             result_compared = results_to_sort[i] 
-            if is_end_loop and len(results_sorted) + 1 == len(results_to_sort) :
-                results_sorted.append(result_compared)
-                result_sorted = result_compared
-            elif result_examined.id == result_compared.id and is_end_loop == False:
+            if result_examined.id == result_compared.id and is_end_loop == False:
                 continue
             elif result_compared in results_sorted : 
                 continue

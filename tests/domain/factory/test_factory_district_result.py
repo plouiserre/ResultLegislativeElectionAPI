@@ -13,8 +13,8 @@ class FactoryDistrictResultTest(unittest.TestCase):
         
         
     def test_factory_district_result(self) : 
-        factory = FactoryDistrict()
-        district = factory.construct_district(15, 15, "15ème circonscription", 33)
+        factory_district = FactoryDistrict()
+        district = factory_district.construct_district(15, 15, "15ème circonscription", 33)
         rate_voting = 33.33
         department_name = "Gironde"
         
