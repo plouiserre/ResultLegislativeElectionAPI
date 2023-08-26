@@ -26,7 +26,7 @@ Feature to developped :
 9. Create a method to find all districts of a department DONE
 10. Create a method to class all districts by participation in first round and second round DONE
 11. Create a method to class all departments by participation in first round and second round DONE
-12. Give the possibility to choose  > or < for sorting datas and add interface to separate api and domain. DID
+12. Give the possibility to choose  > or < for sorting datas and add interface to separate api and domain. DONE
 13. Create a method to find all 10 candidates with the hightest result in second round.
 14. Create a method to find for each party all 10 candidates with the hightest result in second round.
 15. Create a method to find for each party all 10 departments with the hightest result.
