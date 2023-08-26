@@ -1,7 +1,8 @@
 from app.domain.factory.factorydeputy import FactoryDeputy
+from app.domain.repository.deputy_repository import DeputyRepository
 from app.ports.MySql.my_db import MyDb
 
-class MySqlDeputyRepository():
+class MySqlDeputyRepository(DeputyRepository):
     def __init__(self, cache) -> None:
         self.my_db = MyDb()
         self.__cache = cache

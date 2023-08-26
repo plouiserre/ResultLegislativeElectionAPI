@@ -1,7 +1,8 @@
 from app.domain.factory.factoryresult import FactoryResult
+from app.domain.repository.result_repository import ResultRepository
 from app.ports.MySql.my_db import MyDb
 
-class MySqlResultRepository():
+class MySqlResultRepository(ResultRepository):
     def __init__(self, cache) -> None:
         self.my_db = MyDb()
         self.__cache = cache

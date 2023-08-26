@@ -1,7 +1,8 @@
 from app.domain.factory.factorydepartment import FactoryDepartment
+from app.domain.repository.department_repository import DepartmentRepository
 from app.ports.MySql.my_db import MyDb
 
-class MySqlDepartmentRepository :
+class MySqlDepartmentRepository(DepartmentRepository) :
     def __init__(self, cache) -> None:
         self.my_db = MyDb()
         self.__cache = cache

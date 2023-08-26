@@ -108,7 +108,7 @@ class DistrictBusinessTest(unittest.TestCase):
          
         business = DistrictBusiness(mock_district_repo, mock_department_business, mock_result_business)
         
-        districts_sorted = business.get_districts_by_voting_rate()        
+        districts_sorted = business.get_districts_by_voting_rate("ascending")        
         first_list_districts_result = districts_sorted["first_round"]     
         second_list_districts_result = districts_sorted["second_round"]        
         

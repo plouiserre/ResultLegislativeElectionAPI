@@ -12,10 +12,13 @@ def init_district_business():
 
 
 @router.get("/districts/", tags=["districts"])
-async def get_districts(department: str = "", sort : str = "", district_business = Depends(init_district_business)) : 
+async def get_districts(department: str = "", sort : str = "",  type : str  = "", district_business = Depends(init_district_business)) : 
     try : 
         if sort == "result" : 
-            districts_result = district_business.get_districts_by_voting_rate()
+            if type =="ascending" or type == "descending" : 
+                districts_result = district_business.get_districts_by_voting_rate(type)
+            else :
+                raise HTTPException (status_code= status.HTTP_400_BAD_REQUEST, detail= "Bad Request")
         else :
             districts_result = district_business.get_districts_by_department_name(department)
             if districts_result == None : 

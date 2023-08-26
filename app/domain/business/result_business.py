@@ -2,6 +2,7 @@ class ResultBusiness() :
     
     def __init__(self, result_repository) -> None:
         self.result_repository = result_repository
+        self.sorting_type = ""
         
     
     def get_results(self):
@@ -10,8 +11,9 @@ class ResultBusiness() :
         return results
     
     
-    def get_rounds_participation_sorted(self) : 
+    def get_rounds_participation_sorted(self, sorting_type) : 
         results_sorted_by_round = {}
+        self.sorting_type = sorting_type
         first_round_sorted = self.__process_results_sorted(1)
         second_round_sorted = self.__process_results_sorted(2)
         results_sorted_by_round["first_round"] = first_round_sorted
@@ -47,7 +49,6 @@ class ResultBusiness() :
                     results_to_sort.remove(result_sorted)
         return results_sorted
     
-    
     def __sortered_specific_result(self, results_to_sort, result_examined, results_sorted) :
         result_sorted = None
         for i in range(len(results_to_sort)) :
@@ -57,7 +58,9 @@ class ResultBusiness() :
                 continue
             elif result_compared in results_sorted : 
                 continue
-            elif result_examined.rate_voting > result_compared.rate_voting :
+            elif result_examined.rate_voting > result_compared.rate_voting  and self.sorting_type == "ascending":
+                break
+            elif result_examined.rate_voting < result_compared.rate_voting  and self.sorting_type == "descending":
                 break
             elif is_end_loop :
                 results_sorted.append(result_examined)

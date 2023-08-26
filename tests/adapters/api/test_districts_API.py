@@ -68,15 +68,34 @@ class DistrictsTest(unittest.TestCase) :
         
     def test_get_districts_by_voting_rate_status_OK_when_no_error(self) : 
         self.overriding_business_dependency("success")
-        response = self.client.get("districts/?sort=result")
+        response_first = self.client.get("districts/?sort=result&type=ascending")
+        response_second = self.client.get("districts/?sort=result&type=descending")
+        self.__assert_response_sorting_request_ok(response_first)
+        self.__assert_response_sorting_request_ok(response_second)
         
+    
+    def __assert_response_sorting_request_ok(self, response) :
         self.assertEqual(200, response.status_code)
         self.assertEqual([{"Name" : "2 ème circonscription", "Id" : 2}, {"Name" : "1 ère circonscription", "Id" : 1}], response.json())  
         
         
+    def test_get_districts_by_voting_rate_status_OK_when_bad_request(self) : 
+        #self.overriding_business_dependency("bad request")
+        response_first = self.client.get("districts/?sort=result")
+        response_second = self.client.get("districts/?sort=result&type=desceending")
+        
+        self.__assert_response_sorting_request_bad_request(response_first)
+        self.__assert_response_sorting_request_bad_request(response_second)
+        
+        
+    def __assert_response_sorting_request_bad_request(self, response) :
+        self.assertEqual(400, response.status_code)
+        self.assertEqual({'detail': 'Bad Request'}, response.json())  
+        
+        
     def test_get_districts_by_voting_status_500_when_errors(self) : 
         self.overriding_business_dependency("error")
-        response = self.client.get("districts/?sort=result")
+        response = self.client.get("districts/?sort=result&type=ascending")
         
         self.assertEqual(500, response.status_code)
         self.assertEqual({'detail': 'Treatment failed'}, response.json())
