@@ -80,7 +80,6 @@ class DistrictsTest(unittest.TestCase) :
         
         
     def test_get_districts_by_voting_rate_status_OK_when_bad_request(self) : 
-        #self.overriding_business_dependency("bad request")
         response_first = self.client.get("districts/?sort=result")
         response_second = self.client.get("districts/?sort=result&type=desceending")
         
