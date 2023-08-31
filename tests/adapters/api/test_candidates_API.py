@@ -13,6 +13,7 @@ def override_candidate_business() :
     mock.get_candidates_by_party.return_value = [{"LastName" : "LAPRAY", "FirstName" : "Lumir", "Sexe" : "F"}, {"LastName" : "DAUBIÉ", "FirstName" : "Romain", "Sexe" : "M"}]
     mock.get_candidates_by_departement.return_value = [{"LastName" : "EL OUASDI", "FirstName" : "Fatima", "Sexe" : "F"}, {"LastName" : "DELATTE", "FirstName" : "Marc", "Sexe" : "M"}]
     mock.get_candidates_by_district.return_value = [{"LastName" : "Cazenave", "FirstName" : "Thomas", "Sexe" : "M"},{"LastName" : "LAPRAY", "FirstName" : "Lumir", "Sexe" : "F"},{"LastName" : "EL OUASDI", "FirstName" : "Fatima", "Sexe" : "F"}]
+    mock.get_top_candidates_results.return_value = [{"LastName" : "SIKORA", "FirstName" : "Juliette", "Sexe" : "F"},{"LastName" : "BOUDIÉ", "FirstName" : "Florent", "Sexe" : "M"},{"LastName" : "AUTAIN", "FirstName" : "Clémentine", "Sexe" : "F"}]
     return mock
 
    
@@ -26,6 +27,8 @@ def override_candidate_business_exception() :
     mock.get_candidates_by_departement.return_value = ""
     mock.get_candidates_by_district.side_effect = Exception("Boom!")
     mock.get_candidates_by_district.return_value = ""
+    mock.get_top_candidates_results.side_effect = Exception("Boom!")
+    mock.get_top_candidates_results.return_value = ""
     return mock    
     
     
@@ -138,3 +141,27 @@ class CandidatesAPITest(unittest.TestCase) :
 
         self.assertEqual(404, response.status_code)
         self.assertEqual({'detail': 'No result'}, response.json())
+        
+        
+    def test_get_top_candidates_rate_voting_OK(self) : 
+        self.overriding_business_dependency("success")
+        response = self.client.get("candidates/?sort=rate_voting&top=2")
+        
+        self.assertEqual(200, response.status_code)
+        self.assertEqual([{"LastName" : "SIKORA", "FirstName" : "Juliette", "Sexe" : "F"},{"LastName" : "BOUDIÉ", "FirstName" : "Florent", "Sexe" : "M"},{"LastName" : "AUTAIN", "FirstName" : "Clémentine", "Sexe" : "F"}], response.json())
+        
+        
+    def test_get_top_candidates_rate_voting_with_no_top_OK(self) : 
+        self.overriding_business_dependency("success")
+        response = self.client.get("candidates/?sort=rate_voting")
+        
+        self.assertEqual(200, response.status_code)
+        self.assertEqual([{"LastName" : "Cazenave", "FirstName" : "Thomas", "Sexe" : "M"}, {"LastName" : "TRASTOUR-ISNART", "FirstName" : "Laurence", "Sexe" : "F"}], response.json())
+        
+        
+    def test_get_top_candidates_rate_voting__status_500_when_errors(self) : 
+        self.overriding_business_dependency("error")
+        response = self.client.get("candidates/?sort=rate_voting&top=2")
+        
+        self.assertEqual(500, response.status_code)
+        self.assertEqual({'detail': 'Treatment failed'}, response.json())
