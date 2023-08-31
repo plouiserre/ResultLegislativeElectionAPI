@@ -49,6 +49,7 @@ class ResultBusiness() :
                     results_to_sort.remove(result_sorted)
         return results_sorted
     
+    
     def __sortered_specific_result(self, results_to_sort, result_examined, results_sorted) :
         result_sorted = None
         for i in range(len(results_to_sort)) :
