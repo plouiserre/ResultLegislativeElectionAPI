@@ -9,7 +9,7 @@ def init_candidate_business() :
     return candidate_business
 
 @router.get("/candidates/", tags=["candidates"])
-async def get_candidates(first_name : str ="", last_name: str = "", party : str = "", department: str ="", district : int = 0, candidate_business = Depends(init_candidate_business)):
+async def get_candidates(first_name : str ="", last_name: str = "", party : str = "", department: str ="", district : int = 0, sort : str ="", top : int = 0, candidate_business = Depends(init_candidate_business)):
     try :
         if party != "" : 
             candidates_result = candidate_business.get_candidates_by_party(party)
@@ -17,6 +17,8 @@ async def get_candidates(first_name : str ="", last_name: str = "", party : str 
             candidates_result = candidate_business.get_candidates_by_departement(department)
         elif district != 0 :
             candidates_result = candidate_business.get_candidates_by_district(district)
+        elif sort != "" and top != 0 : 
+            candidates_result = candidate_business.get_top_candidates_results(top)
         else :
             candidates_result = candidate_business.get_candidates(first_name, last_name)
         if candidates_result == None : 
