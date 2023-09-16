@@ -1,7 +1,7 @@
 import datetime
 import unittest
 
-from app.domain.business.candidate_business import CandidateBusiness
+from app.domain.business.candidate.candidate_business import CandidateBusiness
 from app.domain.business.deputy_business import DeputyBusiness
 from app.ports.InMemory.in_memory_deputy_repository import InMemoryDeputyRepository
 from tests.assert_test import AssertTest

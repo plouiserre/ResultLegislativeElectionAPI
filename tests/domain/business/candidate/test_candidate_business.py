@@ -1,7 +1,7 @@
 import datetime
 import unittest
 
-from app.domain.business.candidate_business import CandidateBusiness
+from app.domain.business.candidate.candidate_business import CandidateBusiness
 from app.domain.business.department_business import DepartmentBusiness
 from app.domain.business.district_business import DistrictBusiness
 from app.domain.business.party_business import PartyBusiness
@@ -239,7 +239,8 @@ class CandidateBusinessTest(unittest.TestCase) :
         
         self.assertEqual(None, candidates)
         
-        
+    
+    #TODO factorize with sortered tests all tests below
     @patch.object(CandidateRepository, "get_candidates")
     @patch.object(PartyBusiness, "get_parties")
     def test_get_top_candidates_results_small_samples(self, mock_candidate_repository, mock_party_business):

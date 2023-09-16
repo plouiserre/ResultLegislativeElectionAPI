@@ -46,13 +46,23 @@ def getCandidates(ids_list) :
     thirty_three_candidate = factory.construct_candidate(33, "CRISTOL", "Laurence", "F", datetime.datetime(1967, 11, 8), 7, "Professeur, profession scientifique",	False, 156,	12457, 13.5, 26.68, 22907, 25.764, 54.725)
     thirty_four_candidate = factory.construct_candidate(34, "BERTHET", "Alain", "M", datetime.datetime(1959, 8, 21), 11, "Profession libérale",	False,	156, 2603, 2.82, 5.57, 0, 0, 0)
     thirty_five_candidate = factory.construct_candidate(35, "SAUREL", "Philippe", "M", datetime.datetime(1957, 12, 17), 4, "Profession intermédiaire de la santé et du travail social",	False, 156,	2070, 2.24,	4.43, 0, 0,	0)
+    thirty_six_candidate = factory.construct_candidate(36, "LAÏ-KANE-CHEONG", "Alexandre", "M", datetime.datetime(1988, 12,1), 1, "Professeur des écoles, instituteur et assimilé",	False, 553, 3862, 4.71, 16.99, 11229, 13.845, 46.9)
+    thirty_seven_candidate = factory.construct_candidate(37, "PINEL", "Sylvia",	"F", datetime.date(1977,9,28), 2, "Cadre de la fonction publique",  True, 447, 9892, 10.27, 20.19, 0, 0, 0)
+    thirty_eight_candidate = factory.construct_candidate(38, "HABIB", "David", "M",	datetime.datetime(1961,3,16), 4, "Cadre administratif et commercial d'entreprise",	True, 323, 16345, 19.44, 36.61, 26414, 35.939, 70.602)
+    thirty_nine_candidate = factory.construct_candidate(39,	"MOLAC", "Paul", "M", datetime.datetime(1962,5,21),	6,	"Professeur, profession scientifique",	True, 259,	21900,	19.6, 37.65, 37678,	35.727,	75.423)   
+    forty_candidate = factory.construct_candidate(40, "SEO", "Mikaele",	"M", datetime.datetime(1971,12,27),	8,	"Profession intermédiaire administrative de la fonction publique", False, 563, 1622, 16.91,	21.8, 3717, 38.8, 50.11)
+    forty_one_candidate = factory.construct_candidate(41, "LAGARDE", "Jean-Christophe",	"M", datetime.datetime(1967,10,24),	10,	"Cadre de la fonction publique", True,	509, 7745, 11.87, 33.41, 11395,	16.893,	44.413)
+    forty_two_candidate = factory.construct_candidate(42, "NAEGELEN", "Christophe",	"M", datetime.datetime(1983,12,30),	12,	"Chef d'entreprise de 10 salariés ou plus",	True,	475, 15136,	23.67,	47.21, 21035, 33.633, 73.408)
+    forty_three_candidate = factory.construct_candidate(43,	"TROCHU", "Laurence", "F", datetime.datetime(1973,7,4), 14,	"Personne diverse sans activité professionnelle de moins de 60 ans (sauf retraité)", False,	423, 5730, 6.88, 12.47,	0, 0, 0)
+    forty_four_candidate = factory.construct_candidate(44, "DESSAUX", "Aurélien", "M",	datetime.datetime(1991,12,19), 16, "Profession intermédiaire administrative et commerciale des entreprises", False,	467, 1184,	1.49,	2.83,	0,	0,	0)
        
     candidates = [one_candidate, two_candidate, three_candidate, four_candidate, five_candidate, six_candidate, seven_candidate, eight_candidate,
                   nine_candidate, ten_candidate, eleven_candidate, twelve_candidate, thirteen_candidate, fourteen_candidate, fifteen_candidate, 
                   sixteen_candidate, seventeen_candidate, eighteen_candidate, nineteen_candidate, twenty_candidate, twenty_one_candidate, 
-                  twenty_two_candidate, twenty_three_candidate, twenty_four_candidate, twenty_five_candidate, twenty_six_candidate, 
-                  twenty_seven_candidate, twenty_eight_candidate, twenty_nine_candidate, thirty_candidate, thirty_one_candidate, 
-                  thirty_two_candidate, thirty_three_candidate, thirty_four_candidate, thirty_five_candidate]
+                  twenty_two_candidate, twenty_three_candidate, twenty_four_candidate, twenty_five_candidate, twenty_six_candidate, twenty_seven_candidate,
+                  twenty_eight_candidate, twenty_nine_candidate, thirty_candidate, thirty_one_candidate, thirty_two_candidate, thirty_three_candidate, 
+                  thirty_four_candidate, thirty_five_candidate, thirty_six_candidate, thirty_seven_candidate, thirty_eight_candidate, thirty_nine_candidate,
+                  forty_candidate, forty_one_candidate, forty_two_candidate, forty_three_candidate, forty_four_candidate]
     
     for candidate in candidates : 
         for number in ids_list : 
