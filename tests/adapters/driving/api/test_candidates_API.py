@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import Mock
 
 from app.main import app
-from app.adapters.API.candidatesAPI import init_candidate_business
+from app.adapters.driving.API.candidatesAPI import init_candidate_business
 from app.adapters.dependency.dependency_business import DependencyBusiness
 from fastapi.testclient import TestClient
 
@@ -165,3 +165,5 @@ class CandidatesAPITest(unittest.TestCase) :
         
         self.assertEqual(500, response.status_code)
         self.assertEqual({'detail': 'Treatment failed'}, response.json())
+        
+    ##TODO add a test when rate_voting is not choosed with error 404 and add correction of code

@@ -1,6 +1,6 @@
 import unittest
 
-from app.ports.InMemory.in_memory_result_repository import InMemoryResultRepository
+from app.adapters.driven.InMemory.in_memory_result_repository import InMemoryResultRepository
 from tests.assert_test import AssertTest
 
 class InMemoryResultRepositoryTest(unittest.TestCase) :

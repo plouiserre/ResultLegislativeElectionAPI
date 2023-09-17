@@ -1,6 +1,6 @@
 from app.domain.factory.factoryresult import FactoryResult
 from app.domain.repository.result_repository import ResultRepository
-from app.ports.MySql.my_db import MyDb
+from app.adapters.driven.MySql.my_db import MyDb
 
 class MySqlResultRepository(ResultRepository):
     def __init__(self, cache) -> None:

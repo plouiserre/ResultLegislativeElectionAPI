@@ -1,6 +1,6 @@
 from app.domain.business.result_business import ResultBusiness
-from app.ports.MySql.cache import Cache
-from app.ports.MySql.my_sql_result_repository import MySqlResultRepository
+from app.adapters.driven.MySql.cache import Cache
+from app.adapters.driven.MySql.my_sql_result_repository import MySqlResultRepository
 from app.utils.helper import ManageHttpException
 from fastapi import HTTPException, APIRouter, Depends
 
