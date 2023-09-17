@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import Mock
 
 from app.main import app
-from app.adapters.API.partiesAPI import init_party_business
+from app.adapters.driving.API.partiesAPI import init_party_business
 from fastapi.testclient import TestClient
 
 def override_party_business() : 

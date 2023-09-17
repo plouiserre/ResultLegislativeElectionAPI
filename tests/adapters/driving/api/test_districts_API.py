@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import Mock
 
 from app.main import app
-from app.adapters.API.districtsAPI import init_district_business
+from app.adapters.driving.API.districtsAPI import init_district_business
 from fastapi.testclient import TestClient
 
 def override_district_business() :

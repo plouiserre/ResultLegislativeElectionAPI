@@ -4,13 +4,13 @@ from app.domain.business.district_business import DistrictBusiness
 from app.domain.business.deputy_business import DeputyBusiness
 from app.domain.business.party_business import PartyBusiness
 from app.domain.business.result_business import ResultBusiness
-from app.ports.MySql.cache import Cache
-from app.ports.MySql.my_sql_candidate_repository import MySqlCandidateRepository
-from app.ports.MySql.my_sql_department_repository import MySqlDepartmentRepository
-from app.ports.MySql.my_sql_deputy_repository import MySqlDeputyRepository
-from app.ports.MySql.my_sql_district_repository import MySqlDistrictRepository
-from app.ports.MySql.my_sql_party_repository import MySqlPartyRepository
-from app.ports.MySql.my_sql_result_repository import MySqlResultRepository
+from app.adapters.driven.MySql.cache import Cache
+from app.adapters.driven.MySql.my_sql_candidate_repository import MySqlCandidateRepository
+from app.adapters.driven.MySql.my_sql_department_repository import MySqlDepartmentRepository
+from app.adapters.driven.MySql.my_sql_deputy_repository import MySqlDeputyRepository
+from app.adapters.driven.MySql.my_sql_district_repository import MySqlDistrictRepository
+from app.adapters.driven.MySql.my_sql_party_repository import MySqlPartyRepository
+from app.adapters.driven.MySql.my_sql_result_repository import MySqlResultRepository
 
 class DependencyBusiness : 
     def __init__(self) -> None:

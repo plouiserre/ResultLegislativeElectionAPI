@@ -1,7 +1,7 @@
 import datetime
 import unittest
 
-from app.ports.InMemory.in_memory_deputy_repository import InMemoryDeputyRepository
+from app.adapters.driven.InMemory.in_memory_deputy_repository import InMemoryDeputyRepository
 from tests.assert_test import AssertTest
 
 class InMemoryDeputyRepositoryTest(unittest.TestCase) :

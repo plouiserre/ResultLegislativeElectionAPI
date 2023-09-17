@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from .adapters.API import candidatesAPI, departementsAPI, deputiesAPI, districtsAPI, partiesAPI, resultsAPI
+from app.adapters.driving.API import candidatesAPI, departementsAPI, deputiesAPI, districtsAPI, partiesAPI, resultsAPI
 
 app = FastAPI()
 

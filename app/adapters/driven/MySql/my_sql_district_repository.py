@@ -1,6 +1,6 @@
 from app.domain.factory.factorydistrict import FactoryDistrict
 from app.domain.repository.district_repository import DistrictRepository
-from app.ports.MySql.my_db import MyDb
+from app.adapters.driven.MySql.my_db import MyDb
 
 class MySqlDistrictRepository(DistrictRepository):
     def __init__(self, cache) -> None:

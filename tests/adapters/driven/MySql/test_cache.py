@@ -1,6 +1,6 @@
 import unittest
 
-from app.ports.MySql.cache import Cache
+from app.adapters.driven.MySql.cache import Cache
 
 class CacheTest(unittest.TestCase):
     

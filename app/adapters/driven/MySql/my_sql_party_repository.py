@@ -1,6 +1,6 @@
 from app.domain.factory.factoryparty import FactoryParty
 from app.domain.repository.party_repository import PartyRepository
-from app.ports.MySql.my_db import MyDb
+from app.adapters.driven.MySql.my_db import MyDb
 
 class MySqlPartyRepository(PartyRepository):
     def __init__(self, cache) -> None:

@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import Mock
 
 from app.main import app
-from app.adapters.API.deputiesAPI import init_deputy_business
+from app.adapters.driving.API.deputiesAPI import init_deputy_business
 from fastapi.testclient import TestClient
 
 def override_deputies_business() :
