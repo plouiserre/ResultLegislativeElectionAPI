@@ -165,3 +165,5 @@ class CandidatesAPITest(unittest.TestCase) :
         
         self.assertEqual(500, response.status_code)
         self.assertEqual({'detail': 'Treatment failed'}, response.json())
+        
+    ##TODO add a test when rate_voting is not choosed with error 404 and add correction of code
