@@ -63,9 +63,15 @@ class AssertTest:
         self.unit_test.assertEqual(department_check[1], department_dto.name)
         self.unit_test.assertEqual(department_check[2], department_dto.number)
         
+        
     def assert_department_result_dto(self, department_check, department_result_dto) : 
         self.assert_department_dto(department_check[0 : 3], department_result_dto)
         self.unit_test.assertEqual(department_check[3], department_result_dto.rate_voting)
+        
+        
+    def assert_department_party_result_dto(self, department_party_result_check, department_party_result_dto) : 
+        self.assert_department_result_dto(department_party_result_check[0 : 4], department_party_result_dto)
+        self.unit_test.assertEqual(department_party_result_check[4], department_party_result_dto.party_name)
         
         
     def assert_district_dto(self, district_check, district_dto) :

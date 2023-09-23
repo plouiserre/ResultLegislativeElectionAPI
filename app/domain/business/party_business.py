@@ -20,7 +20,6 @@ class PartyBusiness :
         return party_by_short_name
     
     
-    #TODO subdivise in many nested method
     def get_top_candidates_for_each_party_all_rounds(self, limit) :
         all_candidates = self.candidate_repo.get_candidates()
         all_parties = self.party_repo.get_parties()
@@ -32,8 +31,7 @@ class PartyBusiness :
                     if (party.short_name in all_candidates_by_party) == False:
                         all_candidates_by_party[party.short_name] = []
                     all_candidates_by_party[party.short_name].append(candidate)
-                    break
-                    
+                    break                    
 
         for party in all_parties :
             candidates = all_candidates_by_party[party.short_name]
