@@ -8,7 +8,10 @@ from app.domain.business.party_business import PartyBusiness
 from app.domain.repository.candidate_repository import CandidateRepository
 from unittest.mock import patch
 from tests.assert_test import AssertTest
-from tests.faker import getCandidates, getDepartments, getDistricts, getParties
+from tests.faker.faker_department import getDepartments_by_ids
+from tests.faker.faker_district import getDistricts_by_id
+from tests.faker.faker_party import getParties_by_id
+from tests.faker.faker_candidate import getCandidates_by_id
 
 class CandidateBusinessTest(unittest.TestCase) :
     
@@ -20,8 +23,8 @@ class CandidateBusinessTest(unittest.TestCase) :
     @patch.object(CandidateRepository, "get_candidates")
     @patch.object(PartyBusiness, "get_parties")
     def test_get_all_candidates(self, mock_candidate_repository, mock_party_business) : 
-        mock_candidate_repository.get_candidates.return_value = getCandidates([1, 2, 3, 4, 5])
-        mock_party_business.get_parties.return_value = getParties([1, 3, 7, 9])
+        mock_candidate_repository.get_candidates.return_value = getCandidates_by_id([1, 2, 3, 4, 5])
+        mock_party_business.get_parties.return_value = getParties_by_id([1, 3, 7, 9])
         
         business = CandidateBusiness(mock_candidate_repository, mock_party_business, None, None)
         
@@ -53,8 +56,8 @@ class CandidateBusinessTest(unittest.TestCase) :
     @patch.object(CandidateRepository, "get_candidates")
     @patch.object(PartyBusiness, "get_parties")
     def test_get_specific_candidate(self, mock_party_business, mock_candidate_repository) : 
-        mock_party_business.get_parties.return_value = getParties([1, 3, 7, 9])
-        mock_candidate_repository.get_candidates.return_value = getCandidates([1, 2, 3, 4, 5])
+        mock_party_business.get_parties.return_value = getParties_by_id([1, 3, 7, 9])
+        mock_candidate_repository.get_candidates.return_value = getCandidates_by_id([1, 2, 3, 4, 5])
         
         business = CandidateBusiness(mock_candidate_repository, mock_party_business, None, None)
         
@@ -70,8 +73,8 @@ class CandidateBusinessTest(unittest.TestCase) :
     @patch.object(CandidateRepository, "get_candidates")
     @patch.object(PartyBusiness, "get_parties")
     def test_get_specific_candidate_managing_caps(self, mock_party_business, mock_candidate_repository) : 
-        mock_party_business.get_parties.return_value = getParties([1, 3, 7, 9])
-        mock_candidate_repository.get_candidates.return_value = getCandidates([1, 2, 3, 4, 5])
+        mock_party_business.get_parties.return_value = getParties_by_id([1, 3, 7, 9])
+        mock_candidate_repository.get_candidates.return_value = getCandidates_by_id([1, 2, 3, 4, 5])
         
         business = CandidateBusiness(mock_candidate_repository, mock_party_business, None, None)
         
@@ -87,8 +90,8 @@ class CandidateBusinessTest(unittest.TestCase) :
     @patch.object(CandidateRepository, "get_candidates")
     @patch.object(PartyBusiness, "get_parties")
     def test_get_specific_candidate_managing_accent(self, mock_party_business, mock_candidate_repository) : 
-        mock_party_business.get_parties.return_value = getParties([1, 3, 7, 9])
-        mock_candidate_repository.get_candidates.return_value = getCandidates([1, 2, 3, 4, 5])
+        mock_party_business.get_parties.return_value = getParties_by_id([1, 3, 7, 9])
+        mock_candidate_repository.get_candidates.return_value = getCandidates_by_id([1, 2, 3, 4, 5])
         
         business = CandidateBusiness(mock_candidate_repository, mock_party_business, None, None)
         
@@ -104,8 +107,8 @@ class CandidateBusinessTest(unittest.TestCase) :
     @patch.object(CandidateRepository, "get_candidates")
     @patch.object(PartyBusiness, "get_parties")
     def test_get_candidates_from_specific_party(self, mock_party_business, mock_candidate_repository) :
-        mock_party_business.get_party_by_short_name.return_value = getParties([3])[0]
-        mock_candidate_repository.get_candidates.return_value = getCandidates([1, 2, 3, 4, 5])
+        mock_party_business.get_party_by_short_name.return_value = getParties_by_id([3])[0]
+        mock_candidate_repository.get_candidates.return_value = getCandidates_by_id([1, 2, 3, 4, 5])
         
         business = CandidateBusiness(mock_candidate_repository, mock_party_business, None, None)
         
@@ -126,7 +129,7 @@ class CandidateBusinessTest(unittest.TestCase) :
     @patch.object(PartyBusiness, "get_parties")
     def test_get_candidates_from_unknown_party(self, mock_party_business, mock_candidate_repository) :
         mock_party_business.get_party_by_short_name.return_value = None
-        mock_candidate_repository.get_candidates.return_value = getCandidates([1, 2, 3, 4, 5])
+        mock_candidate_repository.get_candidates.return_value = getCandidates_by_id([1, 2, 3, 4, 5])
         
         business = CandidateBusiness(mock_candidate_repository, mock_party_business, None, None)
         
@@ -138,8 +141,8 @@ class CandidateBusinessTest(unittest.TestCase) :
     @patch.object(CandidateRepository, "get_candidates")
     @patch.object(PartyBusiness, "get_parties")
     def test_get_all_candidates_by_district_id(self, mock_candidate_repository, mock_party_business) : 
-        mock_candidate_repository.get_candidates.return_value = getCandidates([1, 2, 3, 4, 5])
-        mock_party_business.get_parties.return_value = getParties([1, 3, 7, 9])
+        mock_candidate_repository.get_candidates.return_value = getCandidates_by_id([1, 2, 3, 4, 5])
+        mock_party_business.get_parties.return_value = getParties_by_id([1, 3, 7, 9])
         
         business = CandidateBusiness(mock_candidate_repository, mock_party_business, None, None)
         
@@ -161,10 +164,10 @@ class CandidateBusinessTest(unittest.TestCase) :
     @patch.object(DistrictBusiness, "get_districts_by_department_id")
     @patch.object(PartyBusiness, "get_parties")
     def test_get_all_candidates_from_department(self, mock_candidate_repository, mock_department_business, mock_district_business, mock_party_business):
-        mock_candidate_repository.get_candidates.return_value = getCandidates([1, 2, 3, 4, 5])
-        mock_department_business.get_department_by_name.return_value = getDepartments([33])[0]
-        mock_district_business.get_districts_by_department_id.return_value = getDistricts([330, 331])
-        mock_party_business.get_parties.return_value = getParties([1, 3, 7, 9])
+        mock_candidate_repository.get_candidates.return_value = getCandidates_by_id([1, 2, 3, 4, 5])
+        mock_department_business.get_department_by_name.return_value = getDepartments_by_ids([33])[0]
+        mock_district_business.get_districts_by_department_id.return_value = getDistricts_by_id([330, 331])
+        mock_party_business.get_parties.return_value = getParties_by_id([1, 3, 7, 9])
         
         business = CandidateBusiness(mock_candidate_repository, mock_party_business, mock_department_business, mock_district_business)
         
@@ -194,10 +197,10 @@ class CandidateBusinessTest(unittest.TestCase) :
     @patch.object(DistrictBusiness, "get_districts_by_department_id")
     @patch.object(PartyBusiness, "get_parties")
     def test_get_all_candidates_from_unknown_department(self, mock_candidate_repository, mock_department_business, mock_district_business, mock_party_business):
-        mock_candidate_repository.get_candidates.return_value = getCandidates([1, 2, 3, 4, 5])
+        mock_candidate_repository.get_candidates.return_value = getCandidates_by_id([1, 2, 3, 4, 5])
         mock_department_business.get_department_by_name.return_value = None
-        mock_district_business.get_districts_by_department_id.return_value = getDistricts([6, 7])
-        mock_party_business.get_parties.return_value = getParties([1, 3, 7, 9])
+        mock_district_business.get_districts_by_department_id.return_value = getDistricts_by_id([6, 7])
+        mock_party_business.get_parties.return_value = getParties_by_id([1, 3, 7, 9])
         
         business = CandidateBusiness(mock_candidate_repository, mock_party_business, mock_department_business, mock_district_business)
         
@@ -209,8 +212,8 @@ class CandidateBusinessTest(unittest.TestCase) :
     @patch.object(CandidateRepository, "get_candidates")
     @patch.object(PartyBusiness, "get_parties")
     def test_get_all_candidates_from_district(self, mock_candidate_repository, mock_party_business):
-        mock_candidate_repository.get_candidates.return_value = getCandidates([1, 2, 3, 4, 5])
-        mock_party_business.get_parties.return_value = getParties([1, 3, 7, 9])
+        mock_candidate_repository.get_candidates.return_value = getCandidates_by_id([1, 2, 3, 4, 5])
+        mock_party_business.get_parties.return_value = getParties_by_id([1, 3, 7, 9])
         
         business = CandidateBusiness(mock_candidate_repository, mock_party_business, None, None)
         
@@ -231,7 +234,7 @@ class CandidateBusinessTest(unittest.TestCase) :
     @patch.object(PartyBusiness, "get_parties")
     def test_get_all_candidates_from_unknown_district(self, mock_candidate_repository, mock_party_business):
         mock_candidate_repository.get_candidates.return_value = []
-        mock_party_business.get_parties.return_value = getParties([1, 3, 7, 9])
+        mock_party_business.get_parties.return_value = getParties_by_id([1, 3, 7, 9])
         
         business = CandidateBusiness(mock_candidate_repository, mock_party_business, None, None)
         
@@ -244,8 +247,8 @@ class CandidateBusinessTest(unittest.TestCase) :
     @patch.object(CandidateRepository, "get_candidates")
     @patch.object(PartyBusiness, "get_parties")
     def test_get_top_candidates_results_small_samples(self, mock_candidate_repository, mock_party_business):
-        mock_candidate_repository.get_candidates.return_value = getCandidates([2, 8, 14, 26, 28])
-        mock_party_business.get_parties.return_value = getParties([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16])
+        mock_candidate_repository.get_candidates.return_value = getCandidates_by_id([2, 8, 14, 26, 28])
+        mock_party_business.get_parties.return_value = getParties_by_id([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16])
         
         business = CandidateBusiness(mock_candidate_repository, mock_party_business, None, None)
         
@@ -287,9 +290,9 @@ class CandidateBusinessTest(unittest.TestCase) :
     @patch.object(CandidateRepository, "get_candidates")
     @patch.object(PartyBusiness, "get_parties")
     def test_get_top_candidates_results(self, mock_candidate_repository, mock_party_business):
-        mock_candidate_repository.get_candidates.return_value = getCandidates([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 
+        mock_candidate_repository.get_candidates.return_value = getCandidates_by_id([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 
                                                                 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35])
-        mock_party_business.get_parties.return_value = getParties([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16])
+        mock_party_business.get_parties.return_value = getParties_by_id([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16])
         
         business = CandidateBusiness(mock_candidate_repository, mock_party_business, None, None)
         

@@ -1,10 +1,9 @@
 import unittest
 
-from app.domain.factory.factoryresult import FactoryResult
 from app.domain.business.result_business import ResultBusiness
 from app.domain.repository.result_repository import ResultRepository
 from tests.assert_test import AssertTest
-from tests.faker import getResults
+from tests.faker.faker_result import getResults
 from unittest.mock import patch
 
 class ResultBusinessTest(unittest.TestCase) :

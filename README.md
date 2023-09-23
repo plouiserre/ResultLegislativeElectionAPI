@@ -29,7 +29,7 @@ Feature to developped :
 12. Give the possibility to choose  > or < for sorting datas and add interface to separate api and domain. DONE
 13. Create a method to find all X candidates with the hightest result in first and second round. DONE
 14. Create a method to find for each party all X candidates with the hightest result in first and second round. DONE
-15. Create a method to find for each party all X departments with the hightest result.
+15. Create a method to find for each party all X departments with the hightest result. DOING
 16. Create a method to calculate the % of non relect candidates for each party
 17. Create a method to class the jobs of the new congressmans.
 18. Create a method to return the average age of the new congressmans and for each party.

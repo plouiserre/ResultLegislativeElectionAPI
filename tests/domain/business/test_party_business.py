@@ -5,7 +5,8 @@ from app.domain.business.party_business import PartyBusiness
 from app.domain.repository.candidate_repository import CandidateRepository
 from app.domain.repository.party_repository import PartyRepository
 from tests.assert_test import AssertTest
-from tests.faker import getCandidates, getParties
+from tests.faker.faker_party import getParties_by_id
+from tests.faker.faker_candidate import getCandidates_by_id
 from unittest.mock import patch
 
 class PartyBusinessTest(unittest.TestCase) : 
@@ -17,7 +18,7 @@ class PartyBusinessTest(unittest.TestCase) :
         
     @patch.object(PartyRepository, "get_parties")
     def test_get_parties(self, mock_party_repository) : 
-        mock_party_repository.get_parties.return_value = getParties([1, 3, 7, 9])
+        mock_party_repository.get_parties.return_value = getParties_by_id([1, 3, 7, 9])
         
         business = PartyBusiness(mock_party_repository, None)
         parties = business.get_parties()
@@ -39,7 +40,7 @@ class PartyBusinessTest(unittest.TestCase) :
         
     @patch.object(PartyRepository, "get_parties")
     def test_get_parties_by_short_name(self, mock_party_repository) : 
-        mock_party_repository.get_parties.return_value = getParties([1, 3, 7, 9])
+        mock_party_repository.get_parties.return_value = getParties_by_id([1, 3, 7, 9])
         
         business = PartyBusiness(mock_party_repository, None)
         party = business.get_party_by_short_name("ENS")
@@ -51,10 +52,10 @@ class PartyBusinessTest(unittest.TestCase) :
     @patch.object(CandidateRepository, "get_candidates")
     @patch.object(PartyBusiness, "get_parties")
     def test_get_each_top_3_candidates_for_each_party_all_rounds(self, mock_candidate_repository, mock_party_business) : 
-        mock_candidate_repository.get_candidates.return_value = getCandidates([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+        mock_candidate_repository.get_candidates.return_value = getCandidates_by_id([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
                                                                                22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
                                                                                42, 43, 44])
-        mock_party_business.get_parties.return_value = getParties([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16])
+        mock_party_business.get_parties.return_value = getParties_by_id([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16])
         
         business = PartyBusiness(mock_party_business, mock_candidate_repository)
         
