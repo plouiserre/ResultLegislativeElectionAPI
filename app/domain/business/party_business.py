@@ -40,3 +40,7 @@ class PartyBusiness :
             all_candidates_by_party[party.short_name] = candidates_sortered        
             
         return all_candidates_by_party
+    
+    
+    def get_top_departments_for_each_each_party_all_rounds(self, limit) : 
+        print("I love C#")

@@ -14,18 +14,18 @@ def getDepartments_by_ids(numbers_list):
     return departments_needed
 
 
-def getDepartments_by_names(departments_name) : 
-    departments_needed = []    
+# def getDepartments_by_names(departments_name) : 
+#     departments_needed = []    
     
-    departments = __create_departments()
+#     departments = __create_departments()
     
-    for department in departments : 
-        for name in departments_name :
-            if department.name == name :
-                departments_needed.append(department)
-                break
+#     for department in departments : 
+#         for name in departments_name :
+#             if department.name == name :
+#                 departments_needed.append(department)
+#                 break
             
-    return departments_needed
+#     return departments_needed
 
 
 def __create_departments() : 
