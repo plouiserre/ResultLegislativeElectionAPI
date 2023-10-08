@@ -80,7 +80,7 @@ class DepartmentBusinessTest(unittest.TestCase):
         
         first_round_departments_results = departments_results_all_rounds["first_round"]     
         
-        self.assert_test.assert_department_result_dto([69, "Nord", 69, 30.3], first_round_departments_results[0])
+        self.assert_test.assert_department_result_dto([69, "Rhône", 69, 30.3], first_round_departments_results[0])
         self.assert_test.assert_department_result_dto([11, "Aude", 11, 35.8], first_round_departments_results[1])
         self.assert_test.assert_department_result_dto([34, "Herault", 34, 48.8], first_round_departments_results[2])
         self.assert_test.assert_department_result_dto([33, "Gironde", 33, 54.8], first_round_departments_results[3])
@@ -91,7 +91,7 @@ class DepartmentBusinessTest(unittest.TestCase):
         self.assert_test.assert_department_result_dto([11, "Aude", 11, 28.3], second_round_departments_results[0])  
         self.assert_test.assert_department_result_dto([33, "Gironde", 33, 33.8], second_round_departments_results[1]) 
         self.assert_test.assert_department_result_dto([1, "Ain", 1, 37.8], second_round_departments_results[2])  
-        self.assert_test.assert_department_result_dto([69, "Nord", 69, 46.55], second_round_departments_results[3]) 
+        self.assert_test.assert_department_result_dto([69, "Rhône", 69, 46.55], second_round_departments_results[3]) 
         self.assert_test.assert_department_result_dto([34, "Herault", 34, 59.3], second_round_departments_results[4])       
         
         
@@ -142,12 +142,12 @@ class DepartmentBusinessTest(unittest.TestCase):
         self.assert_test.assert_department_result_dto([33, "Gironde", 33, 54.8], first_round_departments_results[1])
         self.assert_test.assert_department_result_dto([34, "Herault", 34, 48.8], first_round_departments_results[2])
         self.assert_test.assert_department_result_dto([11, "Aude", 11, 35.8], first_round_departments_results[3])
-        self.assert_test.assert_department_result_dto([69, "Nord", 69, 30.3], first_round_departments_results[4])
+        self.assert_test.assert_department_result_dto([69, "Rhône", 69, 30.3], first_round_departments_results[4])
         
         second_round_departments_results = departments_results_all_rounds["second_round"]     
         
         self.assert_test.assert_department_result_dto([34, "Herault", 34, 59.3], second_round_departments_results[0])              
-        self.assert_test.assert_department_result_dto([69, "Nord", 69, 46.55], second_round_departments_results[1]) 
+        self.assert_test.assert_department_result_dto([69, "Rhône", 69, 46.55], second_round_departments_results[1]) 
         self.assert_test.assert_department_result_dto([1, "Ain", 1, 37.8], second_round_departments_results[2])  
         self.assert_test.assert_department_result_dto([33, "Gironde", 33, 33.8], second_round_departments_results[3]) 
         self.assert_test.assert_department_result_dto([11, "Aude", 11, 28.3], second_round_departments_results[4])          

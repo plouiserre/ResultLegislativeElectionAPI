@@ -38,45 +38,6 @@ def getCandidates_by_partys_departments(party_names, departments_ids) :
                     candidates_needed.append(candidate)
                 
     return candidates_needed
-        
-
-# def getCandidates_by_party(party_names) : 
-#     candidates_needed = []
-#     party_ids = getParties_id_by_name(party_names)        
-    
-#     candidates = __create_candidates()
-    
-#     for candidate in candidates : 
-#         for party_id in party_ids : 
-#             if candidate.party_id == party_id :
-#                 candidates_needed.append(candidate)
-#                 break
-    
-#     return candidates_needed
-
-
-# def getCandidates_by_department(departments_name) :
-#     candidates_needed = []
-#     departments = getDepartments_by_names(departments_name)
-    
-#     departments_id = []
-#     for department in departments : 
-#         departments_id.append(department.id)
-        
-#     districts = getDistricts_by_department_id(departments_id)
-#     districts_id = []
-#     for district in districts : 
-#         districts_id.append(district.id)
-    
-#     candidates = __create_candidates()
-    
-#     for candidate in candidates : 
-#         for district_id in districts_id : 
-#             if candidate.district_id == district_id :
-#                 candidates_needed.append(candidate)
-#                 break
-            
-#     return candidates_needed
 
 
 def __create_candidates() :
