@@ -1,15 +1,11 @@
 import unittest
 import datetime
 
-from app.domain.business.party_business import PartyBusiness
+from app.domain.business.party.party_business import PartyBusiness
 from app.domain.repository.candidate_repository import CandidateRepository
-from app.domain.repository.department_repository import DepartmentRepository
-from app.domain.repository.district_repository import DistrictRepository
 from app.domain.repository.party_repository import PartyRepository
 from tests.assert_test import AssertTest
-from tests.faker.faker_candidate import getCandidates_by_id, getCandidates_by_partys_departments
-from tests.faker.faker_department import getDepartments_by_ids
-from tests.faker.faker_district import getDistricts_by_department_id
+from tests.faker.faker_candidate import getCandidates_by_id
 from tests.faker.faker_party import getParties_by_id
 from unittest.mock import patch
 
@@ -24,7 +20,7 @@ class PartyBusinessTest(unittest.TestCase) :
     def test_get_parties(self, mock_party_repository) : 
         mock_party_repository.get_parties.return_value = getParties_by_id([1, 3, 7, 9])
         
-        business = PartyBusiness(mock_party_repository, None, None, None)
+        business = PartyBusiness(mock_party_repository, None)
         parties = business.get_parties()
         
         self.assertEqual(4, len(parties))
@@ -46,7 +42,7 @@ class PartyBusinessTest(unittest.TestCase) :
     def test_get_parties_by_short_name(self, mock_party_repository) : 
         mock_party_repository.get_parties.return_value = getParties_by_id([1, 3, 7, 9])
         
-        business = PartyBusiness(mock_party_repository, None, None, None)
+        business = PartyBusiness(mock_party_repository, None)
         party = business.get_party_by_short_name("ENS")
         
         party_check = [7, "Ensemble ! (Majorité présidentielle)", "ENS"]
@@ -61,7 +57,7 @@ class PartyBusinessTest(unittest.TestCase) :
                                                                                42, 43, 44])
         mock_party_business.get_parties.return_value = getParties_by_id([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16])
         
-        business = PartyBusiness(mock_party_business, mock_candidate_repository, None, None)
+        business = PartyBusiness(mock_party_business, mock_candidate_repository)
         
         top_candidates = business.get_top_candidates_for_each_party_all_rounds(3)
         
@@ -328,91 +324,4 @@ class PartyBusinessTest(unittest.TestCase) :
         self.assert_test.assert_candidate_dto(sixteen_party_candidate_id_forty_four, top_candidates_sixteen_party["first_round"][0])
         
         self.assert_test.assert_candidate_dto(sixteen_party_candidate_id_forty_four, top_candidates_sixteen_party["second_round"][0]) 
-        
-        
-    @patch.object(CandidateRepository, "get_candidates")
-    @patch.object(PartyBusiness, "get_parties")
-    @patch.object(DistrictRepository, "get_districts")
-    @patch.object(DepartmentRepository, "get_departments")
-    def test_get_top_departments_for_each_four_specifics_parties_all_rounds(self, mock_candidate_repository, mock_party_business, mock_district_repository, mock_department_repository) :
-        mock_candidate_repository.get_candidates.return_value = getCandidates_by_partys_departments(["NUP", "LR", "ENS", "RN"], [11, 33, 34, 69])
-        
-        mock_party_business.get_parties.return_value = getParties_by_id([3, 7, 11, 15])        
-        
-        mock_department_repository.get_departments.return_value = getDepartments_by_ids([11, 33, 34, 69])
-        
-        mock_district_repository.get_districts.return_value = getDistricts_by_department_id([11, 33, 34, 69])
-        
-        business = PartyBusiness(mock_party_business, mock_candidate_repository, mock_district_repository, mock_department_repository)
-        
-        top_departments = business.get_top_departments_for_each_party_all_rounds()
-        
-        self.assertEqual(len(top_departments), 4)        
-        
-        nup_departments = top_departments["NUP"]
-        self.__assert_third_party_top_department(nup_departments)
-        
-        ens_departments = top_departments["ENS"]
-        self.__assert_seven_party_top_department(ens_departments)
-        
-        lr_departments = top_departments["LR"]
-        self.__assert_eleven_party_top_department(lr_departments)
-        
-        rn_departments = top_departments["RN"]
-        self.__assert_fifteen_party_top_department(rn_departments)
-        
-        
-    def __assert_third_party_top_department(self, third_top_department) : 
-        nup_departments_first_round = third_top_department["first_round"]
-        self.assert_test.assert_department_result_dto([33, "Gironde", 33, 21.18], nup_departments_first_round[0]) 
-        self.assert_test.assert_department_result_dto([11, "Aude", 11, 23.35], nup_departments_first_round[1]) 
-        self.assert_test.assert_department_result_dto([34, "Herault", 34, 31.67], nup_departments_first_round[2]) 
-        self.assert_test.assert_department_result_dto([69, "Rhône", 69, 35.55], nup_departments_first_round[3]) 
-        
-        nup_departments_second_round = third_top_department["second_round"]
-        self.assert_test.assert_department_result_dto([11, "Aude", 11, 17.35], nup_departments_second_round[0])
-        self.assert_test.assert_department_result_dto([33, "Gironde", 33, 17.91], nup_departments_second_round[1])
-        self.assert_test.assert_department_result_dto([69, "Rhône", 69, 51.87], nup_departments_second_round[2])
-        self.assert_test.assert_department_result_dto([34, "Herault", 34, 54.10], nup_departments_second_round[3])
-        
-        
-    def __assert_seven_party_top_department(self, seven_top_department) : 
-        ens_departments_first_round = seven_top_department["first_round"]
-        self.assert_test.assert_department_result_dto([11, "Aude", 11, 20.06], ens_departments_first_round[0]) 
-        self.assert_test.assert_department_result_dto([69, "Rhône", 69, 20.06], ens_departments_first_round[1]) 
-        self.assert_test.assert_department_result_dto([34, "Herault", 34, 24.55], ens_departments_first_round[2]) 
-        self.assert_test.assert_department_result_dto([33, "Gironde", 69, 35.55], ens_departments_first_round[3]) 
-        
-        ens_departments_second_round = seven_top_department["second_round"]
-        self.assert_test.assert_department_result_dto([11, "Aude", 11, 15.68], ens_departments_second_round[0])
-        self.assert_test.assert_department_result_dto([69, "Rhône", 69, 18.24], ens_departments_second_round[1])
-        self.assert_test.assert_department_result_dto([34, "Herault", 34, 28.62], ens_departments_second_round[2])
-        self.assert_test.assert_department_result_dto([33, "Gironde", 33, 46.80], ens_departments_second_round[3])
-        
-        
-    def __assert_eleven_party_top_department(self, eleven_top_department) : 
-        lr_departments_first_round = eleven_top_department["first_round"]
-        self.assert_test.assert_department_result_dto([11, "Aude", 11, 6.8], lr_departments_first_round[0]) 
-        self.assert_test.assert_department_result_dto([34, "Herault", 34, 6.90], lr_departments_first_round[1]) 
-        self.assert_test.assert_department_result_dto([33, "Gironde", 33, 14.07], lr_departments_first_round[2]) 
-        self.assert_test.assert_department_result_dto([69, "Rhône", 69, 17.07], lr_departments_first_round[3]) 
-        
-        lr_departments_second_round = eleven_top_department["second_round"]
-        self.assert_test.assert_department_result_dto([11, "Aude", 11, 0], lr_departments_second_round[0])
-        self.assert_test.assert_department_result_dto([34, "Herault", 34, 0], lr_departments_second_round[1])
-        self.assert_test.assert_department_result_dto([69, "Rhône", 69, 16.271], lr_departments_second_round[2])
-        self.assert_test.assert_department_result_dto([33, "Gironde", 33, 21.05], lr_departments_second_round[3])
-        
-        
-    def __assert_fifteen_party_top_department(self, fifteen_top_department) : 
-        rn_departments_first_round = fifteen_top_department["first_round"]
-        self.assert_test.assert_department_result_dto([69, "Rhône", 69, 20.865], rn_departments_first_round[0]) 
-        self.assert_test.assert_department_result_dto([11, "Aude", 11, 28.29], rn_departments_first_round[1]) 
-        self.assert_test.assert_department_result_dto([34, "Herault", 34, 29.01], rn_departments_first_round[2]) 
-        self.assert_test.assert_department_result_dto([33, "Gironde", 33, 32], rn_departments_first_round[3]) 
-        
-        rn_departments_second_round = fifteen_top_department["second_round"]
-        self.assert_test.assert_department_result_dto([69, "Rhône", 69, 0], rn_departments_second_round[0])
-        self.assert_test.assert_department_result_dto([34, "Herault", 34, 37.145], rn_departments_second_round[1])
-        self.assert_test.assert_department_result_dto([11, "Aude", 11, 50.43], rn_departments_second_round[2])
-        self.assert_test.assert_department_result_dto([33, "Gironde", 33, 56.03], rn_departments_second_round[3])
+    

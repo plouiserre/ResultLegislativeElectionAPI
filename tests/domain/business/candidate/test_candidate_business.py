@@ -4,7 +4,7 @@ import unittest
 from app.domain.business.candidate.candidate_business import CandidateBusiness
 from app.domain.business.department_business import DepartmentBusiness
 from app.domain.business.district_business import DistrictBusiness
-from app.domain.business.party_business import PartyBusiness
+from app.domain.business.party.party_business import PartyBusiness
 from app.domain.repository.candidate_repository import CandidateRepository
 from unittest.mock import patch
 from tests.assert_test import AssertTest

@@ -4,8 +4,7 @@ import unittest
 from app.domain.factory.factorycandidate import FactoryCandidate
 from tests.assert_test import AssertTest
 
-class FactoryCandidateTest(unittest.TestCase) :
-    
+class FactoryCandidateTest(unittest.TestCase) :    
     def __init__(self, methodName: str = "runTest") -> None:
         super().__init__(methodName)
         self.assert_test = AssertTest(self)
