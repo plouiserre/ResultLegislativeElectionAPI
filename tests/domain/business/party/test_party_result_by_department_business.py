@@ -12,8 +12,7 @@ from tests.faker.faker_district import getDistricts_by_department_id
 from tests.faker.faker_party import getParties_by_id
 from unittest.mock import patch
 
-class PartyResultByDepartmentBusinessTest(unittest.TestCase) : 
-    
+class PartyResultByDepartmentBusinessTest(unittest.TestCase) :     
     def __init__(self, methodName: str = "runTest") -> None:
         super().__init__(methodName)
         self.assert_test = AssertTest(self)
