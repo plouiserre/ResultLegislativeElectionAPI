@@ -97,9 +97,9 @@ class SorteredCandidate() :
                             if department_candidate.id == department.id : 
                                 if (party.short_name in results) == False  : 
                                     results[party.short_name] = {}
-                                if (department in results[party.short_name]) == False : 
-                                    results[party.short_name][department] = []
-                                results[party.short_name][department].append(candidate)
+                                if (department.name in results[party.short_name]) == False : 
+                                    results[party.short_name][department.name] = []
+                                results[party.short_name][department.name].append(candidate)
                                 break
         return results   
         

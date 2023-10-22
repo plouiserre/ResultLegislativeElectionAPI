@@ -134,51 +134,51 @@ class SorteredCandidateTest(unittest.TestCase) :
         
         candidates_ordered_by_party_department = business.get_candidates_by_party_and_departments(all_departments_by_districts)
         
-        self.assertEqual(4, len(candidates_ordered_by_party_department))
+        self.assertEqual(2, len(candidates_ordered_by_party_department))
         
         first_candidate = candidates_ordered_by_party_department["NUP"]["Gironde"][0]
-        first_candidate_check = [2, "RAVACLEY", "Stéphane", "M", datetime.datetime(1970,6,6), 3, "Artisan", False, 330, 13112, 16.56, 32.51, 17594, 22.22, 47.75]
+        first_candidate_check = [2, "RAVACLEY", "Stéphane", "M", datetime.datetime(1970,6,6), 3, "XXXX", "Artisan", False, 330, 13112, 16.56, 32.51, 17594, 22.22, 47.75]
         self.assert_test.assert_candidate_dto(first_candidate_check, first_candidate)
         
         second_candidate = candidates_ordered_by_party_department["NUP"]["Gironde"][1]
-        second_candidate_check = [5,"HERITIER", "Louise", "F", datetime.datetime(1997,2,25), 3, "Profession de l'information, des arts et des spectacles", False, 330, 89787, 23.2, 12.2, 9872, 21.32, 6.2]
+        second_candidate_check = [5,"HERITIER", "Louise", "F", datetime.datetime(1997,2,25), 3, "XXXX", "Profession de l'information, des arts et des spectacles", False, 330, 89787, 23.2, 12.2, 9872, 21.32, 6.2]
         self.assert_test.assert_candidate_dto(second_candidate_check, second_candidate)
             
         third_candidate = candidates_ordered_by_party_department["NUP"]["Gironde"][2]
-        third_candidate_check = [29, "FAURE", "Marylène", "F", datetime.datetime(1972, 2, 26), 3 , "Employé administratif d'entreprise", False, 331,	11269, 9.41, 18.84,	0, 0, 0]
+        third_candidate_check = [29, "FAURE", "Marylène", "F", datetime.datetime(1972, 2, 26), 3 , "XXXX", "Employé administratif d'entreprise", False, 331,	11269, 9.41, 18.84,	0, 0, 0]
         self.assert_test.assert_candidate_dto(third_candidate_check, third_candidate)
         
-        fourth_candidate = candidates_ordered_by_party_department["LR"]["Gironde"][0]
-        fourth_candidate_check = [18, "RAY", "Nicolas", "M", datetime.datetime(1981,5,14), 11, "Cadre de la fonction publique",	False, 330, 9594, 11.96, 24.22, 19296, 26.194, 63.272]
-        self.assert_test.assert_candidate_dto(fourth_candidate_check, fourth_candidate)  
+        fourth_candidate = candidates_ordered_by_party_department["NUP"]["Aude"][0]
+        fourth_candidate_check = [27, "BOURGOIS", "Pascal", "M", datetime.datetime(1956, 7, 24), 3, "XXXX", "Cadre de la fonction publique", False, 111, 9705, 11.65,	23.4, 0, 0,	0]
+        self.assert_test.assert_candidate_dto(fourth_candidate_check, fourth_candidate)
         
-        fifth_candidate = candidates_ordered_by_party_department["LR"]["Gironde"][1]
-        fifth_candidate_check = [45, "NJIKAM", "Pierre De Gaetan", "M", datetime.datetime(1966, 8, 7), 11, "Cadre administratif et commercial d'entreprise", False, 330, 4116, 3.95, 8.03, 0, 0, 0]
-        self.assert_test.assert_candidate_dto(fifth_candidate, fifth_candidate_check)
+        fifth_candidate = candidates_ordered_by_party_department["NUP"]["Aude"][1]
+        fifth_candidate_check = [62, "THIVENT", "Viviane",	"F", datetime.datetime(1977,5,1), 3, "XXXX", "Professeur, profession scientifique",	False, 110,	9204, 9.94,	20.94,	0,	0,	0]
+        self.assert_test.assert_candidate_dto(fifth_candidate_check, fifth_candidate)
         
-        sixth_candidate = candidates_ordered_by_party_department["LR"]["Gironde"][2]
-        sixth_candidate_check = [46, "MORIN", "Marc", "M", datetime.datetime(1985, 7, 31), 11, "Commerçant et assimilé", False, 331, 5964, 4.98, 9.97, 0, 0, 0]
-        self.assert_test.assert_candidate_dto(sixth_candidate, sixth_candidate_check)
+        sixth_candidate = candidates_ordered_by_party_department["NUP"]["Aude"][2]
+        sixth_candidate_check = [63,	"ADDA--NETTER",	"Johanna",	"F", datetime.datetime(1996,2,21),	3, "XXXX",	"Ingénieur et cadre technique d'entreprise", False,	111, 12547,	13.97,	25.8, 19894, 27.651, 52.078]
+        self.assert_test.assert_candidate_dto(sixth_candidate_check, sixth_candidate)
         
-        seven_candidate = candidates_ordered_by_party_department["NUP"]["Aude"][0]
-        seven_candidate_check = [27, "BOURGOIS", "Pascal", "M", datetime.datetime(1956, 7, 24), 3, "Cadre de la fonction publique", False, 111, 9705, 11.65,	23.4, 0, 0,	0]
-        self.assert_test.assert_candidate_dto(seven_candidate, seven_candidate_check)
+        seventh_candidate = candidates_ordered_by_party_department["LR"]["Gironde"][0]
+        seventh_candidate_check = [18, "RAY", "Nicolas", "M", datetime.datetime(1981,5,14), 11, "XXXX", "Cadre de la fonction publique",	False, 330, 9594, 11.96, 24.22, 19296, 26.194, 63.272]
+        self.assert_test.assert_candidate_dto(seventh_candidate_check, seventh_candidate)  
         
-        eighth_candidate = candidates_ordered_by_party_department["NUP"]["Aude"][1]
-        eighth_candidate_check = [62, "THIVENT", "Viviane",	"F", datetime.datetime(1977,5,1), 3, "Professeur, profession scientifique",	False, 110,	9204, 9.94,	20.94,	0,	0,	0]
-        self.assert_test.assert_candidate_dto(eighth_candidate, eighth_candidate_check)
+        eightth_candidate = candidates_ordered_by_party_department["LR"]["Gironde"][1]
+        eightth_candidate_check = [45, "NJIKAM", "Pierre De Gaetan", "M", datetime.datetime(1966, 8, 7), 11, "XXXX", "Cadre administratif et commercial d'entreprise", False, 330, 4116, 3.95, 8.03, 0, 0, 0]
+        self.assert_test.assert_candidate_dto(eightth_candidate_check, eightth_candidate)
         
-        nineth_candidate = candidates_ordered_by_party_department["NUP"]["Aude"][2]
-        nineth_candidate_check = [63,	"ADDA--NETTER",	"Johanna",	"F", datetime.datetime(1996,2,21),	3,	"Ingénieur et cadre technique d'entreprise", False,	111, 12547,	13.97,	25.8, 19894, 27.651, 52.078]
-        self.assert_test.assert_candidate_dto(nineth_candidate, nineth_candidate_check)
+        nineth_candidate = candidates_ordered_by_party_department["LR"]["Gironde"][2]
+        nineth_candidate_check = [46, "MORIN", "Marc", "M", datetime.datetime(1985, 7, 31), 11, "XXXX", "Commerçant et assimilé", False, 331, 5964, 4.98, 9.97, 0, 0, 0]
+        self.assert_test.assert_candidate_dto(nineth_candidate_check, nineth_candidate)
         
         tenth_candidate = candidates_ordered_by_party_department["LR"]["Aude"][0]
-        tenth_candidate_check = [64, "PEREZ", "Laurent",	"M", datetime.datetime(1965,6,16),	11,	"Chef d'entreprise de 10 salariés ou plus",	False,	110, 2501, 2.54,	5.17, 0, 0,	0]
-        self.assert_test.assert_candidate_dto(tenth_candidate, tenth_candidate_check)
+        tenth_candidate_check = [64, "PEREZ", "Laurent",	"M", datetime.datetime(1965,6,16),	11, "XXXX",	"Chef d'entreprise de 10 salariés ou plus",	False,	110, 2501, 2.54,	5.17, 0, 0,	0]
+        self.assert_test.assert_candidate_dto(tenth_candidate_check, tenth_candidate)
         
         eleventh_candidate = candidates_ordered_by_party_department["LR"]["Aude"][1]
-        eleventh_candidate_check = [65, "ESTRADE", "Quentin", "M", datetime.datetime(1996,5,4),	11,	"Elève, étudiant",	False, 111, 3706, 4,	8.43, 0, 0,	0]
-        self.assert_test.assert_candidate_dto(eleventh_candidate, eleventh_candidate_check)
+        eleventh_candidate_check = [65, "ESTRADE", "Quentin", "M", datetime.datetime(1996,5,4),	11, "XXXX",	"Elève, étudiant",	False, 111, 3706, 4,	8.43, 0, 0,	0]
+        self.assert_test.assert_candidate_dto(eleventh_candidate_check, eleventh_candidate)
         
         
     def __get_datas_department_by_district_id(self, departments, districts) : 

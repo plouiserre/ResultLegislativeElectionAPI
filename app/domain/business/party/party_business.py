@@ -36,7 +36,7 @@ class PartyBusiness :
 
         for party in all_parties :
             candidates = all_candidates_by_party[party.short_name]
-            sortered  = SorteredCandidate(candidates, all_parties)
+            sortered  = SorteredCandidate(candidates, all_parties, None)
             candidates_sortered = sortered.sort_all_candidates(limit)
             all_candidates_by_party[party.short_name] = candidates_sortered        
             
