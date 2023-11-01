@@ -19,7 +19,8 @@ class PartyResultByDepartmentBusiness :
         all_district_ids_by_departments = self.__get_district_ids_by_departments()
         all_candidates_by_party_and_department = self.__get_candidates_by_party_and_departments(all_district_ids_by_departments)
         all_departments_party_result_created = self.__get_all_departments_party_result(all_candidates_by_party_and_department)
-        return {}
+        results = self.__get_party_result_sortered_all_round_sorted(all_departments_party_result_created)
+        return results
     
     def __get_all_datas_needed(self) :        
         self.__all_candidates = self.candidate_repo.get_candidates()
@@ -72,3 +73,59 @@ class PartyResultByDepartmentBusiness :
                 department_result = department
                 break
         return department_result
+    
+    
+    def __get_party_result_sortered_all_round_sorted(self, all_departments_party_result) :
+        all_datas_sorted = {}
+        data_first_round = all_departments_party_result[0]
+        data_second_round = all_departments_party_result[1]
+        data_first_round_sorted = self.__browse_departments_party_result(data_first_round)
+        data_second_round_sorted = self.__browse_departments_party_result(data_second_round)
+        for party_name in data_first_round_sorted : 
+            first_round_department_party_result_sorted = data_first_round_sorted[party_name]
+            second_round_department_party_result_sorted = data_second_round_sorted[party_name]
+            all_datas_sorted[party_name] =  {}
+            all_datas_sorted[party_name]["first_round"] = first_round_department_party_result_sorted
+            all_datas_sorted[party_name]["second_round"] =second_round_department_party_result_sorted
+        return all_datas_sorted
+        
+        
+    def __browse_departments_party_result(self, department_party_result) : 
+        all_departments_result_all_parties = department_party_result.copy()
+        departments_party_results_all_parties = {}
+        for party_name in all_departments_result_all_parties : 
+            all_departments_result_data = all_departments_result_all_parties[party_name]
+            data_all_departments_sorted = self.__sort_all_departments_result_party(all_departments_result_data)  
+            departments_party_results_all_parties[party_name] = data_all_departments_sorted 
+        return departments_party_results_all_parties
+             
+        
+    def __sort_all_departments_result_party(self, data_all_departments): 
+        data_all_departments_sorted = []
+        data_all_departments_to_sort = data_all_departments.copy()
+        while len(data_all_departments) > len(data_all_departments_sorted) : 
+            for department_party_result_examined in data_all_departments_to_sort : 
+                department_result_sorted = self.__sortered_specific_department_result(data_all_departments_to_sort, department_party_result_examined, data_all_departments_sorted)
+                if department_result_sorted != None : 
+                    data_all_departments_to_sort.remove(department_result_sorted)
+        return data_all_departments_sorted
+            
+    def __sortered_specific_department_result(self, department_results_to_sort, department_party_result_examined, data_all_departments_sorted) : 
+        department_result_sorted = None
+        for i in range(len(department_results_to_sort)) :
+            is_end_loop = i + 1 == len(department_results_to_sort)
+            department_party_result_compared = department_results_to_sort[i] 
+            if department_party_result_examined.id == department_party_result_compared.id and is_end_loop == False:
+                continue
+            elif department_party_result_compared in data_all_departments_sorted : 
+                continue
+            elif department_party_result_examined.avg_vote_expressed > department_party_result_compared.avg_vote_expressed:
+                break
+            elif is_end_loop :
+                data_all_departments_sorted.append(department_party_result_examined)
+                department_result_sorted = department_party_result_examined
+                break
+            else : 
+                continue
+        return department_result_sorted        
+           
