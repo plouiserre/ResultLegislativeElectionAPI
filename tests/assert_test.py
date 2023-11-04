@@ -97,7 +97,7 @@ class AssertTest:
         
     def assert_department_result_dto(self, department_check, department_result_dto) : 
         self.assert_department_dto(department_check[0 : 3], department_result_dto)
-        self.unit_test.assertEqual(department_check[3], department_result_dto.avg_vote_expressed)
+        self.unit_test.assertEqual(department_check[3], department_result_dto.rate_voting)
         
         
     def assert_department_party_result_dto(self, department_party_result_check, department_party_result_dto) : 

@@ -30,5 +30,5 @@ class FactoryDepartmentPartyResultTest(unittest.TestCase) :
         
         dep_party_result = factory_department_party_result.construct_department_party_result_from_list_voting_stats(dept, first_round_voting)
         
-        department_result_check = [33, "Gironde", 33, 27.315]
+        department_result_check = [33, "Gironde", 33, 27.31]
         self.assert_test.assert_department_party_result_dto(department_result_check, dep_party_result)
