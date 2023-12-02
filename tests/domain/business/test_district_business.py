@@ -5,7 +5,9 @@ from app.domain.business.district_business import DistrictBusiness
 from app.domain.business.result_business import ResultBusiness
 from app.domain.repository.district_repository import DistrictRepository
 from tests.assert_test import AssertTest
-from tests.faker import  getDepartments, getDistricts, getResults
+from tests.faker.faker_result import getResults
+from tests.faker.faker_district import getDistricts_by_id
+from tests.faker.faker_department import getDepartments_by_ids
 from unittest.mock import patch
 
 class DistrictBusinessTest(unittest.TestCase):
@@ -17,7 +19,7 @@ class DistrictBusinessTest(unittest.TestCase):
     
     @patch.object(DistrictRepository, "get_districts")
     def test_get_districts(self, mock_repo):
-        mock_repo.get_districts.return_value = getDistricts([10, 11, 12, 20])
+        mock_repo.get_districts.return_value = getDistricts_by_id([10, 11, 12, 20])
         
         business = DistrictBusiness(mock_repo, None, None)
         districts = business.get_districts()
@@ -39,7 +41,7 @@ class DistrictBusinessTest(unittest.TestCase):
     
     @patch.object(DistrictRepository, "get_districts")
     def test_get_districts_by_department_id(self, mock_repo):
-        mock_repo.get_districts.return_value = getDistricts([10, 11, 12, 20, 21, 22])
+        mock_repo.get_districts.return_value = getDistricts_by_id([10, 11, 12, 20, 21, 22])
         
         business = DistrictBusiness(mock_repo, None, None)
         districts = business.get_districts_by_department_id(2)
@@ -59,8 +61,8 @@ class DistrictBusinessTest(unittest.TestCase):
     @patch.object(DistrictRepository, "get_districts")
     @patch.object(DepartmentBusiness, "get_departments")
     def test_get_departments_by_department_name(self, mock_district_repo, mock_department_repo) :
-        mock_district_repo.get_districts.return_value = getDistricts([10, 11, 12, 20, 21, 22])
-        mock_department_repo.get_departments.return_value = getDepartments([1, 2])
+        mock_district_repo.get_districts.return_value = getDistricts_by_id([10, 11, 12, 20, 21, 22])
+        mock_department_repo.get_departments.return_value = getDepartments_by_ids([1, 2])
         
         business = DistrictBusiness(mock_district_repo, mock_department_repo, None)
         districts = business.get_districts_by_department_name("Aisne")
@@ -80,8 +82,8 @@ class DistrictBusinessTest(unittest.TestCase):
     @patch.object(DistrictRepository, "get_districts")
     @patch.object(DepartmentBusiness, "get_departments")
     def test_get_departments_by_department_name_from_unknow_department(self, mock_district_repo, mock_department_repo) :
-        mock_district_repo.get_districts.return_value = getDistricts([1, 2, 3, 4, 5, 6])
-        mock_department_repo.get_departments.return_value = getDepartments([1, 2])
+        mock_district_repo.get_districts.return_value = getDistricts_by_id([1, 2, 3, 4, 5, 6])
+        mock_department_repo.get_departments.return_value = getDepartments_by_ids([1, 2])
         
         business = DistrictBusiness(mock_district_repo, mock_department_repo, None)
         districts = business.get_districts_by_department_name("XXX")
@@ -100,7 +102,7 @@ class DistrictBusinessTest(unittest.TestCase):
     @patch.object(ResultBusiness, "get_rounds_participation_sorted")
     @patch.object(DepartmentBusiness, "get_department_name_from_department_id")
     def test_get_districts_sorted_by_voting_rate(self, mock_district_repo, mock_result_business, mock_department_business) : 
-        mock_district_repo.get_districts.return_value = getDistricts([20, 21, 22, 23, 24, 25, 26, 27])
+        mock_district_repo.get_districts.return_value = getDistricts_by_id([20, 21, 22, 23, 24, 25, 26, 27])
         
         mock_result_business.get_rounds_participation_sorted.return_value = self.__get_results_sorted()
         

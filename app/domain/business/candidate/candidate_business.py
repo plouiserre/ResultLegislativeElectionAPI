@@ -129,7 +129,7 @@ class CandidateBusiness() :
         self.parties = self.party_business.get_parties()
         
         #TODO add in the dependency
-        sortered = SorteredCandidate(self.candidates, self.parties)
+        sortered = SorteredCandidate(self.candidates, self.parties, None)
               
         self.candidates_result = sortered.sort_all_candidates(limit)
         

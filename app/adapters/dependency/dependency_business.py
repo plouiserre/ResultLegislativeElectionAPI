@@ -2,7 +2,7 @@ from app.domain.business.candidate.candidate_business import CandidateBusiness
 from app.domain.business.department_business import DepartmentBusiness
 from app.domain.business.district_business import DistrictBusiness
 from app.domain.business.deputy_business import DeputyBusiness
-from app.domain.business.party_business import PartyBusiness
+from app.domain.business.party.party_business import PartyBusiness
 from app.domain.business.result_business import ResultBusiness
 from app.adapters.driven.MySql.cache import Cache
 from app.adapters.driven.MySql.my_sql_candidate_repository import MySqlCandidateRepository

@@ -1,7 +1,10 @@
+from app.domain.business.department.sortered_department import SorteredDepartment
+
 class SorteredCandidate() : 
-    def __init__(self, candidates, parties) -> None:
+    def __init__(self, candidates, parties, departments) -> None:
         self.candidates = candidates
         self.parties = parties
+        self.departments = departments
         self.candidates_result = {}        
         self.candidates_result["first_round"] = []
         self.candidates_result["second_round"] = []
@@ -82,3 +85,21 @@ class SorteredCandidate() :
                     break
                 else : 
                     continue
+                
+                
+    def get_candidates_by_party_and_departments(self, all_district_ids_by_departments) : 
+        results = {}       
+        for candidate in self.candidates :
+                for party in self.parties : 
+                    if party.id == candidate.party_id :
+                        for department in self.departments :                        
+                            department_candidate = all_district_ids_by_departments[candidate.district_id]
+                            if department_candidate.id == department.id : 
+                                if (party.short_name in results) == False  : 
+                                    results[party.short_name] = {}
+                                if (department.name in results[party.short_name]) == False : 
+                                    results[party.short_name][department.name] = []
+                                results[party.short_name][department.name].append(candidate)
+                                break
+        return results   
+        
